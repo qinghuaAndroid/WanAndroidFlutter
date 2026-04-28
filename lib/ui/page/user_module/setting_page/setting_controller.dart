@@ -19,14 +19,14 @@ class SettingController extends BaseGetController {
   }
 
   ///加载缓存
-  loadCache() {
+  void loadCache() {
     CacheUtil.loadCache().then((value) {
       cache.value = CacheUtil.byte2FitMemorySize(value);
     });
   }
 
   ///清除缓存
-  clearCacheFile() {
+  void clearCacheFile() {
     CacheUtil.clearCache().then((value) {
       loadCache();
       ToastUtils.show(
@@ -38,7 +38,7 @@ class SettingController extends BaseGetController {
   }
 
   ///退出登录
-  exitLoginState() {
+  void exitLoginState() {
     SpUtil.deleteUserInfo();
     request.exitLogin();
     Navigate.cleanRouteAndPush(Routes.loginPage);

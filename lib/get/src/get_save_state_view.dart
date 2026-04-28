@@ -10,15 +10,15 @@ import 'package:get/get.dart';
 abstract class GetSaveView<T extends GetxController> extends StatefulWidget {
   const GetSaveView({super.key});
 
-  get tag => null;
+  String? get tag => null;
 
   T get controller => GetInstance().find<T>(tag: tag);
 
   ///Get 局部更新字段
-  get updateId => null;
+  Object? get updateId => null;
 
   ///widget生命周期
-  get lifecycle => null;
+  ValueChanged<AppLifecycleState>? get lifecycle => null;
 
   @protected
   Widget build(BuildContext context);
@@ -65,7 +65,7 @@ class GetSaveViewState<S extends GetxController> extends State<GetSaveView>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if (widget.lifecycle != null) {
-      widget.lifecycle(state);
+      widget.lifecycle?.call(state);
     }
   }
 

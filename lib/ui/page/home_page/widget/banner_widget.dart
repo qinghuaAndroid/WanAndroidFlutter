@@ -113,9 +113,7 @@ class _BannerState extends State<BannerWidget> {
             child: widget.banner[index % length].isAssets
                 ? Container(
                     color: ColorStyle.color_FBE240,
-                    child: Image.asset(
-                      widget.banner[index % length].imagePath,
-                    ),
+                    child: Image.asset(widget.banner[index % length].imagePath),
                   )
                 : Image.network(
                     widget.banner[index % length].imagePath,
@@ -128,7 +126,7 @@ class _BannerState extends State<BannerWidget> {
   }
 
   /// 点击到图片的时候取消定时任务
-  _cancelTimer() {
+  void _cancelTimer() {
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
@@ -137,7 +135,7 @@ class _BannerState extends State<BannerWidget> {
   }
 
   /// 初始化定时任务
-  _initTimer() {
+  void _initTimer() {
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
@@ -159,7 +157,7 @@ class _BannerState extends State<BannerWidget> {
   }
 
   /// 切换页面，并刷新小圆点
-  _changePage() {
+  void _changePage() {
     Timer(const Duration(milliseconds: 350), () {
       _pageController.jumpToPage(_curIndex);
     });

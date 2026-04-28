@@ -21,7 +21,7 @@ class LoginController extends BaseGetController {
   }
 
   ///用户登录
-  login() {
+  void login() {
     if (account.isEmpty || password.isEmpty) {
       return;
     }

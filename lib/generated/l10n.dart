@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -18,8 +19,10 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +44,10 @@ class S {
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -62,52 +67,27 @@ class S {
 
   /// `Play Android`
   String get tab_1 {
-    return Intl.message(
-      'Play Android',
-      name: 'tab_1',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Play Android', name: 'tab_1', desc: '', args: []);
   }
 
   /// `Knowledge System`
   String get tab_2 {
-    return Intl.message(
-      'Knowledge System',
-      name: 'tab_2',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Knowledge System', name: 'tab_2', desc: '', args: []);
   }
 
   /// `Public Account`
   String get tab_3 {
-    return Intl.message(
-      'Public Account',
-      name: 'tab_3',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Public Account', name: 'tab_3', desc: '', args: []);
   }
 
   /// `navigation`
   String get tab_4 {
-    return Intl.message(
-      'navigation',
-      name: 'tab_4',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('navigation', name: 'tab_4', desc: '', args: []);
   }
 
   /// `project`
   String get tab_5 {
-    return Intl.message(
-      'project',
-      name: 'tab_5',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('project', name: 'tab_5', desc: '', args: []);
   }
 
   /// `My Collection`
@@ -132,22 +112,12 @@ class S {
 
   /// `about Us`
   String get nav_about_us {
-    return Intl.message(
-      'about Us',
-      name: 'nav_about_us',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('about Us', name: 'nav_about_us', desc: '', args: []);
   }
 
   /// `Log out`
   String get nav_logout {
-    return Intl.message(
-      'Log out',
-      name: 'nav_logout',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Log out', name: 'nav_logout', desc: '', args: []);
   }
 
   /// `Night Mode`
@@ -162,82 +132,42 @@ class S {
 
   /// `TODO`
   String get nav_todo {
-    return Intl.message(
-      'TODO',
-      name: 'nav_todo',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('TODO', name: 'nav_todo', desc: '', args: []);
   }
 
   /// `square`
   String get nav_square {
-    return Intl.message(
-      'square',
-      name: 'nav_square',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('square', name: 'nav_square', desc: '', args: []);
   }
 
   /// `My Points`
   String get nav_my_score {
-    return Intl.message(
-      'My Points',
-      name: 'nav_my_score',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('My Points', name: 'nav_my_score', desc: '', args: []);
   }
 
   /// `Relax`
   String get nav_girl {
-    return Intl.message(
-      'Relax',
-      name: 'nav_girl',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Relax', name: 'nav_girl', desc: '', args: []);
   }
 
   /// `Questions`
   String get nav_question {
-    return Intl.message(
-      'Questions',
-      name: 'nav_question',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Questions', name: 'nav_question', desc: '', args: []);
   }
 
   /// `ID:`
   String get nav_id {
-    return Intl.message(
-      'ID:',
-      name: 'nav_id',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('ID:', name: 'nav_id', desc: '', args: []);
   }
 
   /// `grade:`
   String get nav_grade {
-    return Intl.message(
-      'grade:',
-      name: 'nav_grade',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('grade:', name: 'nav_grade', desc: '', args: []);
   }
 
   /// `Ranking:`
   String get nav_rank {
-    return Intl.message(
-      'Ranking:',
-      name: 'nav_rank',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Ranking:', name: 'nav_rank', desc: '', args: []);
   }
 }
 

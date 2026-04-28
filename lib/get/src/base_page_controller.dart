@@ -23,7 +23,7 @@ abstract class BaseGetPageController extends BaseGetController {
   RefreshController? controller;
 
   ///预留初次加载，注意只供上拉下拉使用
-  initPullLoading(RefreshController controller) {
+  void initPullLoading(RefreshController controller) {
     if (isInit) {
       page = initialPage;
       this.controller = controller;
@@ -32,13 +32,13 @@ abstract class BaseGetPageController extends BaseGetController {
   }
 
   ///预留上拉刷新
-  onLoadRefresh(RefreshController controller) {
+  void onLoadRefresh(RefreshController controller) {
     page = initialPage;
     requestData(controller, refresh: Refresh.pull);
   }
 
   ///预留下拉加载
-  onLoadMore(RefreshController controller) {
+  void onLoadMore(RefreshController controller) {
     ++page;
     requestData(controller, refresh: Refresh.down);
   }

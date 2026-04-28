@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wan_android_flutter/get/get.dart';
-import 'package:wan_android_flutter/routes/routes.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
@@ -42,9 +41,9 @@ class HomePage extends GetSaveView<HomeController> {
                             controller.banner,
                             height: 215.w,
                             onTap: (index) {
-                                WebUtil.toWebPageBanners(
-                                  controller.banner[index],
-                                );
+                              WebUtil.toWebPageBanners(
+                                controller.banner[index],
+                              );
                             },
                           ),
                         );

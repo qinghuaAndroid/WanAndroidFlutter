@@ -20,7 +20,7 @@ class FeedbackController extends BaseGetController {
 
   /// 打开相册
   /// [index] 索引
-  openGallery(int index) async {
+  Future<void> openGallery(int index) async {
     if (photoEntity.length >= 4) {
       ToastUtils.show(StringStyles.feedbackToast.tr);
       return;
@@ -35,7 +35,7 @@ class FeedbackController extends BaseGetController {
   }
 
   ///由于没有反馈接口，因此延时2秒进行操作
-  requestFeedback(BuildContext context) {
+  void requestFeedback(BuildContext context) {
     debugPrint("feedback >> issue == $issue");
     debugPrint("feedback >> contact == $contact");
     debugPrint("feedback >> photo == $photoEntity");

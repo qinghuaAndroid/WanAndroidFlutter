@@ -12,7 +12,7 @@ abstract class GetCommonView<T extends GetxController> extends StatefulWidget {
   T get controller => GetInstance().find<T>(tag: tag);
 
   ///Get 局部更新字段
-  get updateId => null;
+  Object? get updateId => null;
 
   @protected
   Widget build(BuildContext context);

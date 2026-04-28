@@ -12,7 +12,10 @@ class FileUtils {
   ///保存assets图片到本地
   ///[assets] assets路径
   ///[target] 目标路径
-  static saveAssetsGallery({String assets = '', String target = ''}) async {
+  static Future<void> saveAssetsGallery({
+    String assets = '',
+    String target = '',
+  }) async {
     ByteData bytes = await rootBundle.load(assets);
     final result = await ImageGallerySaverPlus.saveImage(
       bytes.buffer.asUint8List(),

@@ -7,9 +7,9 @@ class Result<T> {
   Result(this.errorCode, this.errorMsg, this.data);
 
   Result.fromJson(Map<String, dynamic> json)
-      : errorCode = json['errorCode'],
-        errorMsg = json['errorMsg'],
-        data = json['data'];
+    : errorCode = json['errorCode'],
+      errorMsg = json['errorMsg'],
+      data = json['data'];
 
   @override
   String toString() {

@@ -52,7 +52,7 @@ class WebController extends BaseGetController {
 
   ///收藏&取消收藏
   ///注意此处，从收藏进入取消收藏的ID是originId
-  collectArticle() {
+  void collectArticle() {
     if (!isCollect.value) {
       collectAtState.value = true;
       Future.delayed(const Duration(milliseconds: 900)).then((value) {

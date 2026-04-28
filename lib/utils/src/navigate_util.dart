@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -7,7 +8,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 /// @description : 导航
 class Navigate {
   /// 获取全局context
-  static get currentContext => Get.context;
+  static BuildContext? get currentContext => Get.context;
 
   static Future<T?>? push<T extends Object?>(String name, {dynamic arguments}) {
     return Get.toNamed(name, arguments: arguments);

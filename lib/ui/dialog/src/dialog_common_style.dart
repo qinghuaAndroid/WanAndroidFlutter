@@ -109,7 +109,7 @@ class CommonDialog extends StatelessWidget {
   }
 
   ///此处使用方法重新创建的原因是因为此处不需要频繁更新，不会造成过度创建
-  _buildTextButton(VoidCallback? tap, String text, bool show) {
+  Visibility _buildTextButton(VoidCallback? tap, String text, bool show) {
     return Visibility(
       visible: show,
       child: Expanded(

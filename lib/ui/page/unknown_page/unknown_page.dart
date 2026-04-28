@@ -6,15 +6,8 @@ class UnknownPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("未知页面"),
-      ),
-      child: Center(
-        child: Text(
-          "未知页面",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      navigationBar: CupertinoNavigationBar(middle: Text("未知页面")),
+      child: Center(child: Text("未知页面", style: TextStyle(fontSize: 20))),
     );
   }
 }

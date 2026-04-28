@@ -16,10 +16,11 @@ const secondaryLightColor = Color(0xff1c1c1c);
 const secondaryDarkColor = Color(0xff000000);
 
 ThemeData get appThemeData => ThemeData(
-    primaryColor: kPrimaryColor,
-    primaryColorLight: kPrimaryLightColor,
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: appBarTheme,
-    textTheme: const TextTheme());
+  primaryColor: kPrimaryColor,
+  primaryColorLight: kPrimaryLightColor,
+  scaffoldBackgroundColor: Colors.white,
+  appBarTheme: appBarTheme,
+  textTheme: const TextTheme(),
+);
 
 AppBarTheme get appBarTheme => const AppBarTheme();

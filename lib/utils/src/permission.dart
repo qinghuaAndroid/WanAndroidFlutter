@@ -5,7 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 /// @name : jhf
 /// @description :权限申请；类
 class PermissionRequest {
-  static sendPermission(Function(bool) result) {
+  static void sendPermission(Function(bool) result) {
     Permission.camera.status.then((value) {
       if (value.isGranted) {
         result(true);

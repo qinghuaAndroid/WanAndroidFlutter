@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -9,7 +8,7 @@ import 'package:wan_android_flutter/utils/utils.dart';
 /// @description :Web工具类
 class WebUtil {
   ///普通页面进入Web页面1
-  static toWebPage(ProjectDetail detail, {Function(bool)? onResult}) {
+  static void toWebPage(ProjectDetail detail, {Function(bool)? onResult}) {
     Navigate.push(
       Routes.webViewPage,
       arguments: WebEntity(
@@ -43,7 +42,7 @@ class WebUtil {
   }
 
   ///普通页面进入Web页面2
-  static toWebPageBanners(Banners detail) {
+  static void toWebPageBanners(Banners detail) {
     Navigate.push(
       Routes.webViewPage,
       arguments: WebEntity(
@@ -56,7 +55,7 @@ class WebUtil {
   }
 
   ///其他页面进入Web页面2
-  static toWebPageOther({String title = '', String link = ''}) {
+  static void toWebPageOther({String title = '', String link = ''}) {
     Navigate.push(
       Routes.webViewPage,
       arguments: WebEntity(title: title, link: link, id: 0, isCollect: false),

@@ -1,6 +1,5 @@
-
-
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -8,15 +7,12 @@ import 'package:path_provider/path_provider.dart';
 /// @date : 2021/08/25
 /// @name : jhf
 /// @description :缓存工具类
-class CacheUtil{
-
-
-
+class CacheUtil {
   ///加载缓存
   static Future<double> loadCache() async {
     try {
-      Directory tempDir = await getTemporaryDirectory();
-      double value = await _getTotalSizeOfFilesInDir(tempDir);
+      final Directory tempDir = await getTemporaryDirectory();
+      final double value = await _getTotalSizeOfFilesInDir(tempDir);
       return value;
     } catch (err) {
       debugPrint(err.toString());
@@ -24,15 +20,15 @@ class CacheUtil{
     }
   }
 
-
-
   /// 递归方式 计算文件的大小
   /// [file] 文件系统实体类
-  static Future<double> _getTotalSizeOfFilesInDir(final FileSystemEntity file) async {
+  static Future<double> _getTotalSizeOfFilesInDir(
+    final FileSystemEntity file,
+  ) async {
     try {
       if (file is File) {
-        int length = await file.length();
-        return double.parse(length.toString());
+        final int length = await file.length();
+        return length.toDouble();
       }
       if (file is Directory) {
         final List<FileSystemEntity> children = file.listSync();
@@ -49,11 +45,10 @@ class CacheUtil{
     }
   }
 
-
   ///清除缓存
   static Future<bool> clearCache() async {
     try {
-      Directory tempDir = await getTemporaryDirectory();
+      final Directory tempDir = await getTemporaryDirectory();
       await delDir(tempDir);
       await loadCache();
       return true;
@@ -63,10 +58,9 @@ class CacheUtil{
     }
   }
 
-
   ///递归方式删除目录
   ///[file]文件目录
-  static Future<Null> delDir(FileSystemEntity file) async {
+  static Future<void> delDir(FileSystemEntity file) async {
     try {
       if (file is Directory) {
         final List<FileSystemEntity> children = file.listSync();
@@ -80,7 +74,6 @@ class CacheUtil{
     }
   }
 
-
   ///byte 转换为实际大小，并保留小数位
   ///[byteSize] 大小
   ///[precision] 小数
@@ -88,7 +81,7 @@ class CacheUtil{
     if (byteSize < 0) {
       return '0B';
     } else if (byteSize < 1024) {
-      return '${byteSize}B';
+      return '${byteSize.toStringAsFixed(0)}B';
     } else if (byteSize < 1048576) {
       var size = (byteSize / 1024).toStringAsFixed(precision);
       return '${size}KB';
@@ -100,6 +93,4 @@ class CacheUtil{
       return '${size}GB';
     }
   }
-
-
 }

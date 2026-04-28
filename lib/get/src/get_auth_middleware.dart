@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
-import 'package:wan_android_flutter/utils/utils.dart';
+import 'package:wan_android_flutter/utils/src/save/sp_util.dart';
 
 class AuthMiddleware extends GetMiddleware {
   ///重定向

@@ -1,38 +1,6 @@
 import 'package:get/get.dart';
 import 'package:wan_android_flutter/get/src/get_auth_middleware.dart';
-import 'package:wan_android_flutter/ui/page/article_page/article_binding.dart';
-import 'package:wan_android_flutter/ui/page/article_page/article_page.dart';
-import 'package:wan_android_flutter/ui/page/color_picker_page/color_picker_page.dart';
-import 'package:wan_android_flutter/ui/page/login_page/login_binding.dart';
-import 'package:wan_android_flutter/ui/page/login_page/login_page.dart';
-import 'package:wan_android_flutter/ui/page/main_page/main_binding.dart';
-import 'package:wan_android_flutter/ui/page/main_page/main_page.dart';
-import 'package:wan_android_flutter/ui/page/register_page/register_binding.dart';
-import 'package:wan_android_flutter/ui/page/register_page/register_page.dart';
-import 'package:wan_android_flutter/ui/page/search_page/search_binding.dart';
-import 'package:wan_android_flutter/ui/page/search_page/search_page.dart';
-import 'package:wan_android_flutter/ui/page/splash_page/splash_binding.dart';
-import 'package:wan_android_flutter/ui/page/splash_page/splash_page.dart';
-import 'package:wan_android_flutter/ui/page/unknown_page/unknown_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/about_page/about_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/about_page/about_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/collect_page/collect_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/collect_page/collect_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/feedback_page/feedback_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/feedback_page/feedback_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/history_page/history_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/history_page/history_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/points_page/points_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/points_page/points_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/setting_page/setting_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/setting_page/setting_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/setting_page/widget/setting_language_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/share_page/share_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/share_page/share_page.dart';
-import 'package:wan_android_flutter/ui/page/user_module/user_info_page/userinfo_binding.dart';
-import 'package:wan_android_flutter/ui/page/user_module/user_info_page/userinfo_page.dart';
-import 'package:wan_android_flutter/ui/page/webview_page/webview_binding.dart';
-import 'package:wan_android_flutter/ui/page/webview_page/webview_page.dart';
+import 'package:wan_android_flutter/ui/ui.dart';
 
 /// @class : Routes
 /// @name : jhf

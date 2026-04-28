@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ToastUtils {
   /// 显示toast
   ///[msg] lottie名称
-  static show(String msg) {
+  static void show(String msg) {
     Fluttertoast.showToast(
       msg: msg,
       toastLength: Toast.LENGTH_SHORT,

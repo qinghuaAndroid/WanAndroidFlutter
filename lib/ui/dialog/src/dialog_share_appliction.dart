@@ -6,7 +6,6 @@ import 'package:wan_android_flutter/utils/utils.dart';
 
 import 'dialog_base.dart';
 
-
 /// @class : ShareDialog
 /// @date : 2021/08/27
 /// @name : jhf

@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class ScreenUtil {
   ///去除状态栏半透明
   ///[context] 上下文
-  static removeSystemTransparent(BuildContext context) {
+  static void removeSystemTransparent(BuildContext context) {
     /// android 平台
     if (Theme.of(context).platform == TargetPlatform.android) {
       SystemUiOverlayStyle style = const SystemUiOverlayStyle(

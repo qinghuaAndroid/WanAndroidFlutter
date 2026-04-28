@@ -12,13 +12,21 @@ typedef SuccessOver<T> = Function(T data, bool over);
 /// @name : jhf
 /// @description : 请求仓库
 class RequestRepository {
+  void _notifySuccess<T>(Success<T>? callback, T data) {
+    callback?.call(data);
+  }
+
+  void _notifyFail(Fail? callback, int code, String msg) {
+    callback?.call(code, msg);
+  }
+
   ///登录请求
   /// [account]账号
   /// [password]密码
   /// [password]重复密码
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  register(
+  void register(
     String account,
     String password,
     String rePassword, {
@@ -32,14 +40,10 @@ class RequestRepository {
         var registerInfo = UserEntity.fromJson(data);
         registerInfo.password = password;
         SpUtil.putUserInfo(registerInfo);
-        if (success != null) {
-          success(registerInfo);
-        }
+        _notifySuccess(success, registerInfo);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -49,7 +53,7 @@ class RequestRepository {
   /// [password]密码
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  login(
+  void login(
     String account,
     String password, {
     Success<UserEntity>? success,
@@ -62,14 +66,10 @@ class RequestRepository {
         var loginInfo = UserEntity.fromJson(data);
         loginInfo.password = password;
         SpUtil.putUserInfo(loginInfo);
-        if (success != null) {
-          success(loginInfo);
-        }
+        _notifySuccess(success, loginInfo);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -78,22 +78,17 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  getUserInfo({Success<UserEntity>? success, Fail? fail}) {
+  void getUserInfo({Success<UserEntity>? success, Fail? fail}) {
     Request.get<dynamic>(
       RequestApi.apiUserInfo,
       <String, dynamic>{},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          var userInfo = data["userInfo"];
-          userInfo = UserEntity.fromJson(userInfo);
-          success(userInfo);
-        }
+        final userInfo = UserEntity.fromJson(data["userInfo"]);
+        _notifySuccess(success, userInfo);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -102,7 +97,7 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  collectArticle(
+  void collectArticle(
     int id, {
     bool isCollect = false,
     Success<bool>? success,
@@ -114,14 +109,10 @@ class RequestRepository {
       <String, dynamic>{},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          success(true);
-        }
+        _notifySuccess(success, true);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -135,14 +126,10 @@ class RequestRepository {
         var list = data.map((e) {
           return ProjectTab.fromJson(e);
         }).toList();
-        if (success != null) {
-          success(list);
-        }
+        _notifySuccess(success, list);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -151,7 +138,7 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestProjects(
+  void requestProjects(
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
     Fail? fail,
@@ -165,14 +152,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -180,7 +163,7 @@ class RequestRepository {
   ///请求z知识体系接口
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestSystems({Success<List<SystemEntity>>? success, Fail? fail}) {
+  void requestSystems({Success<List<SystemEntity>>? success, Fail? fail}) {
     Request.get<List<dynamic>>(
       RequestApi.apiSystem,
       <String, dynamic>{},
@@ -189,14 +172,10 @@ class RequestRepository {
         var list = data.map((e) {
           return SystemEntity.fromJson(e);
         }).toList();
-        if (success != null) {
-          success(list);
-        }
+        _notifySuccess(success, list);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -204,7 +183,7 @@ class RequestRepository {
   ///请求知识体系下的文章
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestSystemArticles(
+  void requestSystemArticles(
     String cid,
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
@@ -219,14 +198,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -235,7 +210,11 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  rankingPoints(int page, {SuccessOver<List<Ranking>>? success, Fail? fail}) {
+  void rankingPoints(
+    int page, {
+    SuccessOver<List<Ranking>>? success,
+    Fail? fail,
+  }) {
     Request.get<dynamic>(
       RequestApi.apiRanking.replaceFirst(RegExp('page'), '$page'),
       <String, dynamic>{},
@@ -248,14 +227,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return Ranking.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -264,7 +239,11 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  pointsDetail(int page, {SuccessOver<List<Points>>? success, Fail? fail}) {
+  void pointsDetail(
+    int page, {
+    SuccessOver<List<Points>>? success,
+    Fail? fail,
+  }) {
     Request.get<dynamic>(
       RequestApi.apiPoints.replaceFirst(RegExp('page'), '$page'),
       <String, dynamic>{},
@@ -277,14 +256,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return Points.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -294,7 +269,7 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  collectDetail(
+  void collectDetail(
     int page, {
     SuccessOver<List<CollectDetail>>? success,
     Fail? fail,
@@ -308,33 +283,25 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return CollectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
 
   ///退出登录
-  exitLogin({Success<bool>? success, Fail? fail}) {
+  void exitLogin({Success<bool>? success, Fail? fail}) {
     Request.post<dynamic>(
       RequestApi.apiLogout,
       <String, dynamic>{},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          success(true);
-        }
+        _notifySuccess(success, true);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -342,7 +309,7 @@ class RequestRepository {
   ///请求问答接口
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestAskModule(
+  void requestAskModule(
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
     Fail? fail,
@@ -356,14 +323,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -372,7 +335,7 @@ class RequestRepository {
   /// [page] 当前页面
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestSquareModule(
+  void requestSquareModule(
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
     Fail? fail,
@@ -386,58 +349,46 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
 
   ///获取首页的Banner图片
-  getBanner({Success<List<Banners>>? success, Fail? fail}) {
+  void getBanner({Success<List<Banners>>? success, Fail? fail}) {
     Request.get<List<dynamic>>(
       RequestApi.apiBanner,
       <String, dynamic>{},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          var list = data.map((value) {
-            return Banners.fromJson(value);
-          }).toList();
-          success(list);
-        }
+        final list = data.map((value) {
+          return Banners.fromJson(value);
+        }).toList();
+        _notifySuccess(success, list);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
 
   ///获取搜索热词
-  getSearchHotWord({Success<List<HotWord>>? success, Fail? fail}) {
+  void getSearchHotWord({Success<List<HotWord>>? success, Fail? fail}) {
     Request.get<List<dynamic>>(
       RequestApi.apiHotWord,
       <String, dynamic>{},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          var list = data.map((value) {
-            return HotWord.fromJson(value);
-          }).toList();
-          success(list);
-        }
+        final list = data.map((value) {
+          return HotWord.fromJson(value);
+        }).toList();
+        _notifySuccess(success, list);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -447,7 +398,7 @@ class RequestRepository {
   /// [hotWord] 当前热词
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  searchKeyWord(
+  void searchKeyWord(
     int page,
     String hotWord, {
     SuccessOver<List<ProjectDetail>>? success,
@@ -462,14 +413,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -478,7 +425,7 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestHomeArticle(
+  void requestHomeArticle(
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
     Fail? fail,
@@ -492,42 +439,34 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
 
   ///获取微信公众号列表
-  getWechatPublic({Success<List<WechatPublic>>? success, Fail? fail}) {
+  void getWechatPublic({Success<List<WechatPublic>>? success, Fail? fail}) {
     Request.get<List<dynamic>>(
       RequestApi.apiWechatPublic,
       <String, dynamic>{},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          var list = data.map((value) {
-            return WechatPublic.fromJson(value);
-          }).toList();
-          success(list);
-        }
+        final list = data.map((value) {
+          return WechatPublic.fromJson(value);
+        }).toList();
+        _notifySuccess(success, list);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
 
   ///获取微信公众号历史数据
-  getWxArticle(
+  void getWxArticle(
     String cid,
     int page, {
     SuccessOver<List<ProjectDetail>>? success,
@@ -544,14 +483,10 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
+        success?.call(list, pageData.over);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -561,7 +496,7 @@ class RequestRepository {
   /// [link] 文章链接
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  shareArticle(
+  void shareArticle(
     String title,
     String link, {
     Success<String>? success,
@@ -572,14 +507,10 @@ class RequestRepository {
       {'title': title, 'link': link},
       dialog: false,
       success: (data) {
-        if (success != null) {
-          success("success");
-        }
+        _notifySuccess(success, "success");
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -588,7 +519,7 @@ class RequestRepository {
   ///[id]文章ID
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  requestShareArticleList(
+  void requestShareArticleList(
     int page, {
     ParamSingleCallback<int>? length,
     SuccessOver<List<ProjectDetail>>? success,
@@ -603,17 +534,11 @@ class RequestRepository {
         var list = pageData.datas.map((value) {
           return ProjectDetail.fromJson(value);
         }).toList();
-        if (success != null) {
-          success(list, pageData.over);
-        }
-        if (length != null) {
-          length(pageData.total);
-        }
+        success?.call(list, pageData.over);
+        length?.call(pageData.total);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }
@@ -621,7 +546,7 @@ class RequestRepository {
   ///导航数据
   /// [success] 请求成功回调
   /// [fail] 请求失败回调
-  navigationData({Success<List<Navigation>>? success, Fail? fail}) {
+  void navigationData({Success<List<Navigation>>? success, Fail? fail}) {
     Request.get<List<dynamic>>(
       RequestApi.apiNavi,
       <String, dynamic>{},
@@ -635,14 +560,10 @@ class RequestRepository {
           navigation.articles = list;
           return navigation;
         }).toList();
-        if (success != null) {
-          success(list);
-        }
+        _notifySuccess(success, list);
       },
       fail: (code, msg) {
-        if (fail != null) {
-          fail(code, msg);
-        }
+        _notifyFail(fail, code, msg);
       },
     );
   }

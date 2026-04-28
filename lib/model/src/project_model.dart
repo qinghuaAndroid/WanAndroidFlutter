@@ -7,7 +7,7 @@ class ProjectPage {
   int curPage = 0;
 
   ///数据
-  List datas = [];
+  List<dynamic> datas = [];
 
   ///偏移
   int offset = 0;
@@ -34,14 +34,14 @@ class ProjectPage {
     required this.total,
   });
 
-  ProjectPage.fromJson(Map<dynamic, dynamic> json) {
-    curPage = json["curPage"];
-    offset = json["offset"];
-    over = json["over"];
-    pageCount = json["pageCount"];
-    size = json["size"];
-    total = json["total"];
-    datas = json['datas'];
+  ProjectPage.fromJson(Map<String, dynamic> json) {
+    curPage = json["curPage"] ?? 0;
+    offset = json["offset"] ?? 0;
+    over = json["over"] ?? false;
+    pageCount = json["pageCount"] ?? 0;
+    size = json["size"] ?? 0;
+    total = json["total"] ?? 0;
+    datas = (json['datas'] as List<dynamic>?) ?? <dynamic>[];
   }
 
   Map<String, dynamic> toJson() {
@@ -66,9 +66,9 @@ class ProjectTag {
 
   ProjectTag({required this.name, required this.url});
 
-  ProjectTag.fromJson(Map<dynamic, dynamic> json) {
-    name = json["name"];
-    url = json["url"];
+  ProjectTag.fromJson(Map<String, dynamic> json) {
+    name = json["name"] ?? "";
+    url = json["url"] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -111,7 +111,7 @@ class ProjectDetail {
   String shareUser = "";
   int superChapterId = 0;
   String superChapterName = "";
-  List tags = [];
+  List<dynamic> tags = [];
   String title = "";
   int type = 0;
   int userId = 0;
@@ -154,40 +154,40 @@ class ProjectDetail {
     required this.zan,
   });
 
-  ProjectDetail.fromJson(Map<dynamic, dynamic> json) {
-    apkLink = json['apkLink'];
-    audit = json['audit'];
-    author = json['author'];
-    canEdit = json['canEdit'];
-    chapterId = json['chapterId'];
-    chapterName = json['chapterName'];
-    collect = json['collect'];
-    courseId = json['courseId'];
-    desc = json['desc'];
-    descMd = json['descMd'];
-    envelopePic = json['envelopePic'];
-    fresh = json['fresh'];
-    host = json['host'];
-    id = json['id'];
-    link = json['link'];
-    niceDate = json['niceDate'];
-    niceShareDate = json['niceShareDate'];
-    origin = json['origin'];
-    prefix = json['prefix'];
-    projectLink = json['projectLink'];
-    publishTime = json['publishTime'];
-    realSuperChapterId = json['realSuperChapterId'];
-    selfVisible = json['selfVisible'];
+  ProjectDetail.fromJson(Map<String, dynamic> json) {
+    apkLink = json['apkLink'] ?? "";
+    audit = json['audit'] ?? 0;
+    author = json['author'] ?? "";
+    canEdit = json['canEdit'] ?? false;
+    chapterId = json['chapterId'] ?? 0;
+    chapterName = json['chapterName'] ?? "";
+    collect = json['collect'] ?? false;
+    courseId = json['courseId'] ?? 0;
+    desc = json['desc'] ?? "";
+    descMd = json['descMd'] ?? "";
+    envelopePic = json['envelopePic'] ?? "";
+    fresh = json['fresh'] ?? false;
+    host = json['host'] ?? "";
+    id = json['id'] ?? 0;
+    link = json['link'] ?? "";
+    niceDate = json['niceDate'] ?? "";
+    niceShareDate = json['niceShareDate'] ?? "";
+    origin = json['origin'] ?? "";
+    prefix = json['prefix'] ?? "";
+    projectLink = json['projectLink'] ?? "";
+    publishTime = json['publishTime'] ?? 0;
+    realSuperChapterId = json['realSuperChapterId'] ?? 0;
+    selfVisible = json['selfVisible'] ?? 0;
     shareDate = json['shareDate'] ?? 0;
-    shareUser = json['shareUser'];
-    superChapterId = json['superChapterId'];
-    superChapterName = json['superChapterName'];
-    tags = json['tags'];
-    title = json['title'];
-    type = json['type'];
-    userId = json['userId'];
-    visible = json['visible'];
-    zan = json['zan'];
+    shareUser = json['shareUser'] ?? "";
+    superChapterId = json['superChapterId'] ?? 0;
+    superChapterName = json['superChapterName'] ?? "";
+    tags = (json['tags'] as List<dynamic>?) ?? <dynamic>[];
+    title = json['title'] ?? "";
+    type = json['type'] ?? 0;
+    userId = json['userId'] ?? 0;
+    visible = json['visible'] ?? 0;
+    zan = json['zan'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {

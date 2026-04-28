@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wan_android_flutter/res/src/r.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 import 'widget/splash_anim_widget.dart';

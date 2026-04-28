@@ -12,7 +12,7 @@ import 'widget/points_item_widget.dart';
 /// @name : jhf
 /// @description :积分明细 View层
 class PointsPage extends GetCommonView<PointsController> {
-  const PointsPage({Key? key}) : super(key: key);
+  const PointsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

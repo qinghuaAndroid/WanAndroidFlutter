@@ -19,7 +19,6 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage>
     with RouteAware, WidgetsBindingObserver {
-  
   SettingController get controller =>
       GetInstance().find<SettingController>(tag: widget.tag);
 

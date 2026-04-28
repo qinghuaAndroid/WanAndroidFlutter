@@ -7,11 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:wan_android_flutter/provider/provider.dart';
-import 'package:wan_android_flutter/res/res.dart';
 
 import 'app/app_theme.dart';
 import 'generated/l10n.dart';
+import 'provider/src/local_provider.dart';
+import 'provider/src/theme_colors_provider.dart';
+import 'res/src/strings.dart';
 import 'routes/navigation_history_observer.dart';
 import 'routes/router_reporter.dart';
 import 'routes/routes.dart';

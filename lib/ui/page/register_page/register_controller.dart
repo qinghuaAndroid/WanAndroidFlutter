@@ -23,7 +23,7 @@ class RegisterController extends BaseGetController {
 
   ///[text] 密码文字
   ///更新指定字段的widget
-  updateCheck() {
+  void updateCheck() {
     isCheckPrivacy = !isCheckPrivacy;
     update(["isCheckPrivacy"]);
   }
@@ -35,7 +35,7 @@ class RegisterController extends BaseGetController {
 
   ///点击注册
   /// 注册成功跳转
-  register() {
+  void register() {
     if (account.isEmpty || password.isEmpty || rePassword.isEmpty) {
       return;
     }

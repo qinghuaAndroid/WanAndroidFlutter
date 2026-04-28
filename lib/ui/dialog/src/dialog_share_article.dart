@@ -119,7 +119,7 @@ class ShareArticleDialog extends StatelessWidget {
   }
 
   ///分享文章
-  shareArticle() {
+  void shareArticle() {
     ///分享的文章标题
     String title = controller.text;
     if (title.isEmpty) {

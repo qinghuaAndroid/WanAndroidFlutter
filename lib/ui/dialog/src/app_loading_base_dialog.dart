@@ -40,7 +40,7 @@ Widget bufferingView(BuildContext context) {
     child: Container(
       width: ScreenUtil().screenWidth,
       height: ScreenUtil().screenHeight,
-      color: Colors.black.withOpacity(0.05),
+      color: Colors.black.withValues(alpha: 0.05),
       child: Center(
         child: Container(
           width: 136.w,

@@ -39,23 +39,23 @@ class CollectDetail {
     required this.zan,
   });
 
-  CollectDetail.fromJson(Map<dynamic, dynamic> json) {
-    author = json['author'];
-    chapterId = json['chapterId'];
-    chapterName = json['chapterName'];
-    courseId = json['courseId'];
-    desc = json['desc'];
-    envelopePic = json['envelopePic'];
-    id = json['id'];
-    link = json['link'];
-    niceDate = json['niceDate'];
-    origin = json['origin'];
-    publishTime = json['publishTime'];
-    title = json['title'];
-    originId = json['originId'];
-    userId = json['userId'];
-    visible = json['visible'];
-    zan = json['zan'];
+  CollectDetail.fromJson(Map<String, dynamic> json) {
+    author = json['author'] ?? "";
+    chapterId = json['chapterId'] ?? 0;
+    chapterName = json['chapterName'] ?? "";
+    courseId = json['courseId'] ?? 0;
+    desc = json['desc'] ?? "";
+    envelopePic = json['envelopePic'] ?? "";
+    id = json['id'] ?? 0;
+    link = json['link'] ?? "";
+    niceDate = json['niceDate'] ?? "";
+    origin = json['origin'] ?? "";
+    publishTime = json['publishTime'] ?? 0;
+    title = json['title'] ?? "";
+    originId = json['originId'] ?? 0;
+    userId = json['userId'] ?? 0;
+    visible = json['visible'] ?? 0;
+    zan = json['zan'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -72,7 +72,7 @@ class CollectDetail {
     data['origin'] = origin;
     data['publishTime'] = publishTime;
     data['title'] = title;
-    data['type'] = originId;
+    data['originId'] = originId;
     data['userId'] = userId;
     data['visible'] = visible;
     data['zan'] = zan;

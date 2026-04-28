@@ -12,7 +12,7 @@ import 'save/sp_util.dart';
 /// @description :语言工具类
 class LocaleUtil {
   ///更新语言
-  static updateLocale(Language language) {
+  static void updateLocale(Language language) {
     Locale? locale;
     if (language.language == '' || language.country == '') {
       locale = Get.deviceLocale;
@@ -26,7 +26,7 @@ class LocaleUtil {
   }
 
   ///获取当前存储的默认语言
-  static getDefault() {
+  static Locale? getDefault() {
     var language = SpUtil.getLanguage();
     if (language == null || language.language == '' || language.country == '') {
       return Get.deviceLocale;

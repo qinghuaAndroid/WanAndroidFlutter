@@ -5,7 +5,7 @@ import 'package:wan_android_flutter/res/src/strings.dart';
 import 'package:wan_android_flutter/ui/dialog/dialog.dart';
 
 ///显示公共弹窗
-showCommonDialog({
+void showCommonDialog({
   String title = '',
   String content = '',
   String backText = '',

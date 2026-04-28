@@ -1,7 +1,7 @@
 // 使用Provider
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wan_android_flutter/utils/utils.dart';
+import 'package:wan_android_flutter/utils/src/save/sp_util.dart';
 
 class ThemeColorsProvider extends ChangeNotifierProvider<ThemeColorsNotifier> {
   ThemeColorsProvider({super.key}) : super.value(value: ThemeColorsNotifier());

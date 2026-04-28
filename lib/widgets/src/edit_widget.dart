@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:wan_android_flutter/provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 /// @class : EditWidget
@@ -34,6 +34,7 @@ class _EditWidgetState extends State<EditWidget> {
   bool showPassWord = false;
   bool eyeExpand = true;
   TextEditingController controller = TextEditingController();
+  ThemeColorService colorService = GetInstance().find<ThemeColorService>();
 
   @override
   Widget build(BuildContext context) {
@@ -114,9 +115,7 @@ class _EditWidgetState extends State<EditWidget> {
   UnderlineInputBorder _getEditBorder(bool isEdit) {
     return UnderlineInputBorder(
       borderSide: BorderSide(
-        color: isEdit
-            ? Provider.of<ThemeColorsNotifier>(context).color
-            : ColorStyle.color_EFF1F8,
+        color: isEdit ? colorService.color.value : ColorStyle.color_EFF1F8,
         width: 0.5.w,
       ),
     );

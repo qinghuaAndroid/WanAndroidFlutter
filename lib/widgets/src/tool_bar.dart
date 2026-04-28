@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:wan_android_flutter/provider/provider.dart';
+import 'package:get/get.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 /// @page : ToolBar
@@ -44,8 +44,7 @@ class _ToolBarState extends State<ToolBar> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor:
-          widget.backgroundColor ??
-          Provider.of<ThemeColorsNotifier>(context).color,
+          widget.backgroundColor ?? Get.find<ThemeColorService>().color.value,
       leading: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         onTap: widget.backOnTap ?? () => Navigate.pop(),

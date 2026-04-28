@@ -6,12 +6,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/service/service.dart';
+import 'package:wan_android_flutter/utils/src/locale_util.dart';
 
 import 'app/app_theme.dart';
 import 'generated/l10n.dart';
-import 'provider/src/local_provider.dart';
-import 'provider/src/theme_colors_provider.dart';
 import 'res/src/strings.dart';
 import 'routes/navigation_history_observer.dart';
 import 'routes/router_reporter.dart';
@@ -34,15 +33,13 @@ void main() async {
     debugPrint("FlutterError-${details.exception}");
   };
 
-  final providers = [LocaleProvider(), ThemeColorsProvider()];
-
-  runZonedGuarded(
-    () => runApp(MultiProvider(providers: providers, child: MyApp())),
-    (Object exception, StackTrace stack) async {
-      // 异常上报
-      debugPrint("runZonedGuarded-$exception");
-    },
-  );
+  runZonedGuarded(() => runApp(MyApp()), (
+    Object exception,
+    StackTrace stack,
+  ) async {
+    // 异常上报
+    debugPrint("runZonedGuarded-$exception");
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -78,7 +75,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           // 当前语言
-          locale: Provider.of<LocaleNotifier>(context).locale,
+          locale: LocaleUtil.getDefault(),
           //国际化支持-默认语言
           fallbackLocale: const Locale('zh', 'CN'),
           //国际化支持-备用语言

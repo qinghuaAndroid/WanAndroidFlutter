@@ -68,11 +68,6 @@ abstract class Routes {
       binding: SplashBinding(),
     ),
     GetPage(
-      name: splashPage,
-      page: () => const SplashPage(),
-      binding: SplashBinding(),
-    ),
-    GetPage(
       name: registerPage,
       page: () => const RegisterPage(),
       binding: RegisterBinding(),

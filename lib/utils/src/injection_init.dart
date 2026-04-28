@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wan_android_flutter/http/src/request_repository.dart';
+import 'package:wan_android_flutter/service/service.dart';
 
 /// @class : Injection
 /// @date : 2021/08/19
@@ -10,6 +11,8 @@ class Injection {
   static Future<void> init() async {
     // shared_preferences
     await Get.putAsync(() => SharedPreferences.getInstance());
+    Get.lazyPut(() => LocalService());
     Get.lazyPut(() => RequestRepository());
+    Get.lazyPut(() => ThemeColorService());
   }
 }

@@ -14,13 +14,13 @@ class WebController extends BaseGetController {
   WebEntity detail = Get.arguments;
 
   ///进度条
-  var progress = 0.0.obs;
+  RxDouble progress = 0.0.obs;
 
   ///是否点赞
-  var isCollect = false.obs;
+  RxBool isCollect = false.obs;
 
   ///控制收藏的取消与结束
-  var collectAtState = false.obs;
+  RxBool collectAtState = false.obs;
 
   final webViewController = WebViewController();
 

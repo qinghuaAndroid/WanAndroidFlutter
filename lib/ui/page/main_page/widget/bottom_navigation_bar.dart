@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
-import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 class MBottomNavigationBar extends StatelessWidget {
@@ -18,78 +18,59 @@ class MBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeColorsNotifier>(
-      builder:
-          (BuildContext context, ThemeColorsNotifier notifier, Widget? child) {
-            return BottomNavigationBar(
-              currentIndex: currentIndex,
-              selectedItemColor: notifier.color,
-              unselectedItemColor: ColorStyle.color_B8C0D4,
-              selectedFontSize: 12.sp,
-              unselectedFontSize: 12.sp,
-              items: [
-                BottomNavigationBarItem(
-                  backgroundColor: Colors.white,
-                  icon: Image.asset(
-                    assetImage("home"),
-                    width: 24.w,
-                    height: 24.w,
-                    color: currentIndex == 0
-                        ? notifier.color
-                        : ColorStyle.color_B8C0D4,
-                  ),
-                  label: S.of(context).tab_1,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    assetImage("system"),
-                    width: 24.w,
-                    height: 24.w,
-                    color: currentIndex == 1
-                        ? notifier.color
-                        : ColorStyle.color_B8C0D4,
-                  ),
-                  label: S.of(context).tab_2,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    assetImage("official_account"),
-                    width: 24.w,
-                    height: 24.w,
-                    color: currentIndex == 2
-                        ? notifier.color
-                        : ColorStyle.color_B8C0D4,
-                  ),
-                  label: S.of(context).tab_3,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    assetImage("navigation"),
-                    width: 24.w,
-                    height: 24.w,
-                    color: currentIndex == 3
-                        ? notifier.color
-                        : ColorStyle.color_B8C0D4,
-                  ),
-                  label: S.of(context).tab_4,
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    assetImage("project"),
-                    width: 24.w,
-                    height: 24.w,
-                    color: currentIndex == 4
-                        ? notifier.color
-                        : ColorStyle.color_B8C0D4,
-                  ),
-                  label: S.of(context).tab_5,
-                ),
-              ],
-              onTap: (index) {
-                onTap.call(index);
-              },
-            );
-          },
+    final themeColorService = Get.find<ThemeColorService>();
+    final unselectedColor = ColorStyle.color_B8C0D4;
+    final icons = <String>[
+      "home",
+      "system",
+      "official_account",
+      "navigation",
+      "project",
+    ];
+    final labels = <String>[
+      S.of(context).tab_1,
+      S.of(context).tab_2,
+      S.of(context).tab_3,
+      S.of(context).tab_4,
+      S.of(context).tab_5,
+    ];
+
+    final selectedColor = themeColorService.color;
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      selectedItemColor: selectedColor.value,
+      unselectedItemColor: unselectedColor,
+      selectedFontSize: 12.sp,
+      unselectedFontSize: 12.sp,
+      items: List.generate(
+        labels.length,
+        (index) => _buildNavItem(
+          index: index,
+          iconName: icons[index],
+          label: labels[index],
+          selectedColor: selectedColor.value,
+          unselectedColor: unselectedColor,
+        ),
+      ),
+      onTap: onTap.call,
+    );
+  }
+
+  BottomNavigationBarItem _buildNavItem({
+    required int index,
+    required String iconName,
+    required String label,
+    required Color selectedColor,
+    required Color unselectedColor,
+  }) {
+    return BottomNavigationBarItem(
+      icon: Image.asset(
+        assetImage(iconName),
+        width: 24.w,
+        height: 24.w,
+        color: currentIndex == index ? selectedColor : unselectedColor,
+      ),
+      label: label,
     );
   }
 }

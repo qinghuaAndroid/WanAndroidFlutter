@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
-import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
@@ -64,7 +63,7 @@ class LoginPage extends GetCommonView<LoginController> {
               margin: EdgeInsets.only(top: 50.w, left: 50.w, right: 50.w),
               decoration: BoxDecoration(
                 color: controller.changeShowButton()
-                    ? Provider.of<ThemeColorsNotifier>(context).color
+                    ? Get.find<ThemeColorService>().color.value
                     : Colors.black12,
                 borderRadius: BorderRadius.all(Radius.circular(4.w)),
               ),

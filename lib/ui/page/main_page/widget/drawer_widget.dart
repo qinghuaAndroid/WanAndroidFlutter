@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/model/models.dart';
-import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/ui/page/main_page/main_controller.dart';
 import 'package:wan_android_flutter/utils/utils.dart' hide ScreenUtil;
 
@@ -26,7 +26,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             child: DrawerHeader(
               decoration: BoxDecoration(
-                color: Provider.of<ThemeColorsNotifier>(context).color,
+                color: Get.find<ThemeColorService>().color.value,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

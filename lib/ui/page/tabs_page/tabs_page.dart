@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/model/models.dart' hide ProjectPage;
-import 'package:wan_android_flutter/provider/provider.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/ui/page/tabs_list_page/tabs_list_page.dart';
 import 'package:wan_android_flutter/ui/page/tabs_page/tabs_controller.dart';
 
@@ -19,6 +18,7 @@ class _TabsPageState extends State<TabsPage>
     with AutomaticKeepAliveClientMixin<TabsPage>, TickerProviderStateMixin {
   String? tag;
   late TabsController controller;
+  late ThemeColorService colorService;
   TabController? tabController;
 
   @override
@@ -26,6 +26,7 @@ class _TabsPageState extends State<TabsPage>
     super.initState();
     tag = widget.tagType.toString();
     controller = GetInstance().find<TabsController>(tag: tag);
+    colorService = Get.find<ThemeColorService>();
     controller.tagType = widget.tagType;
     controller.requestData();
   }
@@ -53,17 +54,13 @@ class _TabsPageState extends State<TabsPage>
           top: true,
           child: Column(
             children: [
-              Selector<ThemeColorsNotifier, Color>(
-                builder: (BuildContext context, value, Widget? child) {
-                  return DecoratedBox(
-                    decoration: BoxDecoration(color: value),
-                    child: _tabBar(tabController),
-                  );
-                },
-                selector: (context, themeColorsNotifier) {
-                  return themeColorsNotifier.color;
-                },
-              ),
+              Obx(() {
+                final color = colorService.color.value;
+                return DecoratedBox(
+                  decoration: BoxDecoration(color: color),
+                  child: _tabBar(tabController),
+                );
+              }),
               Expanded(
                 child: TabBarView(
                   controller: tabController,

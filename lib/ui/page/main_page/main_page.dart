@@ -3,12 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/model/models.dart' hide ProjectPage;
-import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
+import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/ui/dialog/dialog.dart';
 import 'package:wan_android_flutter/ui/page/home_page/home_page.dart';
 import 'package:wan_android_flutter/ui/page/navigation_page/navigation_page.dart';
@@ -37,9 +36,9 @@ class MainTabOptionsState extends State<MainPage>
         SingleTickerProviderStateMixin,
         WidgetsBindingObserver {
   ///控制器
-  TabController? tabController;
-
-  MainController get mainController => GetInstance().find<MainController>();
+  late TabController? tabController;
+  late MainController mainController;
+  late ThemeColorService themeColorService;
 
   ///监听应用从后台切换到前台时，读取粘贴板中的数据，验证URL，已保存分享
   @override
@@ -68,6 +67,8 @@ class MainTabOptionsState extends State<MainPage>
   void initState() {
     super.initState();
     tabController = TabController(length: 5, vsync: this);
+    mainController = Get.find<MainController>();
+    themeColorService = Get.find<ThemeColorService>();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -82,40 +83,38 @@ class MainTabOptionsState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      backgroundColor: ColorStyle.color_F8F9FC,
-      appBar: AppBar(
-        backgroundColor: Provider.of<ThemeColorsNotifier>(context).color,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Obx(
-          () => Text(
+    return Obx(() {
+      return Scaffold(
+        backgroundColor: ColorStyle.color_F8F9FC,
+        appBar: AppBar(
+          backgroundColor: themeColorService.color.value,
+          iconTheme: IconThemeData(color: Colors.white),
+          title: Text(
             _title(mainController.currentIndex.value),
             style: TextStyle(color: Colors.white, fontSize: 18.sp),
           ),
+          actionsPadding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
+          actions: [
+            GestureDetector(
+              onTap: () => Navigate.push(Routes.searchPage),
+              child: Icon(Icons.search),
+            ),
+          ],
         ),
-        actionsPadding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
-        actions: [
-          GestureDetector(
-            onTap: () => Navigate.push(Routes.searchPage),
-            child: Icon(Icons.search),
-          ),
-        ],
-      ),
-      drawer: DrawerWidget(controller: mainController),
-      body: TabBarView(
-        controller: tabController,
-        children: const [
-          HomePage(),
-          SystemPage(),
-          TabsPage(tagType: TagType.publicAccount),
-          NavigationPage(),
-          TabsPage(tagType: TagType.project),
-        ],
-      ),
-      bottomNavigationBar: DecoratedBox(
-        decoration: ShadowStyle.white12TopSpread4Blur10(radius: 0),
-        child: Obx(
-          () => MBottomNavigationBar(
+        drawer: DrawerWidget(controller: mainController),
+        body: TabBarView(
+          controller: tabController,
+          children: const [
+            HomePage(),
+            SystemPage(),
+            TabsPage(tagType: TagType.publicAccount),
+            NavigationPage(),
+            TabsPage(tagType: TagType.project),
+          ],
+        ),
+        bottomNavigationBar: DecoratedBox(
+          decoration: ShadowStyle.white12TopSpread4Blur10(radius: 0),
+          child: MBottomNavigationBar(
             currentIndex: mainController.currentIndex.value,
             onTap: (index) {
               mainController.currentIndex.value = index;
@@ -123,8 +122,8 @@ class MainTabOptionsState extends State<MainPage>
             },
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   String _title(int index) {

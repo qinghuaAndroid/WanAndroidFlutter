@@ -27,6 +27,7 @@ class R {
   static const String assetsImagesCollectQuit = 'assets/svg/collect_quit.svg';
   static const String assetsImagesProgram = 'assets/svg/program.svg';
   static const String assetsImagesDateTime = 'assets/svg/date_time.svg';
+  static const String assetsImagesLoadFailed = 'assets/svg/image_load_failed.svg';
 
   ///----------------------------lottie---------------------------
   static const String assetsLottieLoading =

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/res/res.dart';
 
@@ -118,6 +119,12 @@ class _BannerState extends State<BannerWidget> {
                 : Image.network(
                     widget.banner[index % length].imagePath,
                     fit: BoxFit.fill,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: ColorStyle.color_F8F9FC,
+                        child: SvgPicture.asset(R.assetsImagesLoadFailed),
+                      );
+                    },
                   ),
           );
         },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide SearchController;
+import 'package:flutter/services.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 
@@ -19,52 +20,55 @@ class SearchPage extends GetCommonView<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        top: true,
-        child: Column(
-          children: [
-            Box.vBox15,
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          top: true,
+          child: Column(
+            children: [
+              Box.vBox15,
 
-            ///搜索框顶部Widget
-            SearchTopWidget(
-              onChanged: (text) {
-                controller.changeText.value = text;
-                if (text.isEmpty) {
-                  controller.searchResult.value = [];
-                }
-              },
-              onTap: () => controller.searchWord(),
-              deleteTap: () {
-                controller
-                  ..changeText.value = ''
-                  ..showResult.value = false
-                  ..textController.text = ''
-                  ..searchResult.value = [];
-              },
-              textController: controller.textController,
-            ),
-            Box.vBox15,
-
-            Expanded(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      ///搜索历史
-                      const SearchHistoryWidget(),
-                      Box.vBox20,
-
-                      ///搜索热词
-                      const SearchHotWordWidget(),
-                    ],
-                  ),
-                  const SearchResultWidget(),
-                ],
+              ///搜索框顶部Widget
+              SearchTopWidget(
+                onChanged: (text) {
+                  controller.changeText.value = text;
+                  if (text.isEmpty) {
+                    controller.searchResult.value = [];
+                  }
+                },
+                onTap: () => controller.searchWord(),
+                deleteTap: () {
+                  controller
+                    ..changeText.value = ''
+                    ..showResult.value = false
+                    ..textController.text = ''
+                    ..searchResult.value = [];
+                },
+                textController: controller.textController,
               ),
-            ),
-          ],
+              Box.vBox15,
+
+              Expanded(
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        ///搜索历史
+                        const SearchHistoryWidget(),
+                        Box.vBox20,
+
+                        ///搜索热词
+                        const SearchHotWordWidget(),
+                      ],
+                    ),
+                    const SearchResultWidget(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

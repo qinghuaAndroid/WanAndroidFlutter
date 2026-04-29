@@ -110,6 +110,14 @@ class _ProjectListItem extends StatelessWidget {
             fit: BoxFit.fill,
             width: 72,
             height: 128,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                width: 72,
+                height: 128,
+                color: ColorStyle.color_EFF1F8,
+                child: const Icon(Icons.broken_image, color: Colors.white),
+              );
+            },
           ),
         ),
       ],

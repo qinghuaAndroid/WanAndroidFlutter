@@ -25,7 +25,11 @@ class SearchPage extends GetCommonView<SearchController> {
   Widget build(BuildContext context) {
     var controller = Provider.of<SearchController>(context, listen: false);
     return AnnotatedRegion(
-      value: SystemUiOverlayStyle.dark,
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(

@@ -15,6 +15,6 @@ class ControllerProvider<T extends BaseGetController> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<T>.value(value: create(), child: child);
+    return ChangeNotifierProvider(create: (context) => create(), child: child);
   }
 }

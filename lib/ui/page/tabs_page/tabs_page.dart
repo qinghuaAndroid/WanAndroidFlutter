@@ -21,12 +21,44 @@ class TabsPageState extends State<TabsPage>
     with AutomaticKeepAliveClientMixin<TabsPage>, TickerProviderStateMixin {
   TabController? tabController;
 
+  int _tabLength(TabsController tabsController) {
+    return widget.tagType == TagType.publicAccount
+        ? tabsController.wechatPublic.length
+        : tabsController.projectTabs.length;
+  }
+
+  TabController? _syncTabController(int length) {
+    if (length <= 0) {
+      tabController?.dispose();
+      tabController = null;
+      return null;
+    }
+
+    final current = tabController;
+    if (current == null) {
+      tabController = TabController(length: length, vsync: this);
+      return tabController;
+    }
+
+    if (current.length != length) {
+      final nextIndex = current.index >= length ? length - 1 : current.index;
+      current.dispose();
+      tabController = TabController(
+        length: length,
+        vsync: this,
+        initialIndex: nextIndex,
+      );
+    }
+
+    return tabController;
+  }
+
   @override
   void initState() {
     super.initState();
-    var controller = context.read<TabsController>();
-    controller.tagType = widget.tagType;
-    controller.requestData();
+    final tabsController = context.read<TabsController>();
+    tabsController.tagType = widget.tagType;
+    tabsController.requestData();
   }
 
   @override
@@ -39,46 +71,46 @@ class TabsPageState extends State<TabsPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Consumer<TabsController>(
-      builder: (context, controller, child) {
-        tabController?.dispose();
-        tabController = TabController(
-          length: widget.tagType == TagType.publicAccount
-              ? controller.wechatPublic.length
-              : controller.projectTabs.length,
-          vsync: this,
-        );
+      builder: (context, tabsController, child) {
+        final tabLength = _tabLength(tabsController);
+        final currentTabController = _syncTabController(tabLength);
+        final hasTabs = currentTabController != null;
+
         return SafeArea(
           top: true,
           child: Column(
             children: [
-              Selector<ThemeColorsNotifier, Color>(
-                builder: (BuildContext context, value, Widget? child) {
-                  return DecoratedBox(
-                    decoration: BoxDecoration(color: value),
-                    child: TabBar(
-                      tabs: _tabs(controller),
-                      controller: tabController,
-                      isScrollable: true,
-                      indicatorColor: Colors.white,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: Colors.white,
-                      labelPadding: const EdgeInsets.all(0.0),
-                      indicatorPadding: const EdgeInsets.all(0.0),
-                      tabAlignment: TabAlignment.start,
-                      dividerHeight: 0,
-                    ),
-                  );
-                },
-                selector: (context, themeColorsNotifier) {
-                  return themeColorsNotifier.color;
-                },
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: tabController,
-                  children: _createTabsPage(controller),
+              if (hasTabs)
+                Selector<ThemeColorsNotifier, Color>(
+                  builder: (BuildContext context, value, Widget? child) {
+                    return DecoratedBox(
+                      decoration: BoxDecoration(color: value),
+                      child: TabBar(
+                        tabs: _tabs(tabsController),
+                        controller: currentTabController,
+                        isScrollable: true,
+                        indicatorColor: Colors.white,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Colors.white,
+                        labelPadding: const EdgeInsets.all(0.0),
+                        indicatorPadding: const EdgeInsets.all(0.0),
+                        tabAlignment: TabAlignment.start,
+                        dividerHeight: 0,
+                      ),
+                    );
+                  },
+                  selector: (context, themeColorsNotifier) {
+                    return themeColorsNotifier.color;
+                  },
                 ),
+              Expanded(
+                child: hasTabs
+                    ? TabBarView(
+                        controller: currentTabController,
+                        children: _createTabsPage(tabsController),
+                      )
+                    : const SizedBox.shrink(),
               ),
             ],
           ),
@@ -110,21 +142,21 @@ class TabsPageState extends State<TabsPage>
   List<Widget> _createTabsPage(TabsController controller) {
     return widget.tagType == TagType.publicAccount
         ? (controller.wechatPublic).map((model) {
-            final controller = TabsListController();
-            controller.tagType = widget.tagType;
-            controller.id = model.id.toString();
+            final listController = TabsListController();
+            listController.tagType = widget.tagType;
+            listController.id = model.id.toString();
             return TabsListPage(
               id: model.id.toString(),
-              controller: controller,
+              controller: listController,
             );
           }).toList()
         : (controller.projectTabs).map((model) {
-            final controller = TabsListController();
-            controller.tagType = widget.tagType;
-            controller.id = model.id.toString();
+            final listController = TabsListController();
+            listController.tagType = widget.tagType;
+            listController.id = model.id.toString();
             return TabsListPage(
               id: model.id.toString(),
-              controller: controller,
+              controller: listController,
             );
           }).toList();
   }

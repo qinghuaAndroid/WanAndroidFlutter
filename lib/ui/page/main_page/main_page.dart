@@ -117,7 +117,7 @@ class _MainTabOptionsState extends State<MainPage>
             child: const SystemPage(),
           ),
           ControllerProvider(
-            create: () => TabsController(),
+            create: () => TabsController()..tagType = TagType.publicAccount,
             child: const TabsPage(tagType: TagType.publicAccount),
           ),
           ControllerProvider(
@@ -125,7 +125,7 @@ class _MainTabOptionsState extends State<MainPage>
             child: const NavigationPage(),
           ),
           ControllerProvider(
-            create: () => TabsController(),
+            create: () => TabsController()..tagType = TagType.project,
             child: const TabsPage(tagType: TagType.project),
           ),
         ],

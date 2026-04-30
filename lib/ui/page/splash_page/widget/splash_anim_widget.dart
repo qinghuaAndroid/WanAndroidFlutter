@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -17,42 +18,50 @@ class SplashAnimWidget extends GetCommonView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      onEnd: () {
-        Navigate.popAndPush(Routes.mainPage);
+    return Consumer<SplashController>(
+      builder: (BuildContext context, SplashController controller, Widget? child) {
+        return AnimatedOpacity(
+          onEnd: () {
+            Navigate.popAndPush(Routes.mainPage);
+          },
+          opacity: controller.opacityLevel,
+          duration: const Duration(milliseconds: 2000),
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Expanded(flex: 2, child: SizedBox()),
+                Image.asset(
+                  assetImage('logo_green'),
+                  width: 100.w,
+                  height: 100.w,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 6.w),
+                  child: Text(
+                    StringStyles.appName.tr,
+                    style: TextStyle(
+                      color: ColorStyle.color_00CAAE,
+                      fontSize: 30.sp,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 4.w),
+                  child: Text(
+                    S.of(context).slogan,
+                    style: TextStyle(
+                      color: ColorStyle.color_999999,
+                      fontSize: 15.sp,
+                    ),
+                  ),
+                ),
+                Expanded(flex: 3, child: SizedBox()),
+              ],
+            ),
+          ),
+        );
       },
-      opacity: controller.opacityLevel,
-      duration: const Duration(milliseconds: 2000),
-      child: Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            Expanded(flex: 2, child: SizedBox()),
-            Image.asset(assetImage('logo_green'), width: 100.w, height: 100.w),
-            Padding(
-              padding: EdgeInsets.only(top: 6.w),
-              child: Text(
-                StringStyles.appName.tr,
-                style: TextStyle(
-                  color: ColorStyle.color_00CAAE,
-                  fontSize: 30.sp,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 4.w),
-              child: Text(
-                S.of(context).slogan,
-                style: TextStyle(
-                  color: ColorStyle.color_999999,
-                  fontSize: 15.sp,
-                ),
-              ),
-            ),
-            Expanded(flex: 3, child: SizedBox()),
-          ],
-        ),
-      ),
     );
   }
 }

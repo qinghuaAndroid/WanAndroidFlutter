@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:wan_android_flutter/get/src/base_page_controller.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -39,10 +40,6 @@ class RefreshWidget<T extends BaseGetPageController> extends StatefulWidget {
 
   final String? tag;
 
-  ///获取BaseGetController子类对象，在GetX中，任何BaseGetController都可以通过此方法获取
-  ///但是必须是没有dispose的Controller
-  T get controller => GetInstance().find<T>(tag: tag);
-
   ///是否启用上拉
   final bool enablePullUp;
 
@@ -59,14 +56,14 @@ class RefreshWidget<T extends BaseGetPageController> extends StatefulWidget {
   final Widget child;
 
   @override
-  State<StatefulWidget> createState() {
+  State<RefreshWidget<T>> createState() {
     return RefreshWidgetState<T>();
   }
 }
 
 ///   with AutomaticKeepAliveClientMixin
 class RefreshWidgetState<T extends BaseGetPageController>
-    extends State<RefreshWidget>
+    extends State<RefreshWidget<T>>
     with AutomaticKeepAliveClientMixin {
   ///内部维护[RefreshController] ，不暴露出去 , 上下刷新控制器
   RefreshController refreshController = RefreshController(
@@ -76,7 +73,7 @@ class RefreshWidgetState<T extends BaseGetPageController>
   @override
   void initState() {
     super.initState();
-    widget.controller.initPullLoading(refreshController);
+    context.read<T>().initPullLoading(refreshController);
   }
 
   @override
@@ -90,8 +87,8 @@ class RefreshWidgetState<T extends BaseGetPageController>
           controller: refreshController,
           enablePullDown: widget.enablePullDown,
           enablePullUp: widget.enablePullUp,
-          onRefresh: () => widget.controller.onLoadRefresh(refreshController),
-          onLoading: () => widget.controller.onLoadMore(refreshController),
+          onRefresh: () => context.read<T>().onLoadRefresh(refreshController),
+          onLoading: () => context.read<T>().onLoadMore(refreshController),
           header: CustomHeader(
             builder: (BuildContext context, RefreshStatus? mode) {
               Widget header;

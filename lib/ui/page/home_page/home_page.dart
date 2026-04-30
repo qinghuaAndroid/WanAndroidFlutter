@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
@@ -7,6 +8,8 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 import 'home_controller.dart';
 import 'widget/banner_widget.dart';
 import 'widget/home_article_item.dart';
+
+export 'home_controller.dart';
 
 /// @class : HomePage
 /// @date : 2021/08/23
@@ -30,7 +33,8 @@ class HomePage extends GetSaveView<HomeController> {
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
-                    itemCount: controller.projectData.length + 1,
+                    itemCount:
+                        context.watch<HomeController>().projectData.length + 1,
                     itemBuilder: (BuildContext context, int index) {
                       ///将Banner装载到ListView中
                       if (index == 0) {
@@ -38,11 +42,11 @@ class HomePage extends GetSaveView<HomeController> {
                           width: double.infinity,
                           height: 215.w,
                           child: BannerWidget(
-                            controller.banner,
+                            context.read<HomeController>().banner,
                             height: 215.w,
                             onTap: (index) {
                               WebUtil.toWebPageBanners(
-                                controller.banner[index],
+                                context.read<HomeController>().banner[index],
                               );
                             },
                           ),
@@ -56,14 +60,21 @@ class HomePage extends GetSaveView<HomeController> {
                           color: Colors.transparent,
                           child: Ripple(
                             onTap: () => WebUtil.toWebPage(
-                              controller.projectData[newIndex],
+                              context
+                                  .read<HomeController>()
+                                  .projectData[newIndex],
                               onResult: (value) {
-                                controller.projectData[newIndex].collect =
+                                context
+                                        .read<HomeController>()
+                                        .projectData[newIndex]
+                                        .collect =
                                     value;
                               },
                             ),
                             child: HomeArticleItem(
-                              item: controller.projectData[newIndex],
+                              item: context
+                                  .read<HomeController>()
+                                  .projectData[newIndex],
                               index: newIndex,
                             ),
                           ),

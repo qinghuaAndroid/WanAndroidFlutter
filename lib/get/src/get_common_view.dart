@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 /// @class : GetCommonView
 /// @name : jhf
 /// @description :基类,用于绑定Controller
-abstract class GetCommonView<T extends GetxController> extends StatefulWidget {
+abstract class GetCommonView<T extends ChangeNotifier> extends StatefulWidget {
   const GetCommonView({super.key});
-
-  final String? tag = null;
-
-  T get controller => GetInstance().find<T>(tag: tag);
-
-  ///Get 局部更新字段
-  Object? get updateId => null;
 
   @protected
   Widget build(BuildContext context);
@@ -24,17 +17,11 @@ abstract class GetCommonView<T extends GetxController> extends StatefulWidget {
 /// @class : AutoDisposeState
 /// @name : jhf
 /// @description :基类,可自动装载的状态管理
-class GetCommonViewState<S extends GetxController>
-    extends State<GetCommonView> {
+class GetCommonViewState<T extends ChangeNotifier>
+    extends State<GetCommonView<T>> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<S>(
-      id: widget.updateId,
-      tag: widget.tag,
-      builder: (controller) {
-        return widget.build(context);
-      },
-    );
+    return widget.build(context);
   }
 
   @override
@@ -44,7 +31,6 @@ class GetCommonViewState<S extends GetxController>
 
   @override
   void dispose() {
-    Get.delete<S>(tag: widget.tag);
     super.dispose();
   }
 }

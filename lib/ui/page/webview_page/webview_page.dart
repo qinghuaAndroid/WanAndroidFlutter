@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -11,6 +12,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'webview_controller.dart';
 import 'widget/webview_bottom_widget.dart';
+
+export 'webview_controller.dart';
 
 /// @class : WebViewPage
 /// @date : 2021/08/24
@@ -24,7 +27,7 @@ class WebViewPage extends GetCommonView<WebController> {
     return WillPopScope(
       onWillPop: () async {
         /// 拦截用户返回，返回时携带参数
-        Get.back(result: controller.isCollect.value);
+        Get.back(result: context.read<WebController>().isCollect.value);
         return true;
       },
       child: Scaffold(
@@ -34,9 +37,11 @@ class WebViewPage extends GetCommonView<WebController> {
             Stack(
               children: [
                 ToolBar(
-                  backOnTap: () => Get.back(result: '${controller.isCollect}'),
+                  backOnTap: () => Get.back(
+                    result: '${context.read<WebController>().isCollect}',
+                  ),
                   backColor: Colors.black,
-                  title: controller.detail.title,
+                  title: context.read<WebController>().detail.title,
                   titleColor: Colors.black,
                   backgroundColor: Colors.transparent,
                   systemOverlayStyle: SystemUiOverlayStyle(
@@ -58,6 +63,7 @@ class WebViewPage extends GetCommonView<WebController> {
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       splashColor: ColorStyle.color_E2E3E8_66,
                       onTap: () {
+                        var controller = context.read<WebController>();
                         SharePlus.instance.share(
                           ShareParams(
                             text:
@@ -80,38 +86,45 @@ class WebViewPage extends GetCommonView<WebController> {
             Expanded(
               child: Stack(
                 children: [
-                  WebViewWidget(controller: controller.webViewController),
-                  Obx(
-                    () => Visibility(
-                      visible: controller.collectAtState.value,
-                      child: Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Lottie.asset(
-                          R.assetsLottieCollect,
-                          animate: controller.collectAtState.value,
-                        ),
-                      ),
-                    ),
+                  WebViewWidget(
+                    controller: context.read<WebController>().webViewController,
                   ),
-                  Obx(
-                    () => Visibility(
-                      visible: controller.progress < 1,
-                      child: LinearProgressIndicator(
-                        minHeight: 2,
-                        backgroundColor: ColorStyle.color_F9F9F9,
-                        color: ColorStyle.color_24CF5F,
-                        value: controller.progress.value,
-                      ),
-                    ),
+                  Consumer(
+                    builder: (context, WebController controller, child) {
+                      return Visibility(
+                        visible: controller.collectAtState.value,
+                        child: Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Lottie.asset(
+                            R.assetsLottieCollect,
+                            animate: controller.collectAtState.value,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  Consumer(
+                    builder: (context, WebController controller, child) {
+                      return Visibility(
+                        visible: controller.progress < 1,
+                        child: LinearProgressIndicator(
+                          minHeight: 2,
+                          backgroundColor: ColorStyle.color_F9F9F9,
+                          color: ColorStyle.color_24CF5F,
+                          value: controller.progress.value,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
             Visibility(
-              visible: controller.detail.id > 0,
+              visible: context.read<WebController>().detail.id > 0,
               child: const WebViewBottomWidget(),
             ),
           ],

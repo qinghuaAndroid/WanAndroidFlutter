@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 /// @class : GetCommonView
 /// @name : jhf
@@ -7,15 +6,10 @@ import 'package:get/get.dart';
 /// 由于在TabBarView中切换页面会导致状态重置，从而GetxController销毁
 /// 再次切换时需要重新拉取所有信息，体验非常差，因此需要继承AutomaticKeepAliveClientMixin
 /// 来达到拦截状态销毁的目的
-abstract class GetSaveView<T extends GetxController> extends StatefulWidget {
+abstract class GetSaveView<T extends ChangeNotifier> extends StatefulWidget {
   const GetSaveView({super.key});
 
   String? get tag => null;
-
-  T get controller => GetInstance().find<T>(tag: tag);
-
-  ///Get 局部更新字段
-  Object? get updateId => null;
 
   ///widget生命周期
   ValueChanged<AppLifecycleState>? get lifecycle => null;
@@ -24,24 +18,18 @@ abstract class GetSaveView<T extends GetxController> extends StatefulWidget {
   Widget build(BuildContext context);
 
   @override
-  GetSaveViewState createState() => GetSaveViewState<T>();
+  GetSaveViewState<T> createState() => GetSaveViewState<T>();
 }
 
 /// @class : AutoDisposeState
 /// @name : jhf
 /// @description :基类,可自动装载的状态管理
-class GetSaveViewState<S extends GetxController> extends State<GetSaveView>
-    with AutomaticKeepAliveClientMixin<GetSaveView>, WidgetsBindingObserver {
+class GetSaveViewState<T extends ChangeNotifier> extends State<GetSaveView<T>>
+    with AutomaticKeepAliveClientMixin<GetSaveView<T>>, WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return GetBuilder<S>(
-      tag: widget.tag,
-      id: widget.updateId,
-      builder: (controller) {
-        return widget.build(context);
-      },
-    );
+    return widget.build(context);
   }
 
   @override
@@ -54,7 +42,6 @@ class GetSaveViewState<S extends GetxController> extends State<GetSaveView>
 
   @override
   void dispose() {
-    Get.delete<S>();
     if (widget.lifecycle != null) {
       WidgetsBinding.instance.removeObserver(this);
     }

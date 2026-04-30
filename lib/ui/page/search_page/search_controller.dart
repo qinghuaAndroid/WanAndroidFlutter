@@ -12,22 +12,22 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 /// @description :搜索页面 控制器层
 class SearchController extends BaseGetPageController {
   ///当前热词Widget，由于热词从服务器加载，需要动态添加
-  RxList<HotWord> hotWord = <HotWord>[].obs;
+  List<HotWord> hotWord = <HotWord>[];
 
   ///搜索框输入词
-  RxString changeText = ''.obs;
+  String changeText = '';
 
   ///搜索历史记录，从SP中取出动态生成
-  RxList<String> history = <String>[].obs;
+  List<String> history = <String>[];
 
   ///搜索结果
-  RxList<ProjectDetail> searchResult = <ProjectDetail>[].obs;
+  List<ProjectDetail> searchResult = <ProjectDetail>[];
 
   ///输入框文本控制器
   TextEditingController textController = TextEditingController(text: '');
 
   ///控制搜索结果
-  var showResult = false.obs;
+  bool showResult = false;
 
   @override
   void onInit() {
@@ -45,7 +45,7 @@ class SearchController extends BaseGetPageController {
     ///搜索数据
     request.searchKeyWord(
       page,
-      changeText.value,
+      changeText,
       success: (data, over) {
         RefreshExtension.onSuccess(controller, refresh, over);
 
@@ -67,7 +67,9 @@ class SearchController extends BaseGetPageController {
   void getSearchHotWord() {
     request.getSearchHotWord(
       success: (data) {
-        hotWord.value = data;
+        hotWord.clear();
+        hotWord.addAll(data);
+        update();
       },
     );
   }
@@ -80,14 +82,17 @@ class SearchController extends BaseGetPageController {
     if (historyShow.length > 10) {
       historyShow = historyShow.sublist(0, 10);
     }
-    history.value = historyShow;
+    history.clear();
+    history.addAll(historyShow);
+    update();
   }
 
   ///点击搜索历史或者热搜榜中的item
   ///[items] 搜索的内容
   void hotOrHistorySearch(String items) {
     ///改变存储中的值
-    changeText.value = items;
+    changeText = items;
+    update();
 
     ///改变输入框内容，并更新当前光标在尾部
     textController.text = items;
@@ -100,17 +105,17 @@ class SearchController extends BaseGetPageController {
 
   ///点击搜索存储搜索记录
   void searchWord() {
-    if (changeText.value.isEmpty) {
+    if (changeText.isEmpty) {
       return;
     }
     page = 1;
 
     ///显示加载数据
-    showResult.value = true;
+    showResult = true;
     showLoading();
 
     ///更新搜索历史
-    SpUtil.saveSearchHistory(changeText.value);
+    SpUtil.saveSearchHistory(changeText);
     notifySearchHistory();
 
     ///隐藏软键盘
@@ -127,6 +132,16 @@ class SearchController extends BaseGetPageController {
   ///清空搜索历史
   void clearSearchHistory() {
     SpUtil.deleteSearchHistory();
-    history.value = [];
+    history.clear();
+    update();
+  }
+
+  ///清空输入框
+  void clearText() {
+    changeText = '';
+    showResult = false;
+    textController.text = '';
+    searchResult.clear();
+    update();
   }
 }

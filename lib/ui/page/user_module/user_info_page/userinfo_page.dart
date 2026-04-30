@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -7,6 +8,8 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'userinfo_controller.dart';
 import 'widget/user_info_widget.dart';
+
+export 'userinfo_controller.dart';
 
 /// @class : WebViewPage
 /// @date : 2021/08/24
@@ -34,9 +37,13 @@ class UserInfoPage extends GetCommonView<UserInfoController> {
           ),
           Box.vBox20,
 
-          UserInfoWidget(
-            keys: StringStyles.userNickname.tr,
-            value: controller.userInfo.nickname,
+          Consumer<UserInfoController>(
+            builder: (context, controller, child) {
+              return UserInfoWidget(
+                keys: StringStyles.userNickname.tr,
+                value: controller.userInfo.nickname,
+              );
+            },
           ),
 
           DividerStyle.divider1HalfPadding20,

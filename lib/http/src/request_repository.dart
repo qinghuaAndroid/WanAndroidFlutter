@@ -12,6 +12,13 @@ typedef SuccessOver<T> = Function(T data, bool over);
 /// @name : jhf
 /// @description : 请求仓库
 class RequestRepository {
+
+  RequestRepository._();
+
+  static final RequestRepository _instance = RequestRepository._();
+
+  factory RequestRepository() => _instance;
+
   void _notifySuccess<T>(Success<T>? callback, T data) {
     callback?.call(data);
   }

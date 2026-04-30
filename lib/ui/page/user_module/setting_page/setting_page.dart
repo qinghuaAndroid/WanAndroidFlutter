@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/router_reporter.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
@@ -7,6 +8,8 @@ import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'setting_controller.dart';
+
+export 'setting_controller.dart';
 
 class SettingPage extends StatefulWidget {
   final String? tag;
@@ -19,9 +22,6 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage>
     with RouteAware, WidgetsBindingObserver {
-  SettingController get controller =>
-      GetInstance().find<SettingController>(tag: widget.tag);
-
   @override
   void initState() {
     super.initState();
@@ -68,57 +68,53 @@ class _SettingPageState extends State<SettingPage>
   void dispose() {
     routeObserver.unsubscribe(this);
     WidgetsBinding.instance.removeObserver(this);
-    Get.delete<SettingController>(tag: widget.tag);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SettingController>(
-      tag: widget.tag,
-      builder: (controller) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          body: Column(
-            children: [
-              ToolBar(title: StringStyles.settingTitle.tr),
-              DividerStyle.divider1Half,
-              ListTile(
-                onTap: () => Navigate.push(Routes.settingLanguagePage),
-                title: Text(StringStyles.settingLanguage.tr),
-                trailing: const Icon(Icons.keyboard_arrow_right),
-              ),
-
-              ListTile(
-                onTap: () => controller.clearCacheFile(),
-                title: Text(StringStyles.settingCache.tr),
-                trailing: Obx(
-                  () => Text(
-                    controller.cache.value,
-                    style: Styles.style_6A6969_14,
-                  ),
-                ),
-              ),
-
-              ListTile(
-                onTap: () => Navigate.push(Routes.settingThemeColors),
-                title: Text(StringStyles.settingThemeColors.tr),
-                trailing: const Icon(Icons.keyboard_arrow_right),
-              ),
-
-              DividerStyle.divider20Half,
-
-              ListTile(
-                onTap: () => controller.exitLoginState(),
-                title: Container(
-                  alignment: Alignment.center,
-                  child: Text(StringStyles.settingExitLogin.tr),
-                ),
-              ),
-            ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          ToolBar(title: StringStyles.settingTitle.tr),
+          DividerStyle.divider1Half,
+          ListTile(
+            onTap: () => Navigate.push(Routes.settingLanguagePage),
+            title: Text(StringStyles.settingLanguage.tr),
+            trailing: const Icon(Icons.keyboard_arrow_right),
           ),
-        );
-      },
+
+          ListTile(
+            onTap: () => context.read<SettingController>().clearCacheFile(),
+            title: Text(StringStyles.settingCache.tr),
+            trailing: Consumer<SettingController>(
+              builder: (context, controller, child) {
+                return Text(
+                  controller.cache.value,
+                  style: Styles.style_6A6969_14,
+                );
+              },
+            ),
+          ),
+
+          ListTile(
+            onTap: () => Navigate.push(Routes.settingThemeColors),
+            title: Text(StringStyles.settingThemeColors.tr),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+          ),
+
+          DividerStyle.divider20Half,
+
+          ListTile(
+            onTap: () => context.read<SettingController>().exitLoginState(),
+            title: Container(
+              alignment: Alignment.center,
+              child: Text(StringStyles.settingExitLogin.tr),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

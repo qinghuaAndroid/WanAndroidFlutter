@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 import 'widget/splash_anim_widget.dart';
+export 'splash_controller.dart';
 
 /// @class : SplashPage
 /// @date : 2021/08/15

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wan_android_flutter/get/src/controller_provider.dart';
 import 'package:wan_android_flutter/get/src/get_auth_middleware.dart';
 import 'package:wan_android_flutter/ui/ui.dart';
 
@@ -64,87 +65,122 @@ abstract class Routes {
   static final routePage = [
     GetPage(
       name: splashPage,
-      page: () => const SplashPage(),
-      binding: SplashBinding(),
-    ),
-    GetPage(
-      name: splashPage,
-      page: () => const SplashPage(),
-      binding: SplashBinding(),
+      page: () => ControllerProvider(
+        create: () => SplashController(),
+        child: const SplashPage(),
+      ),
     ),
     GetPage(
       name: registerPage,
-      page: () => const RegisterPage(),
-      binding: RegisterBinding(),
+      page: () => ControllerProvider(
+        create: () => RegisterController(),
+        child: const RegisterPage(),
+      ),
     ),
     GetPage(
       name: webViewPage,
-      page: () => const WebViewPage(),
-      binding: WebViewBinding(),
+      page: () => ControllerProvider(
+        create: () => WebController(),
+        child: const WebViewPage(),
+      ),
     ),
     GetPage(
       name: mainPage,
-      page: () => const MainPage(),
-      binding: MainBinding(),
+      page: () => ControllerProvider(
+        create: () => MainController(),
+        child: const MainPage(),
+      ),
       middlewares: [AuthMiddleware()],
     ),
 
     GetPage(
       name: feedbackPage,
-      page: () => const FeedbackPage(),
-      binding: FeedbackBinding(),
+      page: () => ControllerProvider(
+        create: () => FeedbackController(),
+        child: const FeedbackPage(),
+      ),
     ),
     GetPage(
       name: loginPage,
-      page: () => const LoginPage(),
-      binding: LoginBinding(),
+      page: () => ControllerProvider(
+        create: () => LoginController(),
+        child: const LoginPage(),
+      ),
     ),
     GetPage(
       name: userInfoPage,
-      page: () => const UserInfoPage(),
-      binding: UserInfoBinding(),
+      page: () => ControllerProvider(
+        create: () => UserInfoController(),
+        child: const UserInfoPage(),
+      ),
     ),
     GetPage(
       name: aboutPage,
-      page: () => const AboutPage(),
-      binding: AboutBinding(),
+      page: () => ControllerProvider(
+        create: () => AboutController(),
+        child: const AboutPage(),
+      ),
     ),
     GetPage(
       name: pointsPage,
-      page: () => const PointsPage(),
-      binding: PointsBinding(),
+      page: () => ControllerProvider(
+        create: () => PointsController(),
+        child: const PointsPage(),
+      ),
     ),
     GetPage(
       name: settingPage,
-      page: () => const SettingPage(),
-      binding: SettingBinding(),
+      page: () => ControllerProvider(
+        create: () => SettingController(),
+        child: const SettingPage(),
+      ),
     ),
-    GetPage(name: settingLanguagePage, page: () => const SettingLanguagePage()),
-    GetPage(name: settingThemeColors, page: () => const ColorPickerPage()),
+    GetPage(
+      name: settingLanguagePage,
+      page: () {
+        return const SettingLanguagePage();
+      },
+    ),
+    GetPage(
+      name: settingThemeColors,
+      page: () {
+        return const ColorPickerPage();
+      },
+    ),
     GetPage(
       name: collectPage,
-      page: () => const CollectPage(),
-      binding: CollectBinding(),
+      page: () => ControllerProvider(
+        create: () => CollectController(),
+        child: const CollectPage(),
+      ),
     ),
     GetPage(
       name: searchPage,
-      page: () => const SearchPage(),
-      binding: SearchBinding(),
+      page: () => ControllerProvider(
+        create: () => SearchController(),
+        child: const SearchPage(),
+      ),
     ),
     GetPage(
       name: historyPage,
-      page: () => const HistoryPage(),
-      binding: HistoryBinding(),
+      page: () => ControllerProvider(
+        create: () => HistoryController(),
+        child: const HistoryPage(),
+      ),
     ),
     GetPage(
       name: sharePage,
-      page: () => const SharePage(),
-      binding: ShareBinding(),
+      page: () => ControllerProvider(
+        create: () => ShareController(),
+        child: const SharePage(),
+      ),
     ),
     GetPage(
       name: articlePage,
-      page: () => const ArticlePage(),
-      binding: ArticleBinding(),
+      page: () => ControllerProvider(
+        create: () => ArticleController(),
+        child: const ArticlePage(),
+      ),
     ),
   ];
 

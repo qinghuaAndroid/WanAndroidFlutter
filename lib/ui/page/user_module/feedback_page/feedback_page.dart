@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'feedback_controller.dart';
 import 'widget/feedback_photo_select_widget.dart';
+
+export 'feedback_controller.dart';
 
 /// @class : FeedbackPage
 /// @date : 2021/08/25
@@ -47,7 +50,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                     textAlign: TextAlign.left,
                     autofocus: false,
                     onChanged: (text) {
-                      controller
+                      context.read<FeedbackController>()
                         ..issue = text
                         ..update();
                     },
@@ -119,7 +122,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                     maxLines: 1,
                     style: Styles.style_1A2F51_14,
                     onChanged: (text) {
-                      controller
+                      context.read<FeedbackController>()
                         ..contact = text
                         ..update();
                     },
@@ -150,7 +153,9 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                 Box.vBox50,
 
                 GestureDetector(
-                  onTap: () => controller.requestFeedback(context),
+                  onTap: () => context
+                      .read<FeedbackController>()
+                      .requestFeedback(context),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 13.0),
                     alignment: Alignment.center,

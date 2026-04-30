@@ -1,10 +1,10 @@
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 class MainController extends BaseGetController {
-  RxInt currentIndex = 0.obs;
+  int currentIndex = 0;
 
   ///用户信息
   late UserEntity userInfo;
@@ -17,5 +17,10 @@ class MainController extends BaseGetController {
       userInfo = info;
       update();
     }
+  }
+
+  void onTabChange(int index) {
+    currentIndex = index;
+    update();
   }
 }

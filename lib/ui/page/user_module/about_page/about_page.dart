@@ -8,6 +8,8 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'about_controller.dart';
 
+export 'about_controller.dart';
+
 /// @class : AboutPage
 /// @date : 2021/08/25
 /// @name : jhf

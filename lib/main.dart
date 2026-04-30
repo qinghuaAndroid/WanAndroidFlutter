@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/get/src/controller_provider.dart';
 
 import 'app/app_theme.dart';
 import 'generated/l10n.dart';
@@ -16,28 +17,32 @@ import 'res/src/strings.dart';
 import 'routes/navigation_history_observer.dart';
 import 'routes/router_reporter.dart';
 import 'routes/routes.dart';
-import 'ui/page/splash_page/splash_binding.dart';
 import 'ui/page/splash_page/splash_page.dart';
 import 'utils/src/injection_init.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    // 强制竖屏
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  await Injection.init();
-
-  FlutterError.onError = (FlutterErrorDetails details) {
-    // 异常上报 转发容易遗漏异常消息
-    debugPrint("FlutterError-${details.exception}");
-  };
-
-  final providers = [LocaleProvider(), ThemeColorsProvider()];
-
+void main() {
   runZonedGuarded(
-    () => runApp(MultiProvider(providers: providers, child: MyApp())),
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await SystemChrome.setPreferredOrientations([
+        // 强制竖屏
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+      await Injection.init();
+
+      FlutterError.onError = (FlutterErrorDetails details) {
+        // 异常上报 转发容易遗漏异常消息
+        debugPrint("FlutterError-${details.exception}");
+      };
+
+      runApp(
+        MultiProvider(
+          providers: [LocaleProvider(), ThemeColorsProvider()],
+          child: MyApp(),
+        ),
+      );
+    },
     (Object exception, StackTrace stack) async {
       // 异常上报
       debugPrint("runZonedGuarded-$exception");
@@ -64,7 +69,7 @@ class MyApp extends StatelessWidget {
           getPages: Routes.routePage,
           debugShowCheckedModeBanner: false,
           popGesture: Get.isPopGestureEnable,
-          initialRoute: '/',
+          initialRoute: Routes.splashPage,
           unknownRoute: Routes.unknownPage,
           theme: appThemeData,
           //主题颜色
@@ -83,8 +88,6 @@ class MyApp extends StatelessWidget {
           fallbackLocale: const Locale('zh', 'CN'),
           //国际化支持-备用语言
           defaultTransition: Transition.native,
-          initialBinding: SplashBinding(),
-          home: const SplashPage(),
           builder: FlutterSmartDialog.init(),
         ),
       ),

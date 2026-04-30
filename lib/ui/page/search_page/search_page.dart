@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 
@@ -8,6 +9,8 @@ import 'widget/search_history_widget.dart';
 import 'widget/search_hotword_widget.dart';
 import 'widget/search_result_widget.dart';
 import 'widget/search_top_widget.dart';
+
+export 'search_controller.dart';
 
 /// @class : SearchPage
 /// @date : 2021/9/3
@@ -20,6 +23,7 @@ class SearchPage extends GetCommonView<SearchController> {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Provider.of<SearchController>(context, listen: false);
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -33,18 +37,16 @@ class SearchPage extends GetCommonView<SearchController> {
               ///搜索框顶部Widget
               SearchTopWidget(
                 onChanged: (text) {
-                  controller.changeText.value = text;
+                  controller.changeText = text;
                   if (text.isEmpty) {
-                    controller.searchResult.value = [];
+                    controller.clearText();
                   }
                 },
-                onTap: () => controller.searchWord(),
+                onTap: () {
+                  controller.searchWord();
+                },
                 deleteTap: () {
-                  controller
-                    ..changeText.value = ''
-                    ..showResult.value = false
-                    ..textController.text = ''
-                    ..searchResult.value = [];
+                  controller.clearText();
                 },
                 textController: controller.textController,
               ),
@@ -63,6 +65,8 @@ class SearchPage extends GetCommonView<SearchController> {
                         const SearchHotWordWidget(),
                       ],
                     ),
+
+                    ///搜索结果
                     const SearchResultWidget(),
                   ],
                 ),

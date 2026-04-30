@@ -12,6 +12,8 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'login_controller.dart';
 
+export 'login_controller.dart';
+
 /// @class : LoginPage
 /// @date : 2021/08/17
 /// @name : jhf
@@ -43,7 +45,7 @@ class LoginPage extends GetCommonView<LoginController> {
             ///账户名输入框
             EditWidget(
               hintText: StringStyles.loginAccountNameHint.tr,
-              onChanged: (text) => controller
+              onChanged: (text) => context.read<LoginController>()
                 ..account = text
                 ..update(),
             ),
@@ -52,7 +54,7 @@ class LoginPage extends GetCommonView<LoginController> {
             EditWidget(
               hintText: StringStyles.loginAccountPwdHint.tr,
               passwordType: true,
-              onChanged: (text) => controller
+              onChanged: (text) => context.read<LoginController>()
                 ..password = text
                 ..update(),
             ),
@@ -63,22 +65,22 @@ class LoginPage extends GetCommonView<LoginController> {
               height: 45.w,
               margin: EdgeInsets.only(top: 50.w, left: 50.w, right: 50.w),
               decoration: BoxDecoration(
-                color: controller.changeShowButton()
+                color: context.watch<LoginController>().changeShowButton()
                     ? Provider.of<ThemeColorsNotifier>(context).color
                     : Colors.black12,
                 borderRadius: BorderRadius.all(Radius.circular(4.w)),
               ),
               child: TextButton(
-                style: controller.changeShowButton()
+                style: context.watch<LoginController>().changeShowButton()
                     ? ButtonStyles.getButtonStyle()
                     : ButtonStyles.getTransparentStyle(),
                 onPressed: () {
                   KeyboardUtils.hideKeyboard(context);
-                  controller.login();
+                  context.read<LoginController>().login();
                 },
                 child: Text(
                   StringStyles.loginButton.tr,
-                  style: controller.changeShowButton()
+                  style: context.watch<LoginController>().changeShowButton()
                       ? Styles.style_white_16
                       : Styles.style_white_16,
                 ),

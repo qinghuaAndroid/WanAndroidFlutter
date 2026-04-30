@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'collect_controller.dart';
 import 'widget/collect_item_widget.dart';
+
+export 'collect_controller.dart';
 
 /// @class : CollectPage
 /// @date : 2021/08/27
@@ -30,11 +33,17 @@ class CollectPage extends GetCommonView<CollectController> {
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: controller.collectList.length,
+                  itemCount: context
+                      .watch<CollectController>()
+                      .collectList
+                      .length,
                   itemBuilder: (BuildContext context, int index) {
                     return CollectItemWidget(
-                      collect: controller.collectList[index],
-                      result: () => controller.notifyPart(index),
+                      collect: context
+                          .read<CollectController>()
+                          .collectList[index],
+                      result: () =>
+                          context.read<CollectController>().notifyPart(index),
                     );
                   },
                 ),

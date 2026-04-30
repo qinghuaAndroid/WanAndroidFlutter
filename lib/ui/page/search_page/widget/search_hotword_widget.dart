@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/search_page/search_controller.dart';
@@ -35,30 +36,30 @@ class SearchHotWordWidget extends GetCommonView<SearchController> {
           ],
         ),
         Box.vBox5,
-        Obx(
-          () => Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              itemCount: controller.hotWord.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 5 / 1,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () => controller.hotOrHistorySearch(
-                    controller.hotWord[index].name,
-                  ),
-                  child: SearchHotWordItem(
-                    item: controller.hotWord[index],
-                    index: index + 1,
-                  ),
-                );
-              },
-            ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Consumer<SearchController>(
+            builder: (context, controller, child) {
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemCount: controller.hotWord.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 5 / 1,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  var item = controller.hotWord[index];
+                  return GestureDetector(
+                    onTap: () {
+                      return controller.hotOrHistorySearch(item.name);
+                    },
+                    child: SearchHotWordItem(item: item, index: index + 1),
+                  );
+                },
+              );
+            },
           ),
         ),
       ],

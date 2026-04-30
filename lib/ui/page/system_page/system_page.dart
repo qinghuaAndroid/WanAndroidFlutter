@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/src/article_type.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
@@ -8,6 +9,8 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'system_controller.dart';
 import 'widget/system_item_widget.dart';
+
+export 'system_controller.dart';
 
 class SystemPage extends GetSaveView<SystemController> {
   const SystemPage({super.key});
@@ -20,10 +23,10 @@ class SystemPage extends GetSaveView<SystemController> {
           horizontal: 16.w,
           vertical: 8.w,
         ),
-        itemCount: controller.systems.length,
+        itemCount: context.watch<SystemController>().systems.length,
         itemBuilder: (context, index) {
           return SystemItemWidget(
-            item: controller.systems[index],
+            item: context.read<SystemController>().systems[index],
             onLabelTap: (children) {
               Navigate.push(
                 Routes.articlePage,

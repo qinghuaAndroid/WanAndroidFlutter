@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/user_module/feedback_page/feedback_controller.dart';
@@ -12,7 +13,7 @@ class FeedbackPhotoSelectWidget extends GetCommonView<FeedbackController> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      itemCount: controller.photoEntity.length + 1,
+      itemCount: context.watch<FeedbackController>().photoEntity.length + 1,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         childAspectRatio: 1,
@@ -25,20 +26,23 @@ class FeedbackPhotoSelectWidget extends GetCommonView<FeedbackController> {
           children: [
             GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: () => controller.openGallery(index),
+              onTap: () =>
+                  context.read<FeedbackController>().openGallery(index),
               child: Material(
                 borderRadius: BorderRadius.circular(3),
                 child: Padding(
                   padding: const EdgeInsets.all(5),
-                  child: _getSelectWidget(index),
+                  child: _SelectWidget(index: index),
                 ),
               ),
             ),
             Offstage(
-              offstage: index == controller.photoEntity.length,
+              offstage:
+                  index ==
+                  context.read<FeedbackController>().photoEntity.length,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTap: () => controller
+                onTap: () => context.read<FeedbackController>()
                   ..photoEntity.removeAt(index)
                   ..update(),
                 child: SizedBox(
@@ -62,13 +66,20 @@ class FeedbackPhotoSelectWidget extends GetCommonView<FeedbackController> {
       },
     );
   }
+}
 
-  ///最后一张图片显示为+号，其他图片显示为本地图片，并进行裁剪
-  ///[pos] 当前位置
-  ///此处直接创建对象是因为在增加item时UI必须要重新绘制
-  ///Element虚拟树层级一定会改变，所以此处直接返回一个新的Widget
-  Widget _getSelectWidget(int pos) {
-    if (pos == controller.photoEntity.length) {
+/// 最后一张图片显示为+号，其他图片显示为本地图片，并进行裁剪
+/// [index] 当前位置
+/// 此处直接创建对象是因为在增加item时UI必须要重新绘制
+/// Element虚拟树层级一定会改变，所以此处直接返回一个新的Widget
+class _SelectWidget extends StatelessWidget {
+  const _SelectWidget({required this.index});
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    if (index == context.read<FeedbackController>().photoEntity.length) {
       ///最后一张一定为加号
       return Container(
         width: 80,
@@ -82,7 +93,7 @@ class FeedbackPhotoSelectWidget extends GetCommonView<FeedbackController> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: Image.file(
-          controller.photoEntity[pos],
+          context.read<FeedbackController>().photoEntity[index],
           width: 80,
           height: 80,
           fit: BoxFit.cover,

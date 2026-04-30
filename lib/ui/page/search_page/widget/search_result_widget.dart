@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide SearchController;
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/ui/page/search_page/search_controller.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -16,34 +16,35 @@ class SearchResultWidget extends GetCommonView<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Visibility(
-        visible: controller.showResult.value,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          color: Colors.white,
-          child: RefreshWidget<SearchController>(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: controller.searchResult.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Material(
-                  color: Colors.transparent,
-                  child: Ripple(
-                    onTap: () => WebUtil.toWebPage(
+    return Visibility(
+      visible: context.watch<SearchController>().showResult,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        color: Colors.white,
+        child: RefreshWidget<SearchController>(
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: context.watch<SearchController>().searchResult.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Material(
+                color: Colors.transparent,
+                child: Ripple(
+                  onTap: () {
+                    var controller = context.read<SearchController>();
+                    return WebUtil.toWebPage(
                       controller.searchResult[index],
                       onResult: (value) {
                         controller.searchResult[index].collect = value;
                       },
-                    ),
-                    child: SearchResultItem(
-                      item: controller.searchResult[index],
-                    ),
+                    );
+                  },
+                  child: SearchResultItem(
+                    item: context.read<SearchController>().searchResult[index],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

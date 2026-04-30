@@ -17,12 +17,6 @@ class HomeController extends BaseGetPageController {
   ///首页Banner轮播图
   List<Banners> banner = [];
 
-  ///Banner轮播图控制器
-  final PageController pageController = PageController(
-    initialPage: 0,
-    viewportFraction: 0.8,
-  );
-
   @override
   void onInit() {
     super.onInit();

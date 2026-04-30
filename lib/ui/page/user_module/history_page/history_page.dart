@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'history_controller.dart';
 import 'widget/history_item_widget.dart';
+export 'history_controller.dart';
 
 /// @class : HistoryPage
 /// @date : 2021/9/9
@@ -29,12 +31,21 @@ class HistoryPage extends GetCommonView<HistoryController> {
               child: ListView.builder(
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                itemCount: controller.historyList.length,
+                itemCount: context
+                    .watch<HistoryController>()
+                    .historyList
+                    .length,
                 itemBuilder: (BuildContext context, int index) {
                   return HistoryItemWidget(
-                    detail: controller.historyList[index],
+                    detail: context
+                        .read<HistoryController>()
+                        .historyList[index],
                     onResult: (value) =>
-                        controller.historyList[index].collect = value,
+                        context
+                                .read<HistoryController>()
+                                .historyList[index]
+                                .collect =
+                            value,
                   );
                 },
               ),

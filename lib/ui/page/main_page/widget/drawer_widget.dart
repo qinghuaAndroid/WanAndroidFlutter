@@ -9,9 +9,7 @@ import 'package:wan_android_flutter/ui/page/main_page/main_controller.dart';
 import 'package:wan_android_flutter/utils/utils.dart' hide ScreenUtil;
 
 class DrawerWidget extends StatelessWidget {
-  final MainController controller;
-
-  const DrawerWidget({super.key, required this.controller});
+  const DrawerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +46,20 @@ class DrawerWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    controller.userInfo.nickname,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Selector<MainController, UserEntity>(
+                    builder: (context, value, child) {
+                      return Text(
+                        value.nickname,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
+                    selector: (context, controller) {
+                      return controller.userInfo;
+                    },
                   ),
                 ],
               ),

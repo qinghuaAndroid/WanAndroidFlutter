@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/webview_page/webview_controller.dart';
@@ -40,14 +41,16 @@ class WebViewBottomWidget extends GetCommonView<WebController> {
           ),
           Box.hBox20,
           InkWell(
-            onTap: () => controller.collectArticle(),
-            child: Obx(
-              () => SvgPicture.asset(
-                controller.isCollect.value
-                    ? R.assetsImagesCollect
-                    : R.assetsImagesCollectQuit,
-                width: 24,
-              ),
+            onTap: () => context.read<WebController>().collectArticle(),
+            child: Consumer(
+              builder: (context, WebController controller, child) {
+                return SvgPicture.asset(
+                  controller.isCollect.value
+                      ? R.assetsImagesCollect
+                      : R.assetsImagesCollectQuit,
+                  width: 24,
+                );
+              },
             ),
           ),
           Box.hBox20,
@@ -61,7 +64,9 @@ class WebViewBottomWidget extends GetCommonView<WebController> {
           ),
           Box.hBox20,
           InkWell(
-            onTap: () => Navigate.launchInBrowser(controller.detail.link),
+            onTap: () => Navigate.launchInBrowser(
+              context.read<WebController>().detail.link,
+            ),
             child: const Icon(Icons.public, color: Colors.blue, size: 24),
           ),
           Box.hBox20,

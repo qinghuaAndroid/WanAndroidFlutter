@@ -11,6 +11,8 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'register_controller.dart';
 
+export 'register_controller.dart';
+
 /// @class : RegisterPage
 /// @date : 2021/08/17
 /// @name : jhf
@@ -45,7 +47,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
             ///账户名输入框
             EditWidget(
               hintText: StringStyles.loginAccountNameHint.tr,
-              onChanged: (text) => controller
+              onChanged: (text) => context.read<RegisterController>()
                 ..account = text
                 ..update(),
             ),
@@ -54,7 +56,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
             EditWidget(
               hintText: StringStyles.loginAccountPwdHint.tr,
               passwordType: true,
-              onChanged: (text) => controller
+              onChanged: (text) => context.read<RegisterController>()
                 ..password = text
                 ..update(),
             ),
@@ -63,7 +65,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
             EditWidget(
               hintText: StringStyles.loginAccountRePwdHint.tr,
               passwordType: true,
-              onChanged: (text) => controller
+              onChanged: (text) => context.read<RegisterController>()
                 ..rePassword = text
                 ..update(),
             ),
@@ -74,22 +76,22 @@ class RegisterPage extends GetCommonView<RegisterController> {
               height: 45.w,
               margin: EdgeInsets.only(top: 50.w, left: 50.w, right: 50.w),
               decoration: BoxDecoration(
-                color: controller.changeShowButton()
+                color: context.watch<RegisterController>().changeShowButton()
                     ? Provider.of<ThemeColorsNotifier>(context).color
                     : Colors.black12,
                 borderRadius: BorderRadius.all(Radius.circular(4.w)),
               ),
               child: TextButton(
-                style: controller.changeShowButton()
+                style: context.watch<RegisterController>().changeShowButton()
                     ? ButtonStyles.getButtonStyle()
                     : ButtonStyles.getTransparentStyle(),
                 onPressed: () {
                   KeyboardUtils.hideKeyboard(context);
-                  controller.register();
+                  context.read<RegisterController>().register();
                 },
                 child: Text(
                   StringStyles.registerButton.tr,
-                  style: controller.changeShowButton()
+                  style: context.watch<RegisterController>().changeShowButton()
                       ? Styles.style_white_16
                       : Styles.style_white_16,
                 ),

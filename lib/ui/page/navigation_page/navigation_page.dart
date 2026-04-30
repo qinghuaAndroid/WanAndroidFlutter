@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'navigation_controller.dart';
 import 'widget/navigation_item_widget.dart';
+
+export 'navigation_controller.dart';
 
 class NavigationPage extends GetSaveView<NavigationController> {
   const NavigationPage({super.key});
@@ -18,10 +21,10 @@ class NavigationPage extends GetSaveView<NavigationController> {
           horizontal: 16.w,
           vertical: 8.w,
         ),
-        itemCount: controller.navigationList.length,
+        itemCount: context.watch<NavigationController>().navigationList.length,
         itemBuilder: (context, index) {
           return NavigationItemWidget(
-            item: controller.navigationList[index],
+            item: context.read<NavigationController>().navigationList[index],
             onLabelTap: (detail) {
               WebUtil.toWebPage(detail);
             },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/search_page/search_controller.dart';
@@ -98,18 +99,19 @@ class SearchTopWidget extends GetCommonView<SearchController> {
               ),
               Positioned(
                 right: 10,
-                child: Obx(
-                  () => Visibility(
-                    visible: controller.changeText.value.isNotEmpty,
-                    child: Ripple(
-                      onTap: deleteTap,
-                      child: const Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(
-                          Icons.cancel_rounded,
-                          color: ColorStyle.color_B8C0D4,
-                          size: 18,
-                        ),
+                child: Visibility(
+                  visible: context
+                      .watch<SearchController>()
+                      .changeText
+                      .isNotEmpty,
+                  child: Ripple(
+                    onTap: deleteTap,
+                    child: const Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Icon(
+                        Icons.cancel_rounded,
+                        color: ColorStyle.color_B8C0D4,
+                        size: 18,
                       ),
                     ),
                   ),

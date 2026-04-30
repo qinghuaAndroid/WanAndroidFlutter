@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'points_controller.dart';
 import 'widget/points_item_widget.dart';
+
+export 'points_controller.dart';
 
 /// @class : PointsPage
 /// @date : 2021/08/25
@@ -30,10 +33,15 @@ class PointsPage extends GetCommonView<PointsController> {
                 child: ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
-                  itemCount: controller.pointsList.length,
+                  itemCount: context
+                      .watch<PointsController>()
+                      .pointsList
+                      .length,
                   itemBuilder: (BuildContext context, int index) {
                     return PointsItemWidget(
-                      points: controller.pointsList[index],
+                      points: context
+                          .read<PointsController>()
+                          .pointsList[index],
                     );
                   },
                 ),

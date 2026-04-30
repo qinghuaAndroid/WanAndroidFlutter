@@ -21,38 +21,6 @@ class TabsPageState extends State<TabsPage>
     with AutomaticKeepAliveClientMixin<TabsPage>, TickerProviderStateMixin {
   TabController? tabController;
 
-  int _tabLength(TabsController tabsController) {
-    return widget.tagType == TagType.publicAccount
-        ? tabsController.wechatPublic.length
-        : tabsController.projectTabs.length;
-  }
-
-  TabController? _syncTabController(int length) {
-    if (length <= 0) {
-      tabController?.dispose();
-      tabController = null;
-      return null;
-    }
-
-    final current = tabController;
-    if (current == null) {
-      tabController = TabController(length: length, vsync: this);
-      return tabController;
-    }
-
-    if (current.length != length) {
-      final nextIndex = current.index >= length ? length - 1 : current.index;
-      current.dispose();
-      tabController = TabController(
-        length: length,
-        vsync: this,
-        initialIndex: nextIndex,
-      );
-    }
-
-    return tabController;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -70,51 +38,57 @@ class TabsPageState extends State<TabsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Consumer<TabsController>(
-      builder: (context, tabsController, child) {
-        final tabLength = _tabLength(tabsController);
-        final currentTabController = _syncTabController(tabLength);
-        final hasTabs = currentTabController != null;
-
+    return Selector<TabsController, int>(
+      builder: (context, value, child) {
+        final controller = context.read<TabsController>();
+        tabController?.dispose();
+        tabController = TabController(
+          length: widget.tagType == TagType.publicAccount
+              ? controller.wechatPublic.length
+              : controller.projectTabs.length,
+          vsync: this,
+        );
         return SafeArea(
           top: true,
           child: Column(
             children: [
-              if (hasTabs)
-                Selector<ThemeColorsNotifier, Color>(
-                  builder: (BuildContext context, value, Widget? child) {
-                    return DecoratedBox(
-                      decoration: BoxDecoration(color: value),
-                      child: TabBar(
-                        tabs: _tabs(tabsController),
-                        controller: currentTabController,
-                        isScrollable: true,
-                        indicatorColor: Colors.white,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        labelColor: Colors.white,
-                        unselectedLabelColor: Colors.white,
-                        labelPadding: const EdgeInsets.all(0.0),
-                        indicatorPadding: const EdgeInsets.all(0.0),
-                        tabAlignment: TabAlignment.start,
-                        dividerHeight: 0,
-                      ),
-                    );
-                  },
-                  selector: (context, themeColorsNotifier) {
-                    return themeColorsNotifier.color;
-                  },
-                ),
+              Selector<ThemeColorsNotifier, Color>(
+                builder: (BuildContext context, value, Widget? child) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(color: value),
+                    child: TabBar(
+                      tabs: _tabs(controller),
+                      controller: tabController,
+                      isScrollable: true,
+                      indicatorColor: Colors.white,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.white,
+                      labelPadding: const EdgeInsets.all(0.0),
+                      indicatorPadding: const EdgeInsets.all(0.0),
+                      tabAlignment: TabAlignment.start,
+                      dividerHeight: 0,
+                    ),
+                  );
+                },
+                selector: (context, themeColorsNotifier) {
+                  return themeColorsNotifier.color;
+                },
+              ),
               Expanded(
-                child: hasTabs
-                    ? TabBarView(
-                        controller: currentTabController,
-                        children: _createTabsPage(tabsController),
-                      )
-                    : const SizedBox.shrink(),
+                child: TabBarView(
+                  controller: tabController,
+                  children: _createTabsPage(controller),
+                ),
               ),
             ],
           ),
         );
+      },
+      selector: (context, controller) {
+        return controller.tagType == TagType.publicAccount
+            ? controller.wechatPublic.length
+            : controller.projectTabs.length;
       },
     );
   }

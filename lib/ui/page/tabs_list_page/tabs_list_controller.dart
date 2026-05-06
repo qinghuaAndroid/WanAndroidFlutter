@@ -7,6 +7,11 @@ class TabsListController extends BaseGetPageController {
 
   List<ProjectDetail> projectData = [];
 
+  void initData(String id, TagType tagType) {
+    this.id = id;
+    this.tagType = tagType;
+  }
+
   ///请求积分明细
   @override
   void requestData(
@@ -25,7 +30,6 @@ class TabsListController extends BaseGetPageController {
         }
         projectData.addAll(data);
         showSuccess(projectData);
-        update();
       },
       fail: (code, msg) {
         showError();

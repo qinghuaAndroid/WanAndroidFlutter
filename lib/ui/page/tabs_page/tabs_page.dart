@@ -116,21 +116,15 @@ class TabsPageState extends State<TabsPage>
   List<Widget> _createTabsPage(TabsController controller) {
     return widget.tagType == TagType.publicAccount
         ? (controller.wechatPublic).map((model) {
-            final listController = TabsListController();
-            listController.tagType = widget.tagType;
-            listController.id = model.id.toString();
             return TabsListPage(
               id: model.id.toString(),
-              controller: listController,
+              tagType: widget.tagType,
             );
           }).toList()
         : (controller.projectTabs).map((model) {
-            final listController = TabsListController();
-            listController.tagType = widget.tagType;
-            listController.id = model.id.toString();
             return TabsListPage(
               id: model.id.toString(),
-              controller: listController,
+              tagType: widget.tagType,
             );
           }).toList();
   }

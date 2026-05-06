@@ -16,7 +16,6 @@ class SystemController extends BaseGetController {
       success: (data) {
         systems.addAll(data);
         showSuccess(data);
-        update();
       },
       fail: (code, msg) {
         showError();

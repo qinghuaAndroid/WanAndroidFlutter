@@ -29,7 +29,6 @@ class ShareController extends BaseGetPageController {
         }
         shareList.addAll(data);
         showSuccess(shareList);
-        update();
       },
       fail: (code, msg) {
         showError();

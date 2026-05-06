@@ -29,7 +29,6 @@ class CollectController extends BaseGetPageController {
         }
         collectList.addAll(data);
         showSuccess(collectList);
-        update();
       },
       fail: (code, msg) {
         showError();

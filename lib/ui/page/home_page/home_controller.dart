@@ -41,9 +41,6 @@ class HomeController extends BaseGetPageController {
 
         projectData.addAll(data);
         showSuccess(projectData);
-
-        ///为了防止动画每次都加载，所以只需要在第一次出现时加载一次
-        update();
       },
       fail: (code, msg) {
         showError();

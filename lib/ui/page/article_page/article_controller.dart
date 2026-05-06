@@ -52,7 +52,6 @@ class ArticleController extends BaseGetPageController {
         }
         projectData.addAll(data);
         showSuccess(projectData);
-        update();
       },
       fail: (code, msg) {
         showError();
@@ -73,7 +72,6 @@ class ArticleController extends BaseGetPageController {
         }
         projectData.addAll(data);
         showSuccess(projectData);
-        update();
       },
       fail: (code, msg) {
         showError();
@@ -94,7 +92,6 @@ class ArticleController extends BaseGetPageController {
         }
         projectData.addAll(data);
         showSuccess(projectData);
-        update();
       },
       fail: (code, msg) {
         showError();

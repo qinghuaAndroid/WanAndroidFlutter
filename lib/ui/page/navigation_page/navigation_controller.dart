@@ -16,7 +16,6 @@ class NavigationController extends BaseGetController {
       success: (data) {
         navigationList.addAll(data);
         showSuccess(data);
-        update();
       },
       fail: (code, msg) {},
     );

@@ -12,17 +12,17 @@ part 'tabs_list_controller.dart';
 
 class TabsListPage extends GetSaveView<TabsListController> {
   final String id;
-  final TabsListController controller;
+  final TagType tagType;
 
   @override
   get tag => id;
 
-  const TabsListPage({super.key, required this.id, required this.controller});
+  const TabsListPage({super.key, required this.id, required this.tagType});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: controller,
+    return ChangeNotifierProvider(
+      create: (context) => TabsListController()..initData(id, tagType),
       child: _TabsListPage(),
     );
   }
@@ -31,27 +31,19 @@ class TabsListPage extends GetSaveView<TabsListController> {
 class _TabsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var controller2 = context.watch<TabsListController>();
     return RefreshWidget<TabsListController>(
       child: ListView.builder(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
-        itemCount: context
-            .watch<TabsListController>()
-            .projectData
-            .length,
+        itemCount: controller2.projectData.length,
         itemBuilder: (BuildContext context, int index) {
+          var controller = context.read<TabsListController>();
           return TabsListItem(
-            tagType: context
-                .read<TabsListController>()
-                .tagType,
-            detail: context
-                .read<TabsListController>()
-                .projectData[index],
+            tagType: controller.tagType,
+            detail: controller.projectData[index],
             onResult: (value) {
-              context
-                  .read<TabsListController>()
-                  .projectData[index].collect =
-                  value;
+              controller.projectData[index].collect = value;
             },
           );
         },

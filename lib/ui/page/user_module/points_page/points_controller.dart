@@ -29,7 +29,6 @@ class PointsController extends BaseGetPageController {
         }
         pointsList.addAll(data);
         showSuccess(pointsList);
-        update();
       },
       fail: (code, msg) {
         showError();

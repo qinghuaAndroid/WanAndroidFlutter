@@ -5,7 +5,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
-import 'package:wan_android_flutter/get/src/controller_provider.dart';
+import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart' hide ProjectPage;
 import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';

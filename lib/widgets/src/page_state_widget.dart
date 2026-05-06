@@ -47,9 +47,16 @@ class _PageStateWidgetState<T extends BaseGetController>
                 child: SizedBox(
                   width: 50,
                   height: 50,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3.w,
-                    color: Colors.black,
+                  child: Selector<ThemeColorsNotifier, Color>(
+                    builder: (context, value, child) {
+                      return CircularProgressIndicator(
+                        strokeWidth: 2.w,
+                        color: value,
+                      );
+                    },
+                    selector: (context, themeColorsNotifier) {
+                      return themeColorsNotifier.color;
+                    },
                   ),
                 ),
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/model/models.dart';
+import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
@@ -110,6 +112,30 @@ class _ProjectListItem extends StatelessWidget {
             fit: BoxFit.fill,
             width: 72,
             height: 128,
+            loadingBuilder: (context, child, loadingProgress) {
+              return Container(
+                width: 72,
+                height: 128,
+                color: ColorStyle.color_EFF1F8,
+                child: Center(
+                  child: Selector<ThemeColorsNotifier, Color>(
+                    builder: (context, value, child) {
+                      return CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: value,
+                        constraints: BoxConstraints.expand(
+                          width: 20,
+                          height: 20,
+                        ),
+                      );
+                    },
+                    selector: (context, notifier) {
+                      return notifier.color;
+                    },
+                  ),
+                ),
+              );
+            },
             errorBuilder: (context, error, stackTrace) {
               return Container(
                 width: 72,

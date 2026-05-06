@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:wan_android_flutter/get/src/controller_provider.dart';
-import 'package:wan_android_flutter/get/src/get_auth_middleware.dart';
+import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/ui/ui.dart';
 
 /// @class : Routes

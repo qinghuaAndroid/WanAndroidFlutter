@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -107,12 +108,12 @@ class _ProjectListItem extends StatelessWidget {
         Box.hBox5,
         ClipRRect(
           borderRadius: BorderRadius.circular(5),
-          child: Image.network(
-            detail.envelopePic,
+          child: CachedNetworkImage(
+            imageUrl: detail.envelopePic,
             fit: BoxFit.fill,
             width: 72,
             height: 128,
-            loadingBuilder: (context, child, loadingProgress) {
+            progressIndicatorBuilder: (context, url, downloadProgress) {
               return Container(
                 width: 72,
                 height: 128,
@@ -123,6 +124,7 @@ class _ProjectListItem extends StatelessWidget {
                       return CircularProgressIndicator(
                         strokeWidth: 2,
                         color: value,
+                        value: downloadProgress.progress,
                         constraints: BoxConstraints.expand(
                           width: 20,
                           height: 20,
@@ -136,7 +138,7 @@ class _ProjectListItem extends StatelessWidget {
                 ),
               );
             },
-            errorBuilder: (context, error, stackTrace) {
+            errorWidget: (context, url, error) {
               return Container(
                 width: 72,
                 height: 128,

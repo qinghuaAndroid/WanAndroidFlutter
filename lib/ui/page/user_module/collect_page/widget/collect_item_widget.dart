@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:wan_android_flutter/model/models.dart';
@@ -101,12 +102,12 @@ class CollectItemWidget extends StatelessWidget {
               visible: collect.envelopePic.isNotEmpty,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.network(
-                  collect.envelopePic,
+                child: CachedNetworkImage(
+                  imageUrl: collect.envelopePic,
                   fit: BoxFit.cover,
                   width: 72,
                   height: 72,
-                  errorBuilder: (context, error, stackTrace) {
+                  errorWidget: (context, url, error) {
                     return Container(
                       width: 72,
                       height: 128,

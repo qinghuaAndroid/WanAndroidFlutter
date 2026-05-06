@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wan_android_flutter/model/models.dart';
@@ -122,10 +123,10 @@ class _BannerState extends State<BannerWidget> {
                     color: ColorStyle.color_FBE240,
                     child: Image.asset(widget.banner[index % length].imagePath),
                   )
-                : Image.network(
-                    widget.banner[index % length].imagePath,
+                : CachedNetworkImage(
+                    imageUrl: widget.banner[index % length].imagePath,
                     fit: BoxFit.fill,
-                    errorBuilder: (context, error, stackTrace) {
+                    errorWidget: (context, url, error) {
                       return Container(
                         color: ColorStyle.color_F8F9FC,
                         child: SvgPicture.asset(R.assetsImagesLoadFailed),

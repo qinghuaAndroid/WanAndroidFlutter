@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -85,12 +86,12 @@ class HistoryItemWidget extends StatelessWidget {
               visible: detail.envelopePic.isNotEmpty,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.network(
-                  detail.envelopePic,
+                child: CachedNetworkImage(
+                  imageUrl: detail.envelopePic,
                   fit: BoxFit.cover,
                   width: 72,
                   height: 72,
-                  errorBuilder: (context, error, stackTrace) {
+                  errorWidget: (context, url, error) {
                     return Container(
                       width: 72,
                       height: 128,

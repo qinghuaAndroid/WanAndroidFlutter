@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
@@ -24,7 +24,7 @@ class PointsPage extends GetCommonView<PointsController> {
       body: SizedBox(
         child: Column(
           children: [
-            ToolBar(title: StringStyles.pointsDetailTitle.tr),
+            ToolBar(title: S.of(context).pointsDetailTitle),
             DividerStyle.divider1HalfPadding20,
 
             ///积分列表

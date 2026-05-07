@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
@@ -75,7 +74,6 @@ class _MainTabOptionsState extends State<MainPage>
   @override
   void dispose() {
     super.dispose();
-    Get.delete<MainController>();
     tabController?.dispose();
     WidgetsBinding.instance.removeObserver(this);
   }
@@ -99,7 +97,7 @@ class _MainTabOptionsState extends State<MainPage>
         actionsPadding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
         actions: [
           GestureDetector(
-            onTap: () => Navigate.push(Routes.searchPage),
+            onTap: () => Navigate.push(context, Routes.searchPage),
             child: Icon(Icons.search),
           ),
         ],
@@ -109,23 +107,23 @@ class _MainTabOptionsState extends State<MainPage>
         controller: tabController,
         children: [
           ControllerProvider(
-            create: () => HomeController(),
+            create: (_) => HomeController(),
             child: const HomePage(),
           ),
           ControllerProvider(
-            create: () => SystemController(),
+            create: (_) => SystemController(),
             child: const SystemPage(),
           ),
           ControllerProvider(
-            create: () => TabsController()..tagType = TagType.publicAccount,
+            create: (_) => TabsController()..tagType = TagType.publicAccount,
             child: const TabsPage(tagType: TagType.publicAccount),
           ),
           ControllerProvider(
-            create: () => NavigationController(),
+            create: (_) => NavigationController(),
             child: const NavigationPage(),
           ),
           ControllerProvider(
-            create: () => TabsController()..tagType = TagType.project,
+            create: (_) => TabsController()..tagType = TagType.project,
             child: const TabsPage(tagType: TagType.project),
           ),
         ],
@@ -152,11 +150,11 @@ class _MainTabOptionsState extends State<MainPage>
 
   String _title(int index) {
     return switch (index) {
-      0 => S.of(context).tab_1,
-      1 => S.of(context).tab_2,
-      2 => S.of(context).tab_3,
-      3 => S.of(context).tab_4,
-      4 => S.of(context).tab_5,
+      0 => S.of(context).tab1,
+      1 => S.of(context).tab2,
+      2 => S.of(context).tab3,
+      3 => S.of(context).tab4,
+      4 => S.of(context).tab5,
       _ => throw UnimplementedError(),
     };
   }

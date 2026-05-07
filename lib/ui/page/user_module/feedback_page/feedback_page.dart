@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
@@ -26,7 +26,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ///标题栏
-            ToolBar(title: StringStyles.homeFeedback.tr),
+            ToolBar(title: S.of(context).homeFeedback),
 
             ///问题反馈标题
             ListView(
@@ -37,7 +37,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                 Container(
                   margin: const EdgeInsets.only(top: 25, left: 25),
                   child: Text(
-                    StringStyles.feedbackTitleStar.tr,
+                    S.of(context).feedbackTitleStar,
                     style: Styles.style_1A2F51_14,
                   ),
                 ),
@@ -58,7 +58,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                     maxLength: 200,
                     style: Styles.style_1A2F51_14,
                     decoration: InputDecoration(
-                      hintText: StringStyles.feedbackHint.tr,
+                      hintText: S.of(context).feedbackHint,
                       hintStyle: Styles.style_B8C0D4_13,
                       border: _getEditBorder(),
                       focusedBorder: _getEditBorder(),
@@ -78,11 +78,11 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                   child: Row(
                     children: [
                       Text(
-                        StringStyles.feedbackUploadPhoto.tr,
+                        S.of(context).feedbackUploadPhoto,
                         style: Styles.style_1A2F51_14,
                       ),
                       Text(
-                        StringStyles.feedbackOptional.tr,
+                        S.of(context).feedbackOptional,
                         style: Styles.style_B8C0D4_14,
                       ),
                     ],
@@ -101,11 +101,11 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                   child: Row(
                     children: [
                       Text(
-                        StringStyles.feedbackContact.tr,
+                        S.of(context).feedbackContact,
                         style: Styles.style_1A2F51_14,
                       ),
                       Text(
-                        StringStyles.feedbackOptional.tr,
+                        S.of(context).feedbackOptional,
                         style: Styles.style_B8C0D4_14,
                       ),
                     ],
@@ -127,7 +127,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                         ..update();
                     },
                     decoration: InputDecoration(
-                      hintText: StringStyles.feedbackConnectHint.tr,
+                      hintText: S.of(context).feedbackConnectHint,
                       hintStyle: Styles.style_B8C0D4_13,
                       border: _getEditBorder(),
                       focusedBorder: _getEditBorder(),
@@ -145,7 +145,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                 Container(
                   margin: const EdgeInsets.only(top: 30, left: 25),
                   child: Text(
-                    StringStyles.feedbackConnectQQ.tr,
+                    S.of(context).feedbackConnectQQ,
                     style: Styles.style_1A2F51_14,
                   ),
                 ),
@@ -168,7 +168,7 @@ class FeedbackPage extends GetCommonView<FeedbackController> {
                     ),
                     margin: const EdgeInsets.only(left: 90, right: 110),
                     child: Text(
-                      StringStyles.feedbackSubmit.tr,
+                      S.of(context).feedbackSubmit,
                       style: Styles.style_1A2F51_14,
                     ),
                   ),

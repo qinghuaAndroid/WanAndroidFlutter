@@ -1,10 +1,9 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/provider/provider.dart';
-import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
 class ColorPickerPage extends StatefulWidget {
@@ -34,11 +33,11 @@ class _ColorPickerPageState extends State<ColorPickerPage> {
             backgroundColor: value,
             leading: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
-              onTap: () => Navigate.pop(),
+              onTap: () => Navigate.pop(context),
               child: Icon(Icons.arrow_back, color: Colors.white),
             ),
             title: Text(
-              StringStyles.settingThemeColors.tr,
+              S.of(context).settingThemeColors,
               style: TextStyle(color: Colors.white, fontSize: 18.sp),
             ),
           ),

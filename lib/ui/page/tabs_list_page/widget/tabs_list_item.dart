@@ -22,7 +22,7 @@ class TabsListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => WebUtil.toWebPage(detail, onResult: onResult),
+      onTap: () => WebUtil.toWebPage(context, detail, onResult: onResult),
       child: Container(
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 10),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
 import 'history_controller.dart';
 import 'widget/history_item_widget.dart';
+
 export 'history_controller.dart';
 
 /// @class : HistoryPage
@@ -23,7 +24,7 @@ class HistoryPage extends GetCommonView<HistoryController> {
       body: SizedBox(
         child: Column(
           children: [
-            ToolBar(title: StringStyles.historyTitle.tr),
+            ToolBar(title: S.of(context).historyTitle),
             DividerStyle.divider1HalfPadding20,
 
             ///浏览历史

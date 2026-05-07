@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/search_page/search_controller.dart';
@@ -27,7 +27,7 @@ class SearchHotWordWidget extends GetCommonView<SearchController> {
           children: [
             Box.hBox20,
             Text(
-              StringStyles.searchHotWord.tr,
+              S.of(context).searchHotWord,
               style: Styles.style_black_16_bold500,
             ),
             SvgPicture.asset(R.assetsImagesHotWord, width: 16),

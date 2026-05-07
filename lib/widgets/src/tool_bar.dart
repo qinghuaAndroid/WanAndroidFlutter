@@ -45,10 +45,10 @@ class _ToolBarState extends State<ToolBar> {
     return AppBar(
       backgroundColor:
           widget.backgroundColor ??
-          Provider.of<ThemeColorsNotifier>(context).color,
+          Provider.of<ThemeColorsNotifier>(context, listen: false).color,
       leading: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
-        onTap: widget.backOnTap ?? () => Navigate.pop(),
+        onTap: widget.backOnTap ?? () => Navigate.pop(context),
         child: Icon(Icons.arrow_back, color: widget.backColor ?? Colors.white),
       ),
       title: ConstrainedBox(

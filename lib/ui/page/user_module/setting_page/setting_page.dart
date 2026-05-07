@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/router_reporter.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
@@ -77,40 +77,39 @@ class _SettingPageState extends State<SettingPage>
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          ToolBar(title: StringStyles.settingTitle.tr),
+          ToolBar(title: S.of(context).settingTitle),
           DividerStyle.divider1Half,
           ListTile(
-            onTap: () => Navigate.push(Routes.settingLanguagePage),
-            title: Text(StringStyles.settingLanguage.tr),
+            onTap: () => Navigate.push(context, Routes.settingLanguagePage),
+            title: Text(S.of(context).settingLanguage),
             trailing: const Icon(Icons.keyboard_arrow_right),
           ),
 
           ListTile(
             onTap: () => context.read<SettingController>().clearCacheFile(),
-            title: Text(StringStyles.settingCache.tr),
+            title: Text(S.of(context).settingCache),
             trailing: Consumer<SettingController>(
               builder: (context, controller, child) {
-                return Text(
-                  controller.cache.value,
-                  style: Styles.style_6A6969_14,
-                );
+                return Text(controller.cache, style: Styles.style_6A6969_14);
               },
             ),
           ),
 
           ListTile(
-            onTap: () => Navigate.push(Routes.settingThemeColors),
-            title: Text(StringStyles.settingThemeColors.tr),
+            onTap: () => Navigate.push(context, Routes.settingThemeColors),
+            title: Text(S.of(context).settingThemeColors),
             trailing: const Icon(Icons.keyboard_arrow_right),
           ),
 
           DividerStyle.divider20Half,
 
           ListTile(
-            onTap: () => context.read<SettingController>().exitLoginState(),
+            onTap: () {
+              context.read<SettingController>().exitLoginState(context);
+            },
             title: Container(
               alignment: Alignment.center,
-              child: Text(StringStyles.settingExitLogin.tr),
+              child: Text(S.of(context).settingExitLogin),
             ),
           ),
         ],

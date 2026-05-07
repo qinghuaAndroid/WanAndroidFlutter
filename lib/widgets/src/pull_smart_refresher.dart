@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/src/base_page_controller.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/widgets/src/page_state_widget.dart';
@@ -95,7 +95,7 @@ class RefreshWidgetState<T extends BaseGetPageController>
               if (mode == RefreshStatus.idle) {
                 ///下拉时显示
                 header = Text(
-                  StringStyles.refreshHeaderIdle.tr,
+                  S.of(context).refreshHeaderIdle,
                   style: Styles.style_B8C0D4_14,
                 );
               } else if (mode == RefreshStatus.refreshing) {
@@ -108,19 +108,19 @@ class RefreshWidgetState<T extends BaseGetPageController>
               } else if (mode == RefreshStatus.failed) {
                 ///加载失败
                 header = Text(
-                  StringStyles.refreshHeaderFailed.tr,
+                  S.of(context).refreshHeaderFailed,
                   style: Styles.style_B8C0D4_14,
                 );
               } else if (mode == RefreshStatus.completed) {
                 ///加载成功
                 header = Text(
-                  StringStyles.refreshHeaderSuccess.tr,
+                  S.of(context).refreshHeaderSuccess,
                   style: Styles.style_B8C0D4_14,
                 );
               } else {
                 ///超过二层
                 header = Text(
-                  StringStyles.refreshHeaderFreed.tr,
+                  S.of(context).refreshHeaderFreed,
                   style: Styles.style_B8C0D4_14,
                 );
               }
@@ -143,13 +143,13 @@ class RefreshWidgetState<T extends BaseGetPageController>
               } else if (mode == LoadStatus.failed) {
                 ///加载失败
                 footer = Text(
-                  StringStyles.refreshError.tr,
+                  S.of(context).refreshError,
                   style: Styles.style_B8C0D4_14,
                 );
               } else {
                 ///无更多数据
                 footer = Text(
-                  StringStyles.refreshNoData.tr,
+                  S.of(context).refreshNoData,
                   style: Styles.style_B8C0D4_14,
                 );
               }

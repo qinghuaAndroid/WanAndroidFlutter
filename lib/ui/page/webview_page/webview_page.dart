@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
+import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -27,7 +27,7 @@ class WebViewPage extends GetCommonView<WebController> {
     return WillPopScope(
       onWillPop: () async {
         /// 拦截用户返回，返回时携带参数
-        Get.back(result: context.read<WebController>().isCollect.value);
+        Navigate.pop(context, result: context.read<WebController>().isCollect);
         return true;
       },
       child: Scaffold(
@@ -37,7 +37,8 @@ class WebViewPage extends GetCommonView<WebController> {
             Stack(
               children: [
                 ToolBar(
-                  backOnTap: () => Get.back(
+                  backOnTap: () => Navigate.pop(
+                    context,
                     result: '${context.read<WebController>().isCollect}',
                   ),
                   backColor: Colors.black,
@@ -92,7 +93,7 @@ class WebViewPage extends GetCommonView<WebController> {
                   Consumer(
                     builder: (context, WebController controller, child) {
                       return Visibility(
-                        visible: controller.collectAtState.value,
+                        visible: controller.collectAtState,
                         child: Positioned(
                           left: 0,
                           right: 0,
@@ -100,7 +101,7 @@ class WebViewPage extends GetCommonView<WebController> {
                           bottom: 0,
                           child: Lottie.asset(
                             R.assetsLottieCollect,
-                            animate: controller.collectAtState.value,
+                            animate: controller.collectAtState,
                           ),
                         ),
                       );
@@ -115,7 +116,7 @@ class WebViewPage extends GetCommonView<WebController> {
                           minHeight: 2,
                           backgroundColor: ColorStyle.color_F9F9F9,
                           color: ColorStyle.color_24CF5F,
-                          value: controller.progress.value,
+                          value: controller.progress,
                         ),
                       );
                     },

@@ -1,5 +1,4 @@
-import 'package:get/get.dart';
-import 'package:wan_android_flutter/res/res.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 
 /// @class : Language
 /// @date : 2021/08/26
@@ -29,7 +28,7 @@ class Language {
 
 ///新增语言要在此处手动增加
 final languageList = [
-  Language(StringStyles.settingLanguageDefault.tr, '', ''),
+  Language(S.current.settingLanguageDefault, '', ''),
   Language('简体中文', 'zh', 'CN'),
   Language('繁體中文', 'zh', 'TW'),
   Language('English', 'en', 'US'),

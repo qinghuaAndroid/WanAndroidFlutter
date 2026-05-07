@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:wan_android_flutter/res/res.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:wan_android_flutter/widgets/widgets.dart';
 
@@ -39,7 +38,7 @@ class RefreshExtension {
       controller.loadComplete();
     }
     if (refresh == Refresh.pull) {
-      ToastUtils.show(StringStyles.pointsNotifySuccess.tr);
+      ToastUtils.show(S.current.pointsNotifySuccess);
     }
   }
 }

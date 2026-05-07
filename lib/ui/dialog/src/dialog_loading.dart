@@ -9,7 +9,7 @@ import 'package:wan_android_flutter/res/res.dart';
 class LoadingDialog extends StatelessWidget {
   final String text;
 
-  const LoadingDialog({super.key, this.text = StringStyles.loading});
+  const LoadingDialog({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

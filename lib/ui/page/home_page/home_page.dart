@@ -37,16 +37,18 @@ class HomePage extends GetSaveView<HomeController> {
                         context.watch<HomeController>().projectData.length + 1,
                     itemBuilder: (BuildContext context, int index) {
                       ///将Banner装载到ListView中
+                      var controller = context.read<HomeController>();
                       if (index == 0) {
                         return SizedBox(
                           width: double.infinity,
                           height: 215.w,
                           child: BannerWidget(
-                            context.read<HomeController>().banner,
+                            controller.banner,
                             height: 215.w,
                             onTap: (index) {
                               WebUtil.toWebPageBanners(
-                                context.read<HomeController>().banner[index],
+                                context,
+                                controller.banner[index],
                               );
                             },
                           ),
@@ -59,22 +61,18 @@ class HomePage extends GetSaveView<HomeController> {
                         return Material(
                           color: Colors.transparent,
                           child: Ripple(
-                            onTap: () => WebUtil.toWebPage(
-                              context
-                                  .read<HomeController>()
-                                  .projectData[newIndex],
-                              onResult: (value) {
-                                context
-                                        .read<HomeController>()
-                                        .projectData[newIndex]
-                                        .collect =
-                                    value;
-                              },
-                            ),
+                            onTap: () {
+                              var detail = controller.projectData[newIndex];
+                              return WebUtil.toWebPage(
+                                context,
+                                detail,
+                                onResult: (value) {
+                                  detail.collect = value;
+                                },
+                              );
+                            },
                             child: HomeArticleItem(
-                              item: context
-                                  .read<HomeController>()
-                                  .projectData[newIndex],
+                              item: controller.projectData[newIndex],
                               index: newIndex,
                             ),
                           ),

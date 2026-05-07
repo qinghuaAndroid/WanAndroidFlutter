@@ -22,6 +22,8 @@ abstract class BaseGetPageController extends BaseGetController {
   /// 刷新控制器
   RefreshController? controller;
 
+  BaseGetPageController({super.arguments});
+
   ///预留初次加载，注意只供上拉下拉使用
   void initPullLoading(RefreshController controller) {
     if (isInit) {

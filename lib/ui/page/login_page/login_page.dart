@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -44,7 +44,7 @@ class LoginPage extends GetCommonView<LoginController> {
 
             ///账户名输入框
             EditWidget(
-              hintText: StringStyles.loginAccountNameHint.tr,
+              hintText: S.of(context).loginAccountNameHint,
               onChanged: (text) => context.read<LoginController>()
                 ..account = text
                 ..update(),
@@ -52,7 +52,7 @@ class LoginPage extends GetCommonView<LoginController> {
 
             ///密码输入框
             EditWidget(
-              hintText: StringStyles.loginAccountPwdHint.tr,
+              hintText: S.of(context).loginAccountPwdHint,
               passwordType: true,
               onChanged: (text) => context.read<LoginController>()
                 ..password = text
@@ -76,10 +76,10 @@ class LoginPage extends GetCommonView<LoginController> {
                     : ButtonStyles.getTransparentStyle(),
                 onPressed: () {
                   KeyboardUtils.hideKeyboard(context);
-                  context.read<LoginController>().login();
+                  context.read<LoginController>().login(context);
                 },
                 child: Text(
-                  StringStyles.loginButton.tr,
+                  S.of(context).loginButton,
                   style: context.watch<LoginController>().changeShowButton()
                       ? Styles.style_white_16
                       : Styles.style_white_16,
@@ -89,11 +89,11 @@ class LoginPage extends GetCommonView<LoginController> {
 
             ///注册按钮
             GestureDetector(
-              onTap: () => Navigate.push(Routes.registerPage),
+              onTap: () => Navigate.push(context, Routes.registerPage),
               child: Padding(
                 padding: EdgeInsetsDirectional.all(15.w),
                 child: Text(
-                  StringStyles.registerButton.tr,
+                  S.of(context).registerButton,
                   style: TextStyle(color: Colors.redAccent, fontSize: 16),
                 ),
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
-import 'package:wan_android_flutter/res/res.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/utils/src/toast_util.dart';
 
 /// @class : FileUtils
@@ -20,6 +19,6 @@ class FileUtils {
     final result = await ImageGallerySaverPlus.saveImage(
       bytes.buffer.asUint8List(),
     );
-    ToastUtils.show(StringStyles.saveSuccess.tr);
+    ToastUtils.show(S.current.saveSuccess);
   }
 }

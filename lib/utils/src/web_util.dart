@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -8,8 +9,13 @@ import 'package:wan_android_flutter/utils/utils.dart';
 /// @description :Web工具类
 class WebUtil {
   ///普通页面进入Web页面1
-  static void toWebPage(ProjectDetail detail, {Function(bool)? onResult}) {
+  static void toWebPage(
+    BuildContext context,
+    ProjectDetail detail, {
+    Function(bool)? onResult,
+  }) {
     Navigate.push(
+      context,
       Routes.webViewPage,
       arguments: WebEntity(
         title: detail.title,
@@ -28,8 +34,12 @@ class WebUtil {
   }
 
   ///收藏页面进入Web页面2
-  static Future<dynamic>? toWebPageCollect(CollectDetail detail) {
+  static Future<dynamic>? toWebPageCollect(
+    BuildContext context,
+    CollectDetail detail,
+  ) {
     return Navigate.push(
+      context,
       Routes.webViewPage,
       arguments: WebEntity(
         title: detail.title,
@@ -42,8 +52,9 @@ class WebUtil {
   }
 
   ///普通页面进入Web页面2
-  static void toWebPageBanners(Banners detail) {
+  static void toWebPageBanners(BuildContext context, Banners detail) {
     Navigate.push(
+      context,
       Routes.webViewPage,
       arguments: WebEntity(
         title: detail.title,
@@ -55,8 +66,13 @@ class WebUtil {
   }
 
   ///其他页面进入Web页面2
-  static void toWebPageOther({String title = '', String link = ''}) {
+  static void toWebPageOther(
+    BuildContext context, {
+    String title = '',
+    String link = '',
+  }) {
     Navigate.push(
+      context,
       Routes.webViewPage,
       arguments: WebEntity(title: title, link: link, id: 0, isCollect: false),
     );

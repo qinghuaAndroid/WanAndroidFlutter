@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:get/get.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
@@ -23,9 +23,9 @@ class ShareDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Box.vBox30,
-          Text(StringStyles.shareApplication.tr, style: Styles.style_black_16),
+          Text(S.of(context).shareApplication, style: Styles.style_black_16),
           Box.vBox5,
-          Text(StringStyles.shareHint.tr, style: Styles.style_B8C0D4_14),
+          Text(S.of(context).shareHint, style: Styles.style_B8C0D4_14),
           Box.vBox10,
           Image.asset(R.assetsShareQRCode, width: 120, height: 120),
           Box.vBox20,
@@ -54,13 +54,10 @@ class ShareDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ///在浏览器打开
-              Text(StringStyles.shareBrowser.tr, style: Styles.style_B8C0D4_13),
+              Text(S.of(context).shareBrowser, style: Styles.style_B8C0D4_13),
 
               ///保存在本地
-              Text(
-                StringStyles.shareSaveLocal.tr,
-                style: Styles.style_B8C0D4_13,
-              ),
+              Text(S.of(context).shareSaveLocal, style: Styles.style_B8C0D4_13),
             ],
           ),
           Box.vBox30,
@@ -73,7 +70,7 @@ class ShareDialog extends StatelessWidget {
               onPressed: () {
                 SmartDialog.dismiss();
               },
-              child: Text(StringStyles.quit.tr, style: Styles.style_black_16),
+              child: Text(S.of(context).quit, style: Styles.style_black_16),
             ),
           ),
         ],

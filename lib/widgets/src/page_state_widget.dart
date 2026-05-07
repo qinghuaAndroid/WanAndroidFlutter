@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -74,7 +74,7 @@ class _PageStateWidgetState<T extends BaseGetController>
                       repeat: false,
                     ),
                     Text(
-                      StringStyles.refreshEmpty.tr,
+                      S.of(context).refreshEmpty,
                       style: Styles.style_B8C0D4_13,
                     ),
                   ],

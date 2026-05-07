@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   intl: any
-  get: ^4.7.2
+#  get: ^4.7.2
   dio: ^5.8.0+1
   dio_cookie_manager: ^3.2.0
   dio_smart_retry: ^7.0.1

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/user_module/history_page/widget/history_item_widget.dart';
@@ -24,7 +24,7 @@ class SharePage extends GetCommonView<SearchController> {
       body: SizedBox(
         child: Column(
           children: [
-            ToolBar(title: StringStyles.shareTitle.tr),
+            ToolBar(title: S.of(context).shareTitle),
             DividerStyle.divider1Half,
 
             ///分享列表

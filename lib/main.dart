@@ -5,20 +5,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:wan_android_flutter/get/src/controller_provider.dart';
+import 'package:wan_android_flutter/app/global.dart';
+import 'package:wan_android_flutter/utils/utils.dart';
 
 import 'app/app_theme.dart';
 import 'generated/l10n.dart';
 import 'provider/src/local_provider.dart';
 import 'provider/src/theme_colors_provider.dart';
-import 'res/src/strings.dart';
 import 'routes/navigation_history_observer.dart';
 import 'routes/router_reporter.dart';
 import 'routes/routes.dart';
-import 'ui/page/splash_page/splash_page.dart';
-import 'utils/src/injection_init.dart';
 
 void main() {
   runZonedGuarded(
@@ -29,8 +26,8 @@ void main() {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
-      await Injection.init();
 
+      await SpUtil.init();
       FlutterError.onError = (FlutterErrorDetails details) {
         // 异常上报 转发容易遗漏异常消息
         debugPrint("FlutterError-${details.exception}");
@@ -64,16 +61,19 @@ class MyApp extends StatelessWidget {
         data: MediaQuery.of(
           context,
         ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
-        child: GetMaterialApp(
+        child: MaterialApp(
+          navigatorKey: Global.navigatorKey,
           navigatorObservers: [NavigationHistoryObserver(), routeObserver],
-          getPages: Routes.routePage,
-          debugShowCheckedModeBanner: false,
-          popGesture: Get.isPopGestureEnable,
+
+          // 使用 onGenerateRoute 代替 routes
+          onGenerateRoute: Routes.onGenerateRoute,
+
+          // onUnknownRoute 仍然作为兜底
+          onUnknownRoute: Routes.unknownRoute,
+
           initialRoute: Routes.splashPage,
-          unknownRoute: Routes.unknownPage,
+          debugShowCheckedModeBanner: false,
           theme: appThemeData,
-          //主题颜色
-          translations: Messages(),
           //国际化支持-来源配置
           supportedLocales: S.delegate.supportedLocales,
           localizationsDelegates: const [
@@ -83,11 +83,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
           // 当前语言
-          locale: Provider.of<LocaleNotifier>(context).locale,
-          //国际化支持-默认语言
-          fallbackLocale: const Locale('zh', 'CN'),
-          //国际化支持-备用语言
-          defaultTransition: Transition.native,
+          locale: context.read<LocaleNotifier>().locale,
           builder: FlutterSmartDialog.init(),
         ),
       ),

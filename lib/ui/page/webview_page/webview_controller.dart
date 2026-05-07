@@ -1,7 +1,6 @@
-import 'package:get/get.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
-import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -11,29 +10,33 @@ import 'package:webview_flutter/webview_flutter.dart';
 /// @description : WebView 控制器层
 class WebController extends BaseGetController {
   ///加载URL
-  WebEntity detail = Get.arguments;
+  WebEntity get detail => arguments as WebEntity;
 
   ///进度条
-  var progress = 0.0.obs;
+  var progress = 0.0;
 
   ///是否点赞
-  var isCollect = false.obs;
+  var isCollect = false;
 
   ///控制收藏的取消与结束
-  var collectAtState = false.obs;
+  var collectAtState = false;
 
   final webViewController = WebViewController();
+
+  WebController({super.arguments});
 
   @override
   void onInit() {
     super.onInit();
-    isCollect.value = detail.isCollect;
+    isCollect = detail.isCollect;
+    update();
     webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            this.progress.value = progress.toDouble();
+            this.progress = progress.toDouble();
+            update();
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
@@ -53,23 +56,23 @@ class WebController extends BaseGetController {
   ///收藏&取消收藏
   ///注意此处，从收藏进入取消收藏的ID是originId
   void collectArticle() {
-    if (!isCollect.value) {
-      collectAtState.value = true;
+    if (!isCollect) {
+      collectAtState = true;
+      update();
       Future.delayed(const Duration(milliseconds: 900)).then((value) {
-        collectAtState.value = false;
+        collectAtState = false;
+        update();
       });
     }
 
     request.collectArticle(
-      isCollect.value && detail.originId != 0 ? detail.originId : detail.id,
-      isCollect: isCollect.value,
+      isCollect && detail.originId != 0 ? detail.originId : detail.id,
+      isCollect: isCollect,
       success: (data) {
         ToastUtils.show(
-          isCollect.value
-              ? StringStyles.collectQuit.tr
-              : StringStyles.collectSuccess.tr,
+          isCollect ? S.current.collectQuit : S.current.collectSuccess,
         );
-        isCollect.value = !isCollect.value;
+        isCollect = !isCollect;
         update();
       },
     );

@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
-import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
@@ -35,7 +35,7 @@ class RegisterController extends BaseGetController {
 
   ///点击注册
   /// 注册成功跳转
-  void register() {
+  void register(BuildContext context) {
     if (account.isEmpty || password.isEmpty || rePassword.isEmpty) {
       return;
     }
@@ -44,8 +44,8 @@ class RegisterController extends BaseGetController {
     if (account.isEmpty || account.length < 6) {
       ToastUtils.show(
         account.isEmpty
-            ? StringStyles.registerAccountEmpty.tr
-            : StringStyles.registerAccountLength.tr,
+            ? S.current.registerAccountEmpty
+            : S.current.registerAccountLength,
       );
       return;
     }
@@ -54,8 +54,8 @@ class RegisterController extends BaseGetController {
     if (password.isEmpty || password.length < 6) {
       ToastUtils.show(
         password.isEmpty
-            ? StringStyles.registerPasswordEmpty.tr
-            : StringStyles.registerPasswordLength.tr,
+            ? S.current.registerPasswordEmpty
+            : S.current.registerPasswordLength,
       );
       return;
     }
@@ -64,21 +64,21 @@ class RegisterController extends BaseGetController {
     if (rePassword.isEmpty || rePassword.length < 6) {
       ToastUtils.show(
         rePassword.isEmpty
-            ? StringStyles.registerRePasswordEmpty.tr
-            : StringStyles.registerRePasswordLength.tr,
+            ? S.current.registerRePasswordEmpty
+            : S.current.registerRePasswordLength,
       );
       return;
     }
 
     ///密码 == 确认密码
     if (password != rePassword) {
-      ToastUtils.show(StringStyles.registerPasswordDiff.tr);
+      ToastUtils.show(S.current.registerPasswordDiff);
       return;
     }
 
     ///同意服务条款
     if (!isCheckPrivacy) {
-      ToastUtils.show(StringStyles.registerNotServiceTerms.tr);
+      ToastUtils.show(S.current.registerNotServiceTerms);
       return;
     }
 
@@ -87,8 +87,10 @@ class RegisterController extends BaseGetController {
       password,
       rePassword,
       success: (data) {
-        ToastUtils.show(StringStyles.registerSuccess.tr);
-        Navigate.cleanRouteAndPush(Routes.mainPage);
+        ToastUtils.show(S.current.registerSuccess);
+        if (context.mounted) {
+          Navigate.cleanRouteAndPush(context, Routes.mainPage);
+        }
       },
     );
   }

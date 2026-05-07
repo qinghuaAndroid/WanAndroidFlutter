@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
@@ -10,13 +9,14 @@ import 'package:wan_android_flutter/widgets/widgets.dart';
 /// @name : jhf
 /// @description :项目 控制器层
 class ArticleController extends BaseGetPageController {
-  Map<String, dynamic> arguments = Get.arguments;
-
   List<ProjectDetail> projectData = [];
 
   @override
-  int get initialPage =>
-      arguments['articleType'] == ArticleType.question ? 1 : 0;
+  int get initialPage => args['articleType'] == ArticleType.question ? 1 : 0;
+
+  Map<String, dynamic> get args => (arguments as Map<String, dynamic>?) ?? {};
+
+  ArticleController({super.arguments});
 
   ///请求积分明细
   @override
@@ -24,7 +24,7 @@ class ArticleController extends BaseGetPageController {
     RefreshController controller, {
     Refresh refresh = Refresh.first,
   }) {
-    switch (arguments['articleType'] as ArticleType?) {
+    switch (args['articleType'] as ArticleType?) {
       case ArticleType.system:
         requestSystemArticles(controller, refresh);
         break;
@@ -41,7 +41,7 @@ class ArticleController extends BaseGetPageController {
 
   void requestSystemArticles(RefreshController controller, Refresh refresh) {
     request.requestSystemArticles(
-      arguments["cid"].toString(),
+      args["cid"].toString(),
       page,
       success: (data, over) {
         RefreshExtension.onSuccess(controller, refresh, over);

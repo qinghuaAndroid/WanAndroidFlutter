@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
-import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/dialog/dialog.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
@@ -22,7 +21,7 @@ class FeedbackController extends BaseGetController {
   /// [index] 索引
   Future<void> openGallery(int index) async {
     if (photoEntity.length >= 4) {
-      ToastUtils.show(StringStyles.feedbackToast.tr);
+      ToastUtils.show(S.current.feedbackToast);
       return;
     }
     if (index == photoEntity.length) {
@@ -40,15 +39,17 @@ class FeedbackController extends BaseGetController {
     debugPrint("feedback >> contact == $contact");
     debugPrint("feedback >> photo == $photoEntity");
     if (issue.isEmpty) {
-      ToastUtils.show(StringStyles.feedbackContent.tr);
+      ToastUtils.show(S.current.feedbackContent);
       return;
     }
     KeyboardUtils.hideKeyboard(context);
     BaseLoadingDialog.show();
     Future.delayed(const Duration(seconds: 2)).then((value) {
       BaseLoadingDialog.hide();
-      ToastUtils.show(StringStyles.feedbackSuccess.tr);
-      Navigate.pop();
+      ToastUtils.show(S.current.feedbackSuccess);
+      if (context.mounted) {
+        Navigate.pop(context);
+      }
     });
   }
 }

@@ -26,7 +26,7 @@ class NavigationPage extends GetSaveView<NavigationController> {
           return NavigationItemWidget(
             item: context.read<NavigationController>().navigationList[index],
             onLabelTap: (detail) {
-              WebUtil.toWebPage(detail);
+              WebUtil.toWebPage(context, detail);
             },
           );
         },

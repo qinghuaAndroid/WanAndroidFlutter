@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -45,7 +45,7 @@ class _SettingLanguagePageState extends State<SettingLanguagePage> {
       body: SizedBox(
         child: Column(
           children: [
-            ToolBar(title: StringStyles.settingLanguage.tr),
+            ToolBar(title: S.of(context).settingLanguage),
             DividerStyle.divider1Half,
             ScrollConfiguration(
               behavior: OverScrollBehavior(),
@@ -64,7 +64,7 @@ class _SettingLanguagePageState extends State<SettingLanguagePage> {
                         ..[index].isSelect = true;
                       SpUtil.updateLanguage(language[index]);
                       LocaleUtil.updateLocale(language[index]);
-                      Navigate.pop();
+                      Navigate.pop(context);
                     },
                     title: Text(language[index].name),
                     trailing: Visibility(

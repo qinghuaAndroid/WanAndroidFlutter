@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/http/http.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -28,7 +28,7 @@ class ShareArticleDialog extends StatelessWidget {
         children: <Widget>[
           Box.vBox20,
           Text(
-            StringStyles.shareArticleTitle.tr,
+            S.of(context).shareArticleTitle,
             style: Styles.style_black_16_bold500,
           ),
           Box.vBox20,
@@ -56,7 +56,7 @@ class ShareArticleDialog extends StatelessWidget {
               decoration: InputDecoration(
                 fillColor: Colors.white12,
                 filled: true,
-                hintText: StringStyles.shareArticleHint.tr,
+                hintText: S.of(context).shareArticleHint,
                 hintStyle: Styles.style_B8C0D4_14,
                 border: _getEditBorder(false),
                 focusedBorder: _getEditBorder(true),
@@ -73,7 +73,7 @@ class ShareArticleDialog extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   shareArticle();
-                  Navigate.pop();
+                  Navigate.pop(context);
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -85,7 +85,7 @@ class ShareArticleDialog extends StatelessWidget {
                     20,
                   ),
                   child: Text(
-                    StringStyles.shareArticleEnter.tr,
+                    S.of(context).shareArticleEnter,
                     style: Styles.style_white_14,
                   ),
                 ),
@@ -94,7 +94,7 @@ class ShareArticleDialog extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigate.launchInBrowser(url);
-                  Navigate.pop();
+                  Navigate.pop(context);
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -105,7 +105,7 @@ class ShareArticleDialog extends StatelessWidget {
                     color: ColorStyle.color_24CF5F,
                   ),
                   child: Text(
-                    StringStyles.shareBrowser.tr,
+                    S.of(context).shareBrowser,
                     style: Styles.style_24CF5F_14,
                   ),
                 ),
@@ -123,15 +123,15 @@ class ShareArticleDialog extends StatelessWidget {
     ///分享的文章标题
     String title = controller.text;
     if (title.isEmpty) {
-      ToastUtils.show(StringStyles.shareArticleEdit.tr);
+      ToastUtils.show(S.current.shareArticleEdit);
       return;
     }
-    var request = Get.find<RequestRepository>();
+    var request = RequestRepository();
     request.shareArticle(
       title,
       url,
       success: (data) {
-        ToastUtils.show(StringStyles.shareArticleSuccess.tr);
+        ToastUtils.show(S.current.shareArticleSuccess);
       },
     );
   }

@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/app/global.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/provider/provider.dart';
 
@@ -15,13 +16,17 @@ class LocaleUtil {
   static void updateLocale(Language language) {
     Locale? locale;
     if (language.language == '' || language.country == '') {
-      locale = Get.deviceLocale;
+      // 使用原生方式获取设备语言
+      locale = PlatformDispatcher.instance.locale;
     } else {
       locale = Locale(language.language, language.country);
     }
-    if (locale != null) {
-      Get.updateLocale(locale);
-      Provider.of<LocaleNotifier>(Get.context!).setLocale(locale);
+    // 移除 Get.updateLocale，完全使用 Provider 管理状态
+    if (Global.context != null) {
+      Provider.of<LocaleNotifier>(
+        Global.context!,
+        listen: false,
+      ).setLocale(locale);
     }
   }
 
@@ -29,7 +34,7 @@ class LocaleUtil {
   static Locale? getDefault() {
     var language = SpUtil.getLanguage();
     if (language == null || language.language == '' || language.country == '') {
-      return Get.deviceLocale;
+      return PlatformDispatcher.instance.locale;
     } else {
       return Locale(language.language, language.country);
     }

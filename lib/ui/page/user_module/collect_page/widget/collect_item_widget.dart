@@ -20,7 +20,7 @@ class CollectItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => WebUtil.toWebPageCollect(collect)?.then((value) {
+      onTap: () => WebUtil.toWebPageCollect(context, collect)?.then((value) {
         ///参数类型正确并且取消收藏了
         if (value is bool && !value && result != null) {
           result!();

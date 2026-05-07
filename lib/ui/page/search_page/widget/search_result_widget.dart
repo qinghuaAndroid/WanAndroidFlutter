@@ -33,6 +33,7 @@ class SearchResultWidget extends GetCommonView<SearchController> {
                   onTap: () {
                     var controller = context.read<SearchController>();
                     return WebUtil.toWebPage(
+                      context,
                       controller.searchResult[index],
                       onResult: (value) {
                         controller.searchResult[index].collect = value;

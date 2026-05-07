@@ -9,7 +9,6 @@ export 'src/formatter/customized_length_formatter.dart';
 export 'src/formatter/customized_text_formatter.dart';
 export 'src/function.dart';
 export 'src/html_utils.dart';
-export 'src/injection_init.dart';
 export 'src/keyboard_util.dart';
 export 'src/locale_util.dart';
 export 'src/navigate_util.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/search_page/search_controller.dart';
@@ -40,7 +40,7 @@ class SearchTopWidget extends GetCommonView<SearchController> {
         Box.hBox15,
         Ripple(
           circular: 20,
-          onTap: () => Navigate.pop(),
+          onTap: () => Navigate.pop(context),
           child: const Padding(
             padding: EdgeInsets.all(5),
             child: Icon(
@@ -82,7 +82,7 @@ class SearchTopWidget extends GetCommonView<SearchController> {
                   decoration: InputDecoration(
                     fillColor: Colors.white12,
                     filled: true,
-                    hintText: StringStyles.searchHint.tr,
+                    hintText: S.of(context).searchHint,
                     hintStyle: Styles.style_B8C0D4_14,
                     border: _getEditBorder(),
                     focusedBorder: _getEditBorder(),
@@ -125,7 +125,7 @@ class SearchTopWidget extends GetCommonView<SearchController> {
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: Text(StringStyles.search.tr, style: Styles.style_1A2F51_14),
+            child: Text(S.of(context).search, style: Styles.style_1A2F51_14),
           ),
         ),
         Box.hBox10,

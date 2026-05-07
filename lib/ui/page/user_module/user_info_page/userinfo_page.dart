@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -25,8 +25,8 @@ class UserInfoPage extends GetCommonView<UserInfoController> {
       body: Column(
         children: [
           ToolBar(
-            title: StringStyles.homeUserInfo.tr,
-            backOnTap: () => Navigate.pop(),
+            title: S.of(context).homeUserInfo,
+            backOnTap: () => Navigate.pop(context),
           ),
 
           ///头像
@@ -40,7 +40,7 @@ class UserInfoPage extends GetCommonView<UserInfoController> {
           Consumer<UserInfoController>(
             builder: (context, controller, child) {
               return UserInfoWidget(
-                keys: StringStyles.userNickname.tr,
+                keys: S.of(context).userNickname,
                 value: controller.userInfo.nickname,
               );
             },

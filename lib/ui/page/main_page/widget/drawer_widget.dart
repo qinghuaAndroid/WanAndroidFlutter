@@ -67,56 +67,58 @@ class DrawerWidget extends StatelessWidget {
           ),
           XListTile(
             leading: assetImage('ic_score'),
-            title: S.of(context).nav_my_score,
+            title: S.of(context).myScore,
             onTap: () {
-              Navigate.push(Routes.pointsPage);
+              Navigate.push(context, Routes.pointsPage);
             },
           ),
           XListTile(
             leading: assetImage('ic_collect'),
-            title: S.of(context).nav_my_collect,
+            title: S.of(context).myCollect,
             onTap: () {
-              Navigate.push(Routes.collectPage);
+              Navigate.push(context, Routes.collectPage);
             },
           ),
           XListTile(
             leading: assetImage('ic_question'),
-            title: S.of(context).nav_question,
+            title: S.of(context).questions,
             onTap: () {
               Navigate.push(
+                context,
                 Routes.articlePage,
                 arguments: {
                   "articleType": ArticleType.question,
-                  "title": S.of(context).nav_question,
+                  "title": S.of(context).questions,
                 },
               );
             },
           ),
           XListTile(
             leading: assetImage('ic_square'),
-            title: S.of(context).nav_square,
+            title: S.of(context).square,
             onTap: () {
               Navigate.push(
+                context,
                 Routes.articlePage,
                 arguments: {
                   "articleType": ArticleType.square,
-                  "title": S.of(context).nav_square,
+                  "title": S.of(context).square,
                 },
               );
             },
           ),
           XListTile(
             leading: assetImage('ic_setting'),
-            title: S.of(context).nav_setting,
+            title: S.of(context).settings,
             onTap: () {
-              Navigate.push(Routes.settingPage);
+              Navigate.push(context, Routes.settingPage);
             },
           ),
           XListTile(
             leading: assetImage('ic_about'),
-            title: S.of(context).nav_about_us,
+            title: S.of(context).aboutUs,
             onTap: () {
-              Navigate.push(Routes.aboutPage);
+              Navigate.push(context, Routes.aboutPage);
             },
           ),
         ],

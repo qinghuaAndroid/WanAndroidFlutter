@@ -1,6 +1,7 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart' hide SearchController;
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/ui/ui.dart';
+import 'package:wan_android_flutter/utils/utils.dart';
 
 /// @class : Routes
 /// @name : jhf
@@ -60,131 +61,145 @@ abstract class Routes {
   ///未知页面
   static const unknown = "/unknown";
 
-  ///页面合集
-  static final routePage = [
-    GetPage(
-      name: splashPage,
-      page: () => ControllerProvider(
-        create: () => SplashController(),
-        child: const SplashPage(),
-      ),
-    ),
-    GetPage(
-      name: registerPage,
-      page: () => ControllerProvider(
-        create: () => RegisterController(),
-        child: const RegisterPage(),
-      ),
-    ),
-    GetPage(
-      name: webViewPage,
-      page: () => ControllerProvider(
-        create: () => WebController(),
-        child: const WebViewPage(),
-      ),
-    ),
-    GetPage(
-      name: mainPage,
-      page: () => ControllerProvider(
-        create: () => MainController(),
-        child: const MainPage(),
-      ),
-      middlewares: [AuthMiddleware()],
-    ),
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    // 模拟登录状态，实际开发中从本地存储或状态管理(Provider/Bloc)获取
+    bool isLoggedIn = SpUtil.getUserInfo() != null;
 
-    GetPage(
-      name: feedbackPage,
-      page: () => ControllerProvider(
-        create: () => FeedbackController(),
-        child: const FeedbackPage(),
-      ),
-    ),
-    GetPage(
-      name: loginPage,
-      page: () => ControllerProvider(
-        create: () => LoginController(),
-        child: const LoginPage(),
-      ),
-    ),
-    GetPage(
-      name: userInfoPage,
-      page: () => ControllerProvider(
-        create: () => UserInfoController(),
-        child: const UserInfoPage(),
-      ),
-    ),
-    GetPage(
-      name: aboutPage,
-      page: () => ControllerProvider(
-        create: () => AboutController(),
-        child: const AboutPage(),
-      ),
-    ),
-    GetPage(
-      name: pointsPage,
-      page: () => ControllerProvider(
-        create: () => PointsController(),
-        child: const PointsPage(),
-      ),
-    ),
-    GetPage(
-      name: settingPage,
-      page: () => ControllerProvider(
-        create: () => SettingController(),
-        child: const SettingPage(),
-      ),
-    ),
-    GetPage(
-      name: settingLanguagePage,
-      page: () {
-        return const SettingLanguagePage();
-      },
-    ),
-    GetPage(
-      name: settingThemeColors,
-      page: () {
-        return const ColorPickerPage();
-      },
-    ),
-    GetPage(
-      name: collectPage,
-      page: () => ControllerProvider(
-        create: () => CollectController(),
-        child: const CollectPage(),
-      ),
-    ),
-    GetPage(
-      name: searchPage,
-      page: () => ControllerProvider(
-        create: () => SearchController(),
-        child: const SearchPage(),
-      ),
-    ),
-    GetPage(
-      name: historyPage,
-      page: () => ControllerProvider(
-        create: () => HistoryController(),
-        child: const HistoryPage(),
-      ),
-    ),
-    GetPage(
-      name: sharePage,
-      page: () => ControllerProvider(
-        create: () => ShareController(),
-        child: const SharePage(),
-      ),
-    ),
-    GetPage(
-      name: articlePage,
-      page: () => ControllerProvider(
-        create: () => ArticleController(),
-        child: const ArticlePage(),
-      ),
-    ),
-  ];
+    // 需要拦截的“黑名单”：这些页面必须登录才能看
+    final protectedRoutes = [Routes.mainPage];
 
-  static final unknownPage = GetPage(
-    name: Routes.unknown,
-    page: () => const UnknownPage(),
-  );
+    // 如果访问的是受保护页面且未登录，强行指向登录页
+    if (protectedRoutes.contains(settings.name) && !isLoggedIn) {
+      return MaterialPageRoute(
+        builder: (context) => ControllerProvider(
+          create: (_) => LoginController(),
+          child: const LoginPage(),
+        ),
+      );
+    }
+
+    // 正常匹配跳转
+    switch (settings.name) {
+      case Routes.splashPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => SplashController(),
+            child: const SplashPage(),
+          ),
+        );
+      case Routes.registerPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => RegisterController(),
+            child: const RegisterPage(),
+          ),
+        );
+      case Routes.webViewPage:
+        return MaterialPageRoute(
+          settings: settings, // 必须传递 settings 才能在下级 context 中获取 arguments
+          builder: (context) => ControllerProvider(
+            create: (args) => WebController(arguments: args),
+            child: const WebViewPage(),
+          ),
+        );
+      case Routes.mainPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => MainController(),
+            child: const MainPage(),
+          ),
+        );
+      case Routes.feedbackPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => FeedbackController(),
+            child: const FeedbackPage(),
+          ),
+        );
+      case Routes.loginPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => LoginController(),
+            child: const LoginPage(),
+          ),
+        );
+      case Routes.userInfoPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => UserInfoController(),
+            child: const UserInfoPage(),
+          ),
+        );
+      case Routes.aboutPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => AboutController(),
+            child: const AboutPage(),
+          ),
+        );
+      case Routes.pointsPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => PointsController(),
+            child: const PointsPage(),
+          ),
+        );
+      case Routes.settingPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => SettingController(),
+            child: const SettingPage(),
+          ),
+        );
+      case Routes.settingLanguagePage:
+        return MaterialPageRoute(
+          builder: (context) => const SettingLanguagePage(),
+        );
+      case Routes.settingThemeColors:
+        return MaterialPageRoute(builder: (context) => const ColorPickerPage());
+      case Routes.collectPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => CollectController(),
+            child: const CollectPage(),
+          ),
+        );
+      case Routes.searchPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => SearchController(),
+            child: const SearchPage(),
+          ),
+        );
+      case Routes.historyPage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => HistoryController(),
+            child: const HistoryPage(),
+          ),
+        );
+      case Routes.sharePage:
+        return MaterialPageRoute(
+          builder: (context) => ControllerProvider(
+            create: (_) => ShareController(),
+            child: const SharePage(),
+          ),
+        );
+      case Routes.articlePage:
+        return MaterialPageRoute(
+          settings: settings, // 必须传递 settings 才能在下级 context 中获取 arguments
+          builder: (context) => ControllerProvider(
+            create: (args) => ArticleController(arguments: args),
+            child: const ArticlePage(),
+          ),
+        );
+      default:
+        return unknownRoute(settings);
+    }
+  }
+
+  /// 未知页面的构建器
+  static MaterialPageRoute unknownRoute(RouteSettings settings) {
+    return MaterialPageRoute(builder: (context) => const UnknownPage());
+  }
 }

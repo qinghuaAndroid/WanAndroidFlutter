@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/webview_page/webview_controller.dart';
@@ -25,7 +25,7 @@ class WebViewBottomWidget extends GetCommonView<WebController> {
           Box.hBox20,
           Expanded(
             child: GestureDetector(
-              onTap: () => ToastUtils.show(StringStyles.webNotComment.tr),
+              onTap: () => ToastUtils.show(S.of(context).webNotComment),
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
@@ -33,7 +33,7 @@ class WebViewBottomWidget extends GetCommonView<WebController> {
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Text(
-                  StringStyles.webEditHint.tr,
+                  S.of(context).webEditHint,
                   style: Styles.style_B8C0D4_14,
                 ),
               ),
@@ -45,7 +45,7 @@ class WebViewBottomWidget extends GetCommonView<WebController> {
             child: Consumer(
               builder: (context, WebController controller, child) {
                 return SvgPicture.asset(
-                  controller.isCollect.value
+                  controller.isCollect
                       ? R.assetsImagesCollect
                       : R.assetsImagesCollectQuit,
                   width: 24,
@@ -55,7 +55,7 @@ class WebViewBottomWidget extends GetCommonView<WebController> {
           ),
           Box.hBox20,
           InkWell(
-            onTap: () => ToastUtils.show(StringStyles.notSupportLikes.tr),
+            onTap: () => ToastUtils.show(S.of(context).notSupportLikes),
             child: const Icon(
               Icons.thumb_up_alt_outlined,
               color: ColorStyle.color_24CF5F,

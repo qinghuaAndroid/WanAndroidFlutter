@@ -20,7 +20,7 @@ class ArticlePage extends GetSaveView<ArticleController> {
         child: Column(
           children: [
             ToolBar(
-              title: context.read<ArticleController>().arguments["title"],
+              title: context.read<ArticleController>().args["title"],
             ),
             DividerStyle.divider1HalfPadding20,
 

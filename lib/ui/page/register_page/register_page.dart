@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/provider/provider.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -25,7 +25,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(StringStyles.registerButton.tr),
+        title: Text(S.of(context).registerButton),
         titleTextStyle: TextStyle(fontSize: 18.sp, color: Colors.black),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -46,7 +46,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
 
             ///账户名输入框
             EditWidget(
-              hintText: StringStyles.loginAccountNameHint.tr,
+              hintText: S.of(context).loginAccountNameHint,
               onChanged: (text) => context.read<RegisterController>()
                 ..account = text
                 ..update(),
@@ -54,7 +54,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
 
             ///密码输入框
             EditWidget(
-              hintText: StringStyles.loginAccountPwdHint.tr,
+              hintText: S.of(context).loginAccountPwdHint,
               passwordType: true,
               onChanged: (text) => context.read<RegisterController>()
                 ..password = text
@@ -63,7 +63,7 @@ class RegisterPage extends GetCommonView<RegisterController> {
 
             ///再次输入密码输入框
             EditWidget(
-              hintText: StringStyles.loginAccountRePwdHint.tr,
+              hintText: S.of(context).loginAccountRePwdHint,
               passwordType: true,
               onChanged: (text) => context.read<RegisterController>()
                 ..rePassword = text
@@ -87,10 +87,10 @@ class RegisterPage extends GetCommonView<RegisterController> {
                     : ButtonStyles.getTransparentStyle(),
                 onPressed: () {
                   KeyboardUtils.hideKeyboard(context);
-                  context.read<RegisterController>().register();
+                  context.read<RegisterController>().register(context);
                 },
                 child: Text(
-                  StringStyles.registerButton.tr,
+                  S.of(context).registerButton,
                   style: context.watch<RegisterController>().changeShowButton()
                       ? Styles.style_white_16
                       : Styles.style_white_16,

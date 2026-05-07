@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:wan_android_flutter/app/global.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -119,8 +119,8 @@ class SearchController extends BaseGetPageController {
     notifySearchHistory();
 
     ///隐藏软键盘
-    if (Get.context != null) {
-      KeyboardUtils.hideKeyboard(Get.context!);
+    if (Global.context != null) {
+      KeyboardUtils.hideKeyboard(Global.context!);
     }
 
     if (controller != null) {

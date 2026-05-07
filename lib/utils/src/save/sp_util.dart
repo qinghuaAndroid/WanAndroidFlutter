@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/src/color_util.dart';
@@ -13,7 +12,11 @@ import 'sp_key.dart';
 /// @name : jhf
 /// @description :键值对存储
 class SpUtil {
-  static SharedPreferences get _prefs => Get.find<SharedPreferences>();
+  static late SharedPreferences _prefs;
+
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
 
   ///更新用户信息，需要保存密码
   ///[userInfo] 用户信息
@@ -111,7 +114,7 @@ class SpUtil {
 
   ///清空搜索历史
   static void deleteSearchHistory() {
-    Get.find<SharedPreferences>().remove(SPKey.searchHistory);
+    _prefs.remove(SPKey.searchHistory);
   }
 
   ///获取搜索历史记录

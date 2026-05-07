@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide SearchController;
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/ui/page/search_page/search_controller.dart';
@@ -30,7 +30,7 @@ class SearchHistoryWidget extends GetCommonView<SearchController> {
             children: [
               Box.hBox20,
               Text(
-                StringStyles.searchHistory.tr,
+                S.of(context).searchHistory,
                 style: Styles.style_black_16_bold500,
               ),
               Expanded(child: Container()),

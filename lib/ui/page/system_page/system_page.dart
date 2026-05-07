@@ -29,6 +29,7 @@ class SystemPage extends GetSaveView<SystemController> {
             item: context.read<SystemController>().systems[index],
             onLabelTap: (children) {
               Navigate.push(
+                context,
                 Routes.articlePage,
                 arguments: {
                   "articleType": ArticleType.system,

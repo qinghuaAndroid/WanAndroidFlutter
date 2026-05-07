@@ -38,7 +38,7 @@ class MBottomNavigationBar extends StatelessWidget {
                         ? notifier.color
                         : ColorStyle.color_B8C0D4,
                   ),
-                  label: S.of(context).tab_1,
+                  label: S.of(context).tab1,
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
@@ -49,7 +49,7 @@ class MBottomNavigationBar extends StatelessWidget {
                         ? notifier.color
                         : ColorStyle.color_B8C0D4,
                   ),
-                  label: S.of(context).tab_2,
+                  label: S.of(context).tab2,
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
@@ -60,7 +60,7 @@ class MBottomNavigationBar extends StatelessWidget {
                         ? notifier.color
                         : ColorStyle.color_B8C0D4,
                   ),
-                  label: S.of(context).tab_3,
+                  label: S.of(context).tab3,
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
@@ -71,7 +71,7 @@ class MBottomNavigationBar extends StatelessWidget {
                         ? notifier.color
                         : ColorStyle.color_B8C0D4,
                   ),
-                  label: S.of(context).tab_4,
+                  label: S.of(context).tab4,
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
@@ -82,7 +82,7 @@ class MBottomNavigationBar extends StatelessWidget {
                         ? notifier.color
                         : ColorStyle.color_B8C0D4,
                   ),
-                  label: S.of(context).tab_5,
+                  label: S.of(context).tab5,
                 ),
               ],
               onTap: (index) {

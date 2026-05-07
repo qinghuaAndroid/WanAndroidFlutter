@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
-import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
 
@@ -21,7 +21,7 @@ class LoginController extends BaseGetController {
   }
 
   ///用户登录
-  void login() {
+  void login(BuildContext context) {
     if (account.isEmpty || password.isEmpty) {
       return;
     }
@@ -30,8 +30,8 @@ class LoginController extends BaseGetController {
     if (account.isEmpty || account.length < 6) {
       ToastUtils.show(
         account.isEmpty
-            ? StringStyles.registerAccountEmpty.tr
-            : StringStyles.registerAccountLength.tr,
+            ? S.current.registerAccountEmpty
+            : S.current.registerAccountLength,
       );
       return;
     }
@@ -40,8 +40,8 @@ class LoginController extends BaseGetController {
     if (password.isEmpty || password.length < 6) {
       ToastUtils.show(
         password.isEmpty
-            ? StringStyles.registerPasswordEmpty.tr
-            : StringStyles.registerPasswordLength.tr,
+            ? S.current.registerPasswordEmpty
+            : S.current.registerPasswordLength,
       );
       return;
     }
@@ -50,8 +50,10 @@ class LoginController extends BaseGetController {
       account,
       password,
       success: (data) {
-        ToastUtils.show(StringStyles.loginSuccess.tr);
-        Navigate.popAndPush(Routes.mainPage);
+        ToastUtils.show(S.current.loginSuccess);
+        if (context.mounted) {
+          Navigate.popAndPush(context, Routes.mainPage);
+        }
       },
     );
   }

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'get_controller_inject.dart';
 
 class ControllerProvider<T extends BaseGetController> extends StatelessWidget {
-  final T Function() create;
+  final T Function(Object? arguments) create;
   final Widget child;
 
   const ControllerProvider({
@@ -15,6 +15,12 @@ class ControllerProvider<T extends BaseGetController> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (context) => create(), child: child);
+    var arguments = ModalRoute.of(context)?.settings.arguments;
+    return ChangeNotifierProvider(
+      create: (context) {
+        return create.call(arguments);
+      },
+      child: child,
+    );
   }
 }

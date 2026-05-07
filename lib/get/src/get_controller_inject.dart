@@ -11,10 +11,12 @@ class BaseGetController extends ChangeNotifier {
   static const int emptyState = 2;
   static const int errorState = 3;
 
-  BaseGetController() {
+  BaseGetController({this.arguments}) {
     request = RequestRepository();
-    initialize();
+    _initialize();
   }
+
+  Object? arguments;
 
   ///HTTP请求仓库
   late RequestRepository request;
@@ -24,7 +26,7 @@ class BaseGetController extends ChangeNotifier {
 
   bool _initialized = false;
 
-  void initialize() {
+  void _initialize() {
     if (_initialized) {
       return;
     }

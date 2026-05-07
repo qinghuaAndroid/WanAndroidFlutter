@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:get/get.dart';
-import 'package:wan_android_flutter/res/src/strings.dart';
+import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/ui/dialog/dialog.dart';
 
 ///显示公共弹窗
@@ -20,8 +19,8 @@ void showCommonDialog({
       return CommonDialog(
         title: title,
         content: content,
-        backText: backText.isEmpty ? StringStyles.quit.tr : backText,
-        nextText: nextText.isEmpty ? StringStyles.enter.tr : nextText,
+        backText: backText.isEmpty ? S.of(context).quit : backText,
+        nextText: nextText.isEmpty ? S.of(context).enter : nextText,
         backVisible: backVisible,
         nextVisible: nextVisible,
         backTap: backTap,

@@ -61,30 +61,37 @@ class MyApp extends StatelessWidget {
         data: MediaQuery.of(
           context,
         ).copyWith(textScaler: TextScaler.noScaling, boldText: false),
-        child: MaterialApp(
-          navigatorKey: Global.navigatorKey,
-          navigatorObservers: [NavigationHistoryObserver(), routeObserver],
+        child: Selector<LocaleNotifier, Locale>(
+          builder: (context, value, child) {
+            return MaterialApp(
+              navigatorKey: Global.navigatorKey,
+              navigatorObservers: [NavigationHistoryObserver(), routeObserver],
 
-          // 使用 onGenerateRoute 代替 routes
-          onGenerateRoute: Routes.onGenerateRoute,
+              // 使用 onGenerateRoute 代替 routes
+              onGenerateRoute: Routes.onGenerateRoute,
 
-          // onUnknownRoute 仍然作为兜底
-          onUnknownRoute: Routes.unknownRoute,
+              // onUnknownRoute 仍然作为兜底
+              onUnknownRoute: Routes.unknownRoute,
 
-          initialRoute: Routes.splashPage,
-          debugShowCheckedModeBanner: false,
-          theme: appThemeData,
-          //国际化支持-来源配置
-          supportedLocales: S.delegate.supportedLocales,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          // 当前语言
-          locale: context.read<LocaleNotifier>().locale,
-          builder: FlutterSmartDialog.init(),
+              initialRoute: Routes.splashPage,
+              debugShowCheckedModeBanner: false,
+              theme: appThemeData,
+              //国际化支持-来源配置
+              supportedLocales: S.delegate.supportedLocales,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              // 当前语言
+              locale: value,
+              builder: FlutterSmartDialog.init(),
+            );
+          },
+          selector: (context, localeNotifier) {
+            return localeNotifier.locale;
+          },
         ),
       ),
     );

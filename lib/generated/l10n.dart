@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -54,132 +53,13 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
-
-  /// `A professional Android community`
-  String get slogan {
-    return Intl.message(
-      'A professional Android community',
-      name: 'slogan',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Play Android`
-  String get tab_1 {
-    return Intl.message('Play Android', name: 'tab_1', desc: '', args: []);
-  }
-
-  /// `Knowledge System`
-  String get tab_2 {
-    return Intl.message('Knowledge System', name: 'tab_2', desc: '', args: []);
-  }
-
-  /// `Public Account`
-  String get tab_3 {
-    return Intl.message('Public Account', name: 'tab_3', desc: '', args: []);
-  }
-
-  /// `navigation`
-  String get tab_4 {
-    return Intl.message('navigation', name: 'tab_4', desc: '', args: []);
-  }
-
-  /// `project`
-  String get tab_5 {
-    return Intl.message('project', name: 'tab_5', desc: '', args: []);
-  }
-
-  /// `My Collection`
-  String get nav_my_collect {
-    return Intl.message(
-      'My Collection',
-      name: 'nav_my_collect',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `System Settings`
-  String get nav_setting {
-    return Intl.message(
-      'System Settings',
-      name: 'nav_setting',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `about Us`
-  String get nav_about_us {
-    return Intl.message('about Us', name: 'nav_about_us', desc: '', args: []);
-  }
-
-  /// `Log out`
-  String get nav_logout {
-    return Intl.message('Log out', name: 'nav_logout', desc: '', args: []);
-  }
-
-  /// `Night Mode`
-  String get nav_night_mode {
-    return Intl.message(
-      'Night Mode',
-      name: 'nav_night_mode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `TODO`
-  String get nav_todo {
-    return Intl.message('TODO', name: 'nav_todo', desc: '', args: []);
-  }
-
-  /// `square`
-  String get nav_square {
-    return Intl.message('square', name: 'nav_square', desc: '', args: []);
-  }
-
-  /// `My Points`
-  String get nav_my_score {
-    return Intl.message('My Points', name: 'nav_my_score', desc: '', args: []);
-  }
-
-  /// `Relax`
-  String get nav_girl {
-    return Intl.message('Relax', name: 'nav_girl', desc: '', args: []);
-  }
-
-  /// `Questions`
-  String get nav_question {
-    return Intl.message('Questions', name: 'nav_question', desc: '', args: []);
-  }
-
-  /// `ID:`
-  String get nav_id {
-    return Intl.message('ID:', name: 'nav_id', desc: '', args: []);
-  }
-
-  /// `grade:`
-  String get nav_grade {
-    return Intl.message('grade:', name: 'nav_grade', desc: '', args: []);
-  }
-
-  /// `Ranking:`
-  String get nav_rank {
-    return Intl.message('Ranking:', name: 'nav_rank', desc: '', args: []);
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
-    return const <Locale>[
-      Locale.fromSubtags(languageCode: 'en'),
-      Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
-      Locale.fromSubtags(languageCode: 'zh', countryCode: 'TW'),
-    ];
+    return const <Locale>[Locale.fromSubtags(languageCode: 'en')];
   }
 
   @override

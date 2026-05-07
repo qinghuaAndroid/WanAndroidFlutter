@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -28,11 +27,11 @@ class MBottomNavigationBar extends StatelessWidget {
       "project",
     ];
     final labels = <String>[
-      S.of(context).tab_1,
-      S.of(context).tab_2,
-      S.of(context).tab_3,
-      S.of(context).tab_4,
-      S.of(context).tab_5,
+      StringStyles.tab1.tr,
+      StringStyles.tab2.tr,
+      StringStyles.tab3.tr,
+      StringStyles.tab4.tr,
+      StringStyles.tab5.tr,
     ];
 
     final selectedColor = themeColorService.color;

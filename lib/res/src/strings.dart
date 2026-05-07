@@ -125,6 +125,27 @@ class StringStyles {
   static const String collectQuit = "collectQuit";
 
   static const String notSupportLikes = "notSupportLikes";
+
+  static const String slogan = 'slogan';
+  static const String tab1 = 'tab_1';
+  static const String tab2 = 'tab_2';
+  static const String tab3 = 'tab_3';
+  static const String tab4 = 'tab_4';
+  static const String tab5 = 'tab_5';
+
+  static const String navMyCollect = 'nav_my_collect';
+  static const String navSetting = 'nav_setting';
+  static const String navAboutUs = 'nav_about_us';
+  static const String navLogout = 'nav_logout';
+  static const String navNightMode = 'nav_night_mode';
+  static const String navTodo = 'nav_todo';
+  static const String navSquare = 'nav_square';
+  static const String navMyScore = 'nav_my_score';
+  static const String navGirl = 'nav_girl';
+  static const String navQuestion = 'nav_question';
+  static const String navId = 'nav_id';
+  static const String navGrade = 'nav_grade';
+  static const String navRank = 'nav_rank';
 }
 
 ///使用Get配置语言环境
@@ -234,6 +255,25 @@ class Messages extends Translations {
       StringStyles.collectSuccess: '收藏成功',
       StringStyles.collectQuit: '取消收藏成功',
       StringStyles.notSupportLikes: "暂不支持点赞哟~",
+      StringStyles.slogan: "一个专业的Android社区",
+      StringStyles.tab1: "玩Android",
+      StringStyles.tab2: "知识体系",
+      StringStyles.tab3: "公众号",
+      StringStyles.tab4: "导航",
+      StringStyles.tab5: "项目",
+      StringStyles.navMyCollect: "我的收藏",
+      StringStyles.navSetting: "系统设置",
+      StringStyles.navAboutUs: "关于我们",
+      StringStyles.navLogout: "退出登录",
+      StringStyles.navNightMode: "夜间模式",
+      StringStyles.navTodo: "TODO",
+      StringStyles.navSquare: "广场",
+      StringStyles.navMyScore: "我的积分",
+      StringStyles.navGirl: "轻松一下",
+      StringStyles.navQuestion: "问答",
+      StringStyles.navId: "ID:",
+      StringStyles.navGrade: "等级:",
+      StringStyles.navRank: "排名:",
     },
     'zh_TW': {
       StringStyles.appName: 'WanAndroid',
@@ -337,6 +377,25 @@ class Messages extends Translations {
       StringStyles.collectSuccess: '收藏成功',
       StringStyles.collectQuit: '取消收藏成功',
       StringStyles.notSupportLikes: "暫不支持點讚喲~",
+      StringStyles.slogan: "一個專業的Android社區",
+      StringStyles.tab1: "玩Android",
+      StringStyles.tab2: "知識體系",
+      StringStyles.tab3: "公衆號",
+      StringStyles.tab4: "導航",
+      StringStyles.tab5: "項目",
+      StringStyles.navMyCollect: "我的收藏",
+      StringStyles.navSetting: "系統設置",
+      StringStyles.navAboutUs: "關於我們",
+      StringStyles.navLogout: "退出登錄",
+      StringStyles.navNightMode: "夜間模式",
+      StringStyles.navTodo: "TODO",
+      StringStyles.navSquare: "廣場",
+      StringStyles.navMyScore: "我的積分",
+      StringStyles.navGirl: "輕鬆一下",
+      StringStyles.navQuestion: "問答",
+      StringStyles.navId: "ID:",
+      StringStyles.navGrade: "等級:",
+      StringStyles.navRank: "排名:",
     },
     'en_US': {
       StringStyles.appName: 'WanAndroid',
@@ -444,6 +503,25 @@ class Messages extends Translations {
       StringStyles.collectSuccess: 'Collection success',
       StringStyles.collectQuit: 'Unfavorite successfully',
       StringStyles.notSupportLikes: "Don't support likes at the moment~",
+      StringStyles.slogan: "A professional Android community",
+      StringStyles.tab1: "Play Android",
+      StringStyles.tab2: "Knowledge System",
+      StringStyles.tab3: "Public Account",
+      StringStyles.tab4: "navigation",
+      StringStyles.tab5: "project",
+      StringStyles.navMyCollect: "My Collection",
+      StringStyles.navSetting: "System Settings",
+      StringStyles.navAboutUs: "about Us",
+      StringStyles.navLogout: "Log out",
+      StringStyles.navNightMode: "Night Mode",
+      StringStyles.navTodo: "TODO",
+      StringStyles.navSquare: "square",
+      StringStyles.navMyScore: "My Points",
+      StringStyles.navGirl: "Relax",
+      StringStyles.navQuestion: "Questions",
+      StringStyles.navId: "ID:",
+      StringStyles.navGrade: "grade:",
+      StringStyles.navRank: "Ranking:",
     },
   };
 }

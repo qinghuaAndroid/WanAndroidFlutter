@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/model/models.dart' hide ProjectPage;
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
@@ -128,11 +127,11 @@ class MainTabOptionsState extends State<MainPage>
 
   String _title(int index) {
     return switch (index) {
-      0 => S.of(context).tab_1,
-      1 => S.of(context).tab_2,
-      2 => S.of(context).tab_3,
-      3 => S.of(context).tab_4,
-      4 => S.of(context).tab_5,
+      0 => StringStyles.tab1.tr,
+      1 => StringStyles.tab2.tr,
+      2 => StringStyles.tab3.tr,
+      3 => StringStyles.tab4.tr,
+      4 => StringStyles.tab5.tr,
       _ => throw UnimplementedError(),
     };
   }

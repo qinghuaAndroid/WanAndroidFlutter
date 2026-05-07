@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/model/models.dart';
+import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
 import 'package:wan_android_flutter/service/service.dart';
 import 'package:wan_android_flutter/ui/page/main_page/main_controller.dart';
@@ -62,54 +62,54 @@ class DrawerWidget extends StatelessWidget {
           ),
           XListTile(
             leading: assetImage('ic_score'),
-            title: S.of(context).nav_my_score,
+            title: StringStyles.navMyScore.tr,
             onTap: () {
               Navigate.push(Routes.pointsPage);
             },
           ),
           XListTile(
             leading: assetImage('ic_collect'),
-            title: S.of(context).nav_my_collect,
+            title: StringStyles.navMyCollect.tr,
             onTap: () {
               Navigate.push(Routes.collectPage);
             },
           ),
           XListTile(
             leading: assetImage('ic_question'),
-            title: S.of(context).nav_question,
+            title: StringStyles.navQuestion.tr,
             onTap: () {
               Navigate.push(
                 Routes.articlePage,
                 arguments: {
                   "articleType": ArticleType.question,
-                  "title": S.of(context).nav_question,
+                  "title": StringStyles.navQuestion.tr,
                 },
               );
             },
           ),
           XListTile(
             leading: assetImage('ic_square'),
-            title: S.of(context).nav_square,
+            title: StringStyles.navSquare.tr,
             onTap: () {
               Navigate.push(
                 Routes.articlePage,
                 arguments: {
                   "articleType": ArticleType.square,
-                  "title": S.of(context).nav_square,
+                  "title": StringStyles.navSquare.tr,
                 },
               );
             },
           ),
           XListTile(
             leading: assetImage('ic_setting'),
-            title: S.of(context).nav_setting,
+            title: StringStyles.navSetting.tr,
             onTap: () {
               Navigate.push(Routes.settingPage);
             },
           ),
           XListTile(
             leading: assetImage('ic_about'),
-            title: S.of(context).nav_about_us,
+            title: StringStyles.navAboutUs.tr,
             onTap: () {
               Navigate.push(Routes.aboutPage);
             },

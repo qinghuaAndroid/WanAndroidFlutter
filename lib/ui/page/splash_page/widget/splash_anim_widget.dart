@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/res/res.dart';
 import 'package:wan_android_flutter/routes/routes.dart';
@@ -42,7 +41,7 @@ class SplashAnimWidget extends GetCommonView<SplashController> {
             Padding(
               padding: EdgeInsets.only(top: 4.w),
               child: Text(
-                S.of(context).slogan,
+                StringStyles.slogan.tr,
                 style: TextStyle(
                   color: ColorStyle.color_999999,
                   fontSize: 15.sp,

@@ -1,4 +1,4 @@
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -15,7 +15,7 @@ class CollectController extends BaseGetPageController {
   ///请求积分明细
   @override
   void requestData(
-    RefreshController controller, {
+    EasyRefreshController controller, {
     Refresh refresh = Refresh.first,
   }) {
     request.collectDetail(

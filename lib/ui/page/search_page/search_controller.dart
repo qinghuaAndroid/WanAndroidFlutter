@@ -1,5 +1,5 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:wan_android_flutter/app/global.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
@@ -39,7 +39,7 @@ class SearchController extends BaseGetPageController {
   ///上拉下拉搜索数据加载
   @override
   void requestData(
-    RefreshController controller, {
+    EasyRefreshController controller, {
     Refresh refresh = Refresh.first,
   }) {
     ///搜索数据

@@ -52,7 +52,7 @@ dependencies:
   fluttertoast: ^9.0.0
   flutter_screenutil: ^5.9.3
   lottie: ^3.3.1
-  pull_to_refresh_flutter3: ^2.0.2
+  easy_refresh: ^3.5.0
   rxdart: ^0.28.0
   flutter_svg: ^2.1.0
   webview_flutter: ^4.13.1

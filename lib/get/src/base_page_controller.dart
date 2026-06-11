@@ -1,4 +1,4 @@
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:wan_android_flutter/widgets/src/pull_smart_refresher.dart';
 
 import 'get_controller_inject.dart';
@@ -20,12 +20,12 @@ abstract class BaseGetPageController extends BaseGetController {
   bool isInit = true;
 
   /// 刷新控制器
-  RefreshController? controller;
+  EasyRefreshController? controller;
 
   BaseGetPageController({super.arguments});
 
   ///预留初次加载，注意只供上拉下拉使用
-  void initPullLoading(RefreshController controller) {
+  void initPullLoading(EasyRefreshController controller) {
     if (isInit) {
       page = initialPage;
       this.controller = controller;
@@ -34,20 +34,20 @@ abstract class BaseGetPageController extends BaseGetController {
   }
 
   ///预留上拉刷新
-  void onLoadRefresh(RefreshController controller) {
+  void onLoadRefresh(EasyRefreshController controller) {
     page = initialPage;
     requestData(controller, refresh: Refresh.pull);
   }
 
   ///预留下拉加载
-  void onLoadMore(RefreshController controller) {
+  void onLoadMore(EasyRefreshController controller) {
     ++page;
     requestData(controller, refresh: Refresh.down);
   }
 
   ///网络请求在此处进行，不用在重复进行上拉下拉的处理
   void requestData(
-    RefreshController controller, {
+    EasyRefreshController controller, {
     Refresh refresh = Refresh.first,
   });
 }

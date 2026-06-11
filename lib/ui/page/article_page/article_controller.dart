@@ -1,4 +1,4 @@
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -21,7 +21,7 @@ class ArticleController extends BaseGetPageController {
   ///请求积分明细
   @override
   void requestData(
-    RefreshController controller, {
+    EasyRefreshController controller, {
     Refresh refresh = Refresh.first,
   }) {
     switch (args['articleType'] as ArticleType?) {
@@ -39,7 +39,10 @@ class ArticleController extends BaseGetPageController {
     }
   }
 
-  void requestSystemArticles(RefreshController controller, Refresh refresh) {
+  void requestSystemArticles(
+    EasyRefreshController controller,
+    Refresh refresh,
+  ) {
     request.requestSystemArticles(
       args["cid"].toString(),
       page,
@@ -60,7 +63,7 @@ class ArticleController extends BaseGetPageController {
     );
   }
 
-  void requestAskModule(RefreshController controller, Refresh refresh) {
+  void requestAskModule(EasyRefreshController controller, Refresh refresh) {
     request.requestAskModule(
       page,
       success: (data, over) {
@@ -80,7 +83,7 @@ class ArticleController extends BaseGetPageController {
     );
   }
 
-  void requestSquareModule(RefreshController controller, Refresh refresh) {
+  void requestSquareModule(EasyRefreshController controller, Refresh refresh) {
     request.requestSquareModule(
       page,
       success: (data, over) {

@@ -1,7 +1,7 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:wan_android_flutter/generated/l10n.dart';
 import 'package:wan_android_flutter/get/src/base_page_controller.dart';
 import 'package:wan_android_flutter/res/res.dart';
@@ -65,15 +65,16 @@ class RefreshWidget<T extends BaseGetPageController> extends StatefulWidget {
 class RefreshWidgetState<T extends BaseGetPageController>
     extends State<RefreshWidget<T>>
     with AutomaticKeepAliveClientMixin {
-  ///内部维护[RefreshController] ，不暴露出去 , 上下刷新控制器
-  RefreshController refreshController = RefreshController(
-    initialRefresh: false,
-  );
+  late EasyRefreshController _controller;
 
   @override
   void initState() {
     super.initState();
-    context.read<T>().initPullLoading(refreshController);
+    _controller = EasyRefreshController(
+      controlFinishRefresh: true,
+      controlFinishLoad: true,
+    );
+    context.read<T>().initPullLoading(_controller);
   }
 
   @override
@@ -83,79 +84,14 @@ class RefreshWidgetState<T extends BaseGetPageController>
       tag: widget.tag,
       child: ScrollConfiguration(
         behavior: OverScrollBehavior(),
-        child: SmartRefresher(
-          controller: refreshController,
-          enablePullDown: widget.enablePullDown,
-          enablePullUp: widget.enablePullUp,
-          onRefresh: () => context.read<T>().onLoadRefresh(refreshController),
-          onLoading: () => context.read<T>().onLoadMore(refreshController),
-          header: CustomHeader(
-            builder: (BuildContext context, RefreshStatus? mode) {
-              Widget header;
-              if (mode == RefreshStatus.idle) {
-                ///下拉时显示
-                header = Text(
-                  S.of(context).refreshHeaderIdle,
-                  style: Styles.style_B8C0D4_14,
-                );
-              } else if (mode == RefreshStatus.refreshing) {
-                ///加载中
-                header = Lottie.asset(
-                  R.assetsLottieRefreshHeader,
-                  width: 100,
-                  animate: true,
-                );
-              } else if (mode == RefreshStatus.failed) {
-                ///加载失败
-                header = Text(
-                  S.of(context).refreshHeaderFailed,
-                  style: Styles.style_B8C0D4_14,
-                );
-              } else if (mode == RefreshStatus.completed) {
-                ///加载成功
-                header = Text(
-                  S.of(context).refreshHeaderSuccess,
-                  style: Styles.style_B8C0D4_14,
-                );
-              } else {
-                ///超过二层
-                header = Text(
-                  S.of(context).refreshHeaderFreed,
-                  style: Styles.style_B8C0D4_14,
-                );
-              }
-              return SizedBox(height: 64, child: Center(child: header));
-            },
-          ),
-          footer: CustomFooter(
-            builder: (BuildContext context, LoadStatus? mode) {
-              Widget footer;
-              if (mode == LoadStatus.idle) {
-                ///下拉提示
-                footer = const Text("pull up load");
-              } else if (mode == LoadStatus.loading) {
-                ///加载中
-                footer = Lottie.asset(
-                  R.assetsLottieRefreshFooter,
-                  width: 200,
-                  animate: true,
-                );
-              } else if (mode == LoadStatus.failed) {
-                ///加载失败
-                footer = Text(
-                  S.of(context).refreshError,
-                  style: Styles.style_B8C0D4_14,
-                );
-              } else {
-                ///无更多数据
-                footer = Text(
-                  S.of(context).refreshNoData,
-                  style: Styles.style_B8C0D4_14,
-                );
-              }
-              return SizedBox(height: 60, child: Center(child: footer));
-            },
-          ),
+        child: EasyRefresh(
+          controller: _controller,
+          // enablePullDown: widget.enablePullDown,
+          // enablePullUp: widget.enablePullUp,
+          onRefresh: () => context.read<T>().onLoadRefresh(_controller),
+          onLoad: () => context.read<T>().onLoadMore(_controller),
+          header: ClassicHeader(),
+          footer: ClassicFooter(),
           child: widget.child,
         ),
       ),

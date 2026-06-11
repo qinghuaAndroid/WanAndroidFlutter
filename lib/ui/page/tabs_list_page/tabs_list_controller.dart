@@ -15,7 +15,7 @@ class TabsListController extends BaseGetPageController {
   ///请求积分明细
   @override
   void requestData(
-    RefreshController controller, {
+    EasyRefreshController controller, {
     Refresh refresh = Refresh.first,
   }) {
     request.getWxArticle(

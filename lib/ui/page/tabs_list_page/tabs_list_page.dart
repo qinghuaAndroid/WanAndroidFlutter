@@ -1,6 +1,6 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:wan_android_flutter/get/get.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/utils.dart';

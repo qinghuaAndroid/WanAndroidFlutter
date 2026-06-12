@@ -51,17 +51,19 @@ class HomeArticleItem extends StatelessWidget {
           ),
           Box.vBox10,
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(item.superChapterName, style: Styles.style_FE8C28_11),
-              Box.hBox10,
+              Box.hBox5,
               const Text('|', style: Styles.style_9F9EA6_11),
-              Box.hBox10,
+              Box.hBox5,
               Text(
                 item.shareUser.isEmpty ? item.author : item.shareUser,
                 style: Styles.style_9F9EA6_11,
               ),
-              Box.hBox10,
+              Box.hBox5,
+              const Text('|', style: Styles.style_9F9EA6_11),
+              Box.hBox5,
               Text(item.niceDate, style: Styles.style_9F9EA6_11),
             ],
           ),

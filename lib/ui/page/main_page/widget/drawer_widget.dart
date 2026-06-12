@@ -153,6 +153,8 @@ class XListTile extends StatelessWidget {
         color: Colors.black,
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
+        fontFamily: 'Noto_Serif_TC_EN',
+        fontFamilyFallback: ['Noto_Serif_TC_ZH'],
       ),
       onTap: onTap,
     );

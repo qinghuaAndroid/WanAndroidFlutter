@@ -89,7 +89,7 @@ class Styles {
   static const TextStyle style_white_16_bold = TextStyle(
     color: Colors.white,
     fontSize: 16,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
   );
   static const TextStyle style_white24_18 = TextStyle(
     color: Colors.white24,
@@ -104,7 +104,7 @@ class Styles {
   static const TextStyle style_black_18_bold = TextStyle(
     color: Colors.black,
     fontSize: 18,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
   );
   static const TextStyle style_black_18_bold500 = TextStyle(
     color: Colors.black,
@@ -114,7 +114,7 @@ class Styles {
   static const TextStyle style_black_16_bold = TextStyle(
     color: Colors.black,
     fontSize: 16,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
   );
   static const TextStyle style_black_16_bold500 = TextStyle(
     color: Colors.black,

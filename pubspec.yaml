@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   intl: any
-#  get: ^4.7.2
+  #  get: ^4.7.2
   dio: ^5.8.0+1
   dio_cookie_manager: ^3.2.0
   dio_smart_retry: ^7.0.1
@@ -65,6 +65,7 @@ dependencies:
   permission_handler: ^12.0.0+1
   built_collection: ^5.1.1
   flex_color_picker: ^3.7.1
+  google_fonts: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -128,5 +129,16 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+  fonts:
+    - family: Noto_Serif_TC_ZH
+      fonts:
+        - asset: fonts/NotoSerifTC-VariableFont_wght_zh.ttf
+          weight: 400
+    - family: Noto_Serif_TC_EN
+      fonts:
+        - asset: fonts/NotoSerifTC-VariableFont_wght_en.ttf
+          weight: 400
+
 flutter_intl:
   enabled: true

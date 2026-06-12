@@ -86,8 +86,6 @@ class RefreshWidgetState<T extends BaseGetPageController>
         behavior: OverScrollBehavior(),
         child: EasyRefresh(
           controller: _controller,
-          // enablePullDown: widget.enablePullDown,
-          // enablePullUp: widget.enablePullUp,
           onRefresh: () => context.read<T>().onLoadRefresh(_controller),
           onLoad: () => context.read<T>().onLoadMore(_controller),
           header: ClassicHeader(),

@@ -21,6 +21,8 @@ ThemeData get appThemeData => ThemeData(
   scaffoldBackgroundColor: Colors.white,
   appBarTheme: appBarTheme,
   textTheme: const TextTheme(),
+  fontFamily: 'Noto_Serif_TC_EN',
+  fontFamilyFallback: ['Noto_Serif_TC_ZH'],
 );
 
 AppBarTheme get appBarTheme => const AppBarTheme();

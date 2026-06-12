@@ -140,6 +140,31 @@ class RequestRepository {
       },
     );
   }
+  ///获取微信公众号历史数据
+  void getTabArticles(
+      String cid,
+      int page, {
+        SuccessOver<List<ProjectDetail>>? success,
+        Fail? fail,
+      }) {
+    Request.get<dynamic>(
+      RequestApi.apiTabArticles
+          .replaceFirst(RegExp('xxx'), cid)
+          .replaceFirst(RegExp('page'), '$page'),
+      <String, dynamic>{},
+      dialog: false,
+      success: (data) {
+        ProjectPage pageData = ProjectPage.fromJson(data);
+        var list = pageData.datas.map((value) {
+          return ProjectDetail.fromJson(value);
+        }).toList();
+        success?.call(list, pageData.over);
+      },
+      fail: (code, msg) {
+        _notifyFail(fail, code, msg);
+      },
+    );
+  }
 
   ///请求项目列表接口
   ///[id]文章ID

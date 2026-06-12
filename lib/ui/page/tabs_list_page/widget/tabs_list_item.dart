@@ -67,7 +67,7 @@ class _ProjectListItem extends StatelessWidget {
 
               ///部分内容
               Text(
-                detail.desc,
+                detail.desc.trim(),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
                 style: Styles.style_6A6969_14,
@@ -78,12 +78,12 @@ class _ProjectListItem extends StatelessWidget {
               Row(
                 children: [
                   SvgPicture.asset(R.assetsImagesProgram, width: 16),
-                  Box.hBox10,
+                  Box.hBox5,
                   Text(
                     detail.author,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: Styles.style_6A6969_14,
+                    style: Styles.style_9F9EA6_14,
                   ),
                 ],
               ),
@@ -93,12 +93,12 @@ class _ProjectListItem extends StatelessWidget {
               Row(
                 children: [
                   SvgPicture.asset(R.assetsImagesDateTime, width: 16),
-                  Box.hBox10,
+                  Box.hBox5,
                   Text(
                     detail.niceDate,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: Styles.style_6A6969_14,
+                    style: Styles.style_9F9EA6_14,
                   ),
                 ],
               ),
@@ -161,36 +161,12 @@ class _PublicListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Box.vBox10,
-        Text(
-          detail.title,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-          style: Styles.style_black_16_bold,
-        ),
-        Box.vBox5,
-        Row(
-          children: [
-            Text(
-              detail.author.isNotEmpty ? detail.author : detail.shareUser,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: Styles.style_6A6969_14,
-            ),
-            Box.hBox10,
-            Text(
-              detail.author.isNotEmpty ? detail.niceDate : detail.niceShareDate,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: Styles.style_6A6969_14,
-            ),
-          ],
-        ),
-        Box.vBox10,
-      ],
+    return Padding(
+      padding: pSymmetricV(8.0),
+      child: Text(
+        detail.title,
+        style: Styles.style_black_16_bold,
+      ),
     );
   }
 }

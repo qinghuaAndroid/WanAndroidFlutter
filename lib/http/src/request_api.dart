@@ -16,6 +16,7 @@ class RequestApi {
 
   ///首页Tab栏接口
   static const String apiTab = 'project/tree/json';
+  static const String apiTabArticles = '/project/list/page/json?cid=xxx';
 
   ///知识体系
   static const String apiSystem = 'tree/json';

@@ -61,7 +61,7 @@ class HomePage extends GetSaveView<HomeController> {
                         return Material(
                           color: Colors.transparent,
                           child: Ripple(
-                            onTap: () {
+                            onTap: () async {
                               var detail = controller.projectData[newIndex];
                               return WebUtil.toWebPage(
                                 context,

@@ -30,7 +30,7 @@ class SearchResultWidget extends GetCommonView<SearchController> {
               return Material(
                 color: Colors.transparent,
                 child: Ripple(
-                  onTap: () {
+                  onTap: () async {
                     var controller = context.read<SearchController>();
                     return WebUtil.toWebPage(
                       context,

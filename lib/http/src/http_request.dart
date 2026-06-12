@@ -5,7 +5,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wan_android_flutter/model/models.dart';
 import 'package:wan_android_flutter/utils/utils.dart';
@@ -57,8 +57,10 @@ class HttpRequest {
         receiveTimeout: _receiveTimeout,
       );
       _dio = Dio(options);
-      var persistCookieJar = await prepareJar();
-      _dio?.interceptors.add(CookieManager(persistCookieJar));
+      if (!kIsWeb) {
+        var persistCookieJar = await prepareJar();
+        _dio?.interceptors.add(CookieManager(persistCookieJar));
+      }
       // _dio?.interceptors.add(PrettyDioLogger());
       // 重试拦截器
       _dio?.interceptors.add(

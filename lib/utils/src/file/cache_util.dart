@@ -23,7 +23,7 @@ class CacheUtil {
   /// 递归方式 计算文件的大小
   /// [file] 文件系统实体类
   static Future<double> _getTotalSizeOfFilesInDir(
-    final FileSystemEntity file,
+    FileSystemEntity file,
   ) async {
     try {
       if (file is File) {
@@ -77,7 +77,7 @@ class CacheUtil {
   ///byte 转换为实际大小，并保留小数位
   ///[byteSize] 大小
   ///[precision] 小数
-  static String byte2FitMemorySize(final double byteSize, {int precision = 2}) {
+  static String byte2FitMemorySize(double byteSize, {int precision = 2}) {
     if (byteSize < 0) {
       return '0B';
     } else if (byteSize < 1024) {
